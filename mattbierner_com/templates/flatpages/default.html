@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block page-title %}
+	{{ flatpage.title }}
+{% endblock %}
+
+{% load reprocess %}
+
+{% block content %}
+	{% reprocess %}
+		{{ flatpage.content }}
+	{% endreprocess %}
+{% endblock %}
