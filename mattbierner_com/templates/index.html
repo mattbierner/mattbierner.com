@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div id="page">
+    <div id="root">
+        <header id="root_header">
+            <h1>Matt Bierner</h1>
+        </header>
+        
+        <div id="root_search">
+            <form action="/" method="get">
+                <input type="search" placeholder="Search" autofocus="autofocus" results="5" />
+            </form>
+        </div>
+        
+        <nav id="root_list">
+            <ul id="tags">
+                {% for tag in tags %}
+                <li class="Tag">#{{ tag.name }}</li>
+                {% endfor %}
+            </ul>
+
+            <ul id="search_results">
+                {% for page in pages %}
+                    <li class="SearchResult">
+                        <h2><a>{{ page.title }}</a></h2>
+                        <div>
+                            <ul class="TagList">
+                                {% for tag in page.tags.all %}
+                                    <li class="Tag">{{ tag.name }}</li>
+                                {% endfor %}
+                            </ul>
+                            <p class="ResultBrief">{{ page.brief }}</p>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </div>
+    
+    <article>
+        
+    </article>
+</div>
+{% endblock %}

@@ -1,6 +1,8 @@
 <!doctype html>
 <!--[if lt IE 9]><html class="ie"><![endif]-->
 <!--[if gte IE 9]><!--><html><!--<![endif]-->
+
+{% load staticfiles %}
     
 <head>
     <meta charset="utf-8"/>
@@ -9,17 +11,22 @@
     
     <title></title>
     
-    <link rel="stylesheet" href=""/>
+    <link rel="stylesheet" href="{% static "style/main.css" %}"/>
     
     <!--[if lt IE 9]>
         <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    
+    <meta name="description" content="{% block meta-description %}{% endblock %}"/>
+    <meta name="keywords" content="matt bierner {% block meta-keywords %}{% endblock %}" />
+
+    <title>Matt Bierner {% block page-title %}{% endblock %}</title>
+        
+    {% block extra-head %}{% endblock %}
 </head>
 
 <body lang="en">
-
-    
-
+    {% block content %}{% endblock %}
 </body>
     
 </html>

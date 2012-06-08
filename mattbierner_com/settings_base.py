@@ -1,17 +1,16 @@
-
-# Django settings for mattbierner_com project.
-
 import os
 
-ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
-)
+ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
+
+DEBUG = False
+
+ADMINS = ()
 
 MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'ENGINE': 'django.db.backends.mysql',
         'OPTIONS': {
             'read_default_file': '/Users/mattbierner/config/mysql/mattbierner_com_devel.cnf',
         },
@@ -25,6 +24,7 @@ HAYSTACK_CONNECTIONS = {
         'INDEX_NAME': 'haystack',
     },
 }
+
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -75,6 +75,7 @@ ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
+    os.path.join(ROOT_PATH, "static"),           
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -123,11 +124,16 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+    'django.contrib.markup',
     
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    
+    'haystack',
     'taggit',
+    'taggit_autocomplete_modified',
+    'south',
+    
+    'mattbierner_com.pages',
 )
 
 # A sample logging configuration. The only tangible logging
