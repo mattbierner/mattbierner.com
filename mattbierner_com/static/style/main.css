@@ -151,6 +151,9 @@ h1, h2, h3, h4, h5, h6 {
 .Tag {
   color: #666666; }
 
+#root_list #tags .Tag:before {
+  content: "#"; }
+
 #tags {
   display: block;
   position: absolute;
@@ -165,6 +168,9 @@ h1, h2, h3, h4, h5, h6 {
 #root_list li {
   list-style: none;
   display: block; }
+
+#search_results {
+  margin-bottom: 4em; }
 
 #search_results .SearchResult {
   margin-bottom: 1em; }
@@ -186,6 +192,11 @@ h1, h2, h3, h4, h5, h6 {
   width: 9.714em;
   font-style: italic;
   padding-left: 80px; }
+
+#root footer {
+  font-size: 0.8em; }
+  #root footer > * {
+    display: inline; }
 
 /*
 	An easy way to zoom your entire layout in or out (as long as it's set in ems).

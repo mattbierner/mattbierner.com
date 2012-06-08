@@ -10,14 +10,14 @@
         
         <div id="root_search">
             <form action="/" method="get">
-                <input type="search" placeholder="Search" autofocus="autofocus" results="5" />
+                <input name="query" type="search" placeholder="Search" autofocus="autofocus" results="5" />
             </form>
         </div>
         
         <nav id="root_list">
             <ul id="tags">
                 {% for tag in tags %}
-                <li class="Tag">#{{ tag.name }}</li>
+                <li class="Tag">{{ tag.name }}</li>
                 {% endfor %}
             </ul>
 
@@ -37,6 +37,10 @@
                 {% endfor %}
             </ul>
         </nav>
+        
+        <footer>
+            &#169; 2012 <address><a href="mailto:_@mattbierner.com">Matt Bierner</a></address>
+        </footer>
     </div>
     
     <article>
