@@ -8,14 +8,6 @@ ADMINS = ()
 
 MANAGERS = ADMINS
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'OPTIONS': {
-            'read_default_file': '/Users/mattbierner/config/mysql/mattbierner_com_devel.cnf',
-        },
-    }
-}
 
 HAYSTACK_CONNECTIONS = {
     'default': {

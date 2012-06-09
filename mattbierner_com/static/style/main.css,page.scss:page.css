@@ -8,20 +8,6 @@
   by Joni Korpi     <http://jonikorpi.com/>
   licensed under CC0  <http://creativecommons.org/publicdomain/zero/1.0/>
 */
-.clearfix:after {
-  content: ".";
-  display: block;
-  clear: both;
-  visibility: hidden;
-  line-height: 0;
-  height: 0; }
-
-.clearfix {
-  display: block; }
-
-* html .clearfix {
-  height: 1%; }
-
 /*
 	Margin, padding, and border resets
 	except for form elements
@@ -150,22 +136,24 @@ h1 {
 #page {
   margin: 0 auto;
   padding: 0 0.85em;
-  width: 91.429em;
-  overflow: hidden; }
+  width: 68.557em; }
 
-#root_header, #root_search, #search_list {
-  width: 26.857em;
-  float: left;
-  clear: left; }
+#root {
+  width: 26.857em; }
 
-article, #page_header {
-  width: 61.143em;
-  float: right; }
+article {
+  width: 38.286em;
+  padding-left: 24px;
+  background: red; }
+
+#root, article {
+  float: left; }
 
 .SectionHeader {
   margin-top: 2.2em; }
 
 #root_search {
+  width: 100%;
   margin-bottom: 0.6em; }
   #root_search input {
     width: 100%;
@@ -180,13 +168,12 @@ article, #page_header {
 .Tag {
   color: #666666; }
 
-#tags .Tag:before {
+#root_list #tags .Tag:before {
   content: "#"; }
 
 #tags {
   display: block;
   position: absolute;
-  top: 6em;
   width: 100%;
   margin-left: -100%; }
   #tags li {
@@ -195,9 +182,12 @@ article, #page_header {
     padding-right: 24px;
     font-size: 3em; }
 
-#search_list li {
+#root_list li {
   list-style: none;
   display: block; }
+
+#search_results {
+  margin-bottom: 4em; }
 
 #search_results .SearchResult {
   margin-bottom: 1em; }
@@ -213,7 +203,6 @@ article, #page_header {
   position: relative; }
   .SearchResult div .TagList {
     width: 4em;
-    height: 100%;
     position: absolute; }
 
 .TagList {
@@ -224,12 +213,13 @@ article, #page_header {
   font-style: italic;
   padding-left: 80px; }
 
-footer {
-  font-size: 0.8em;
-  margin-top: 4em;
-  margin-bottom: 1em; }
-  footer > * {
+#root footer {
+  font-size: 0.8em; }
+  #root footer > * {
     display: inline; }
+
+article {
+  float: left; }
 
 /*
 	An easy way to zoom your entire layout in or out (as long as it's set in ems).
@@ -238,27 +228,24 @@ footer {
 	- the first one zooms out by a factor of (16-2)/16 = 0.875
 	- the second one zooms in by a factor of (16+2)/16 = 1.125  
 */
-@media screen and (max-width: 22.857em) {
+@media screen and (max-width: 21.143em) {
+  #page {
+    width: 15.429em; }
+
+  #root {
+    width: 15.429em; }
+
+  .ResultBrief {
+    width: 9.714em; } }
+@media screen and (max-width: 26.857em) {
   #page {
     width: 21.143em; }
 
-  #root_header, #root_search, #search_list {
+  #root {
     width: 21.143em; }
 
   .ResultBrief {
     width: 15.429em; } }
-@media screen and (max-width: 28.571em) {
-  #page {
-    width: 26.857em; }
-
-  #root_header, #root_search, #search_list {
-    width: 26.857em; }
-
-  .ResultBrief {
-    width: 21.143em; } }
-@media screen and (max-width: 91.429em) {
-  #page {
-    width: 89.714em; } }
 /*
 @media screen and (max-width: 1px) {
 	body {

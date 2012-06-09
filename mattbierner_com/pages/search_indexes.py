@@ -25,7 +25,7 @@ class PageIndex(indexes.SearchIndex, indexes.Indexable):
         return obj.body.rendered 
     
     def prepare_tags(self, obj): 
-        return [tag.name for tag in obj.tags.all()] 
+        return [tag.name for tag in obj.tags.all()]
 
     def get_model(self):
         return Page

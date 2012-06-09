@@ -4,6 +4,7 @@ from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from mattbierner_com.views import IndexView
+from mattbierner_com.pages import urls as PageUrls  
 
 admin.autodiscover()
 
@@ -22,10 +23,10 @@ urlpatterns = patterns('',
     
     # Search
     url(r'^$', IndexView.as_view(), name='index'),
-
-    # Pages
-    (r'^(?P<url>.*)$', include('mattbierner_com.pages.urls')),
 )
+
+urlpatterns += PageUrls.urlpatterns
+
 
 
 if settings.DEBUG:

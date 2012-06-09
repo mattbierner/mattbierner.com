@@ -11,7 +11,7 @@ from taggit.models import Tag
 from mattbierner_com.pages.models import Page
 
 
-class IndexView(View, TemplateResponseMixin):
+class SearchView(View, TemplateResponseMixin):
     template_name = 'index.html'
     
     def get(self, request, *args, **kwargs):
@@ -35,3 +35,6 @@ class IndexView(View, TemplateResponseMixin):
             'tags': [x[0] for x in sorted(tags.items(), reverse=True, key=lambda x: x[1])],
             'pages': pages,
         }
+
+class IndexView(SearchView):
+    template_name = 'index.html'

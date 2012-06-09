@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.urlresolvers import reverse
+from django.utils.http import urlquote
 
 from markupfield.fields import MarkupField
 
@@ -27,7 +28,6 @@ class Page(models.Model):
     def __unicode__(self):
         return u'%s' % (self.title)
 
-
     def get_absolute_url(self):
-        return ""#reverse('Documents-ViewDocument', kwargs={'created_year': self.created.year, 'slug': self.slug})
+        return u'%s' % urlquote(self.url)
     

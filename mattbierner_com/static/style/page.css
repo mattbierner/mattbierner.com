@@ -1,0 +1,31 @@
+/*
+  Frameless     <http://framelessgrid.com/>
+  by Joni Korpi     <http://jonikorpi.com/>
+  licensed under CC0  <http://creativecommons.org/publicdomain/zero/1.0/>
+*/
+.clearfix:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0; }
+
+.clearfix {
+  display: block; }
+
+* html .clearfix {
+  height: 1%; }
+
+@media screen and (max-width: 28.571em) {
+  #page_header {
+    margin-top: 0; }
+
+  #page_header, article {
+    float: left; }
+
+  #page_header, #root_search, article {
+    clear: left; }
+
+  #search_list {
+    display: none; } }
