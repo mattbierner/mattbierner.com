@@ -125,7 +125,7 @@ img::-moz-selection {
   background: transparent; }
 
 body {
-  -webkit-tap-highlight-color: rgba(255, 0, 0, 0.62); }
+  -webkit-tap-highlight-color: #00aeef; }
 
 /*
 	Style overrides for IE6-8
@@ -147,10 +147,14 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
   font-size: 2em; }
 
+article ol li,
+article ul li {
+  margin-left: 1.6em; }
+
 #page {
   margin: 0 auto;
-  padding: 0 0.85em;
-  width: 91.429em;
+  padding: 0 12px;
+  width: 61.143em;
   overflow: hidden; }
 
 #root_header, #root_search, #search_list {
@@ -159,7 +163,7 @@ h1 {
   clear: left; }
 
 article, #page_header {
-  width: 61.143em;
+  width: 32.571em;
   float: right; }
 
 .SectionHeader {
@@ -197,7 +201,8 @@ article, #page_header {
 
 #search_list li {
   list-style: none;
-  display: block; }
+  display: block;
+  margin: 0; }
 
 #search_results .SearchResult {
   margin-bottom: 1em; }
@@ -214,10 +219,8 @@ article, #page_header {
   .SearchResult div .TagList {
     width: 4em;
     height: 100%;
-    position: absolute; }
-
-.TagList {
-  text-overflow: ellipsis; }
+    position: absolute;
+    text-overflow: ellipsis; }
 
 .ResultBrief {
   width: 21.143em;
@@ -238,27 +241,73 @@ footer {
 	- the first one zooms out by a factor of (16-2)/16 = 0.875
 	- the second one zooms in by a factor of (16+2)/16 = 1.125  
 */
-@media screen and (max-width: 22.857em) {
+@media screen and (max-width: 62.857em) {
   #page {
-    width: 21.143em; }
+    width: 55.429em; }
 
   #root_header, #root_search, #search_list {
     width: 21.143em; }
 
-  .ResultBrief {
-    width: 15.429em; } }
-@media screen and (max-width: 28.571em) {
+  #page_header, article {
+    width: 32.571em; } }
+@media screen and (max-width: 57.143em) {
   #page {
-    width: 26.857em; }
+    width: 49.714em; }
 
-  #root_header, #root_search, #search_list {
-    width: 26.857em; }
+  #page_header, article {
+    width: 26.857em; } }
+@media screen and (max-width: 51.429em) {
+  /* last two pane design */
+  #page {
+    width: 44em; }
 
-  .ResultBrief {
+  #page_header, article {
     width: 21.143em; } }
-@media screen and (max-width: 91.429em) {
+@media screen and (max-width: 45.714em) {
+  /* first single pane design */
   #page {
-    width: 89.714em; } }
+    width: 38.286em; }
+
+  #root_header, #root_search, #search_list,
+  #page_header, article {
+    width: 100%; } }
+@media screen and (max-width: 40em) {
+  #page {
+    width: 32.571em; } }
+@media screen and (max-width: 34.286em) {
+  #page {
+    width: 26.857em; } }
+/*
+@media screen and (max-width: page_width(8)) { 
+  #page {
+    width: col_width(7);
+  }
+
+  #root_header, #root_search, #search_list {
+    width: col_width(4);
+  }
+  
+  .ResultBrief {
+    width: col_width(3);
+  }
+}
+
+
+@media screen and (max-width: page_width(5)) { 
+  #page {
+    width: col_width(5);
+  }
+
+  #root_header, #root_search, #search_list {
+    width: col_width(5);
+  }
+  
+  .ResultBrief {
+    width: col_width(4);
+  }
+}
+
+*/
 /*
 @media screen and (max-width: 1px) {
 	body {

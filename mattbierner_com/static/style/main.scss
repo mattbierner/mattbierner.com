@@ -121,7 +121,7 @@ img::-moz-selection {
 }
 
 body {
-	-webkit-tap-highlight-color: rgba(255,0,0, 0.62);
+	-webkit-tap-highlight-color: $selection;
 }
 
 
@@ -151,15 +151,19 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: normal;
 }
 
-
 h1 {
   font-size: 2em;
 }
 
+article ol li, 
+article ul li {
+  margin-left: 1.6em;
+}
+
 #page {
   margin: 0 auto;
-  padding: 0 0.85em;
-  width: page_width(16);
+  padding: 0 $margin;
+  width: col_width(11);
   overflow: hidden;
 }
 
@@ -170,7 +174,7 @@ h1 {
 }
 
 article, #page_header {
-  width: col_width(11);
+  width: col_width(6);
   float: right;
 }
 
@@ -221,6 +225,7 @@ article, #page_header {
   li {
     list-style: none;
     display: block;
+    margin: 0;
   }
 }
 
@@ -247,12 +252,9 @@ article, #page_header {
       width: col_width(1);
       height: 100%;
       position: absolute;
+      text-overflow: ellipsis;
     }
   }
-}
-
-.TagList {
-  text-overflow: ellipsis;
 }
 
 .ResultBrief {
@@ -280,9 +282,70 @@ footer {
 	- the second one zooms in by a factor of (16+2)/16 = 1.125  
 */
 
-@media screen and (max-width: page_width(4)) { 
+@media screen and (max-width: page_width(11)) { 
   #page {
+    width: col_width(10);
+  }
+   
+  #root_header, #root_search, #search_list {
     width: col_width(4);
+  }
+ 
+  #page_header, article {
+    width: col_width(6);
+  }
+}
+
+@media screen and (max-width: page_width(10)) { 
+  #page {
+    width: col_width(9);
+  }
+  
+  #page_header, article {
+    width: col_width(5);
+  }
+}
+
+@media screen and (max-width: page_width(9)) { /* last two pane design */
+  #page {
+    width: col_width(8);
+  }
+  
+  #page_header, article {
+    width: col_width(4);
+  }
+}
+
+@media screen and (max-width: page_width(8)) { /* first single pane design */
+  #page {
+    width: col_width(7);
+  }
+  
+  #root_header, #root_search, #search_list, 
+  #page_header, article {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: page_width(7)) { 
+  #page {
+    width: col_width(6);
+  }
+  
+}
+
+@media screen and (max-width: page_width(6)) { 
+  #page {
+    width: col_width(5);
+  }
+}
+
+
+
+/*
+@media screen and (max-width: page_width(8)) { 
+  #page {
+    width: col_width(7);
   }
 
   #root_header, #root_search, #search_list {
@@ -293,6 +356,7 @@ footer {
     width: col_width(3);
   }
 }
+
 
 @media screen and (max-width: page_width(5)) { 
   #page {
@@ -308,14 +372,7 @@ footer {
   }
 }
 
-
-@media screen and (max-width: page_width(16)) { 
-  #page {
-    width: col_width(16);
-  }
-}
-
-
+*/
 
 
 /*

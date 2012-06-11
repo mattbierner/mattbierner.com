@@ -52,7 +52,7 @@ $cols16: (16 * ($column + $gutter) - $gutter) / $em;
 }
 
 @function page_width ($cols:1) {
-  @return col_width($cols) + 2 * $margin / $em;
+  @return col_width($cols) + ((2 * $margin) / $em);
 }
 
 
