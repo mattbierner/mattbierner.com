@@ -1,7 +1,8 @@
-{% extends "index.html" %}
-
-{% load staticfiles %}
-
-{% block extra-css %}
-   <link rel="stylesheet" href="{% static "style/page.css" %}" />
-{% endblock %}
+<article>
+    <section class="PageHeaderSection">
+        {% autoescape off %}{{ page.header.rendered }}{% endautoescape %}
+    </section>
+    <section class="PageBodySection">
+        {% autoescape off %}{{ page.body.rendered }}{% endautoescape %}
+    </section>
+</article>

@@ -37,13 +37,14 @@ $(function()
     {
         e.preventDefault(); // cancel default submit action
         
-        $.getJSON('/page?url=' + encodeURI(dest), function(p)
+        var query = $(this).find('input').val();
+        $.getJSON('/search?query=' + encodeURI(query), function(p)
         {
                 
         });
     });
     
-    // Handle mouseenter and mouse leave on SearchResult
+    // Handle mouseenter and mouseleave on SearchResult
     $(".SearchResult").mouseenter(function(e)
     {
         var tags = $(this).data()['tags'] || [];
@@ -57,6 +58,29 @@ $(function()
         $(".SideTag").each(function(i)
         {
             $(this).removeClass("ActiveTag");   
+        });
+    });
+    
+    
+    // Handle mouseenter and mouseleave on SideTags
+    $(".SideTag").mouseenter(function(e)
+    {
+        $(this).addClass("ActiveTag");   
+
+        var value = $(this).data('value');
+        $(".SearchResult").each(function(i)
+        {
+            var tags = $(this).data()['tags'];
+            if (tags && tags.indexOf(value) < 0)
+                $(this).addClass("NonActiveSearchResult");   
+        });
+    }).mouseleave(function(e)
+    {
+        $(this).removeClass("ActiveTag");   
+
+        $(".SearchResult").each(function(i)
+        {
+            $(this).removeClass("NonActiveSearchResult");   
         });
     });
     

@@ -183,7 +183,9 @@ article, #page_header {
 
 .SideTag {
   color: #cacaca;
-  -webkit-transition: color 0.4s; }
+  transition: color 0.2s;
+  -webkit-transition: color 0.2s;
+  -moz-transition: color 0.2s; }
 
 .ActiveTag {
   color: #222222; }
@@ -225,6 +227,13 @@ article, #page_header {
     height: 100%;
     position: absolute;
     text-overflow: ellipsis; }
+
+.NonActiveSearchResult,
+.NonActiveSearchResult * {
+  transition: color 0.2s;
+  -webkit-transition: color 0.2s;
+  -moz-transition: color 0.2s;
+  color: #cacaca !important; }
 
 .ResultBrief {
   width: 21.143em;

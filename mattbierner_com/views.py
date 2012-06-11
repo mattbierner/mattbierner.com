@@ -1,3 +1,5 @@
+import simplejson as json
+
 from collections import defaultdict
 
 from django.views.generic.base import View, TemplateResponseMixin
@@ -11,7 +13,23 @@ from taggit.models import Tag
 from mattbierner_com.pages.models import Page
 
 
-class SearchView(View, TemplateResponseMixin):
+class SearchView(View):
+    def get_search_results(self, query=None, *args, **kwargs):
+        if query is None:
+            return Page.objects.all()
+        else:
+            return [x.object for x in SearchQuerySet().filter(content=query)]
+        
+    
+class SearchDataView(SearchView):
+    def get(self, request, *args, **kwargs):
+        query = request.GET['query']
+        response = HttpResponse(content_type='application/json')
+        json.dump([get_search_results(query=query)], response)
+        return response
+        
+
+class IndexView(SearchView, TemplateResponseMixin):
     template_name = 'index.html'
     
     def get(self, request, *args, **kwargs):
@@ -35,6 +53,4 @@ class SearchView(View, TemplateResponseMixin):
             'tags': [x[0] for x in sorted(tags.items(), reverse=True, key=lambda x: x[1])],
             'pages': pages,
         }
-
-class IndexView(SearchView):
-    template_name = 'index.html'
+    

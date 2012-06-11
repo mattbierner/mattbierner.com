@@ -9,7 +9,7 @@ from haystack.query import SearchQuerySet
 
 from taggit.models import Tag
 
-from mattbierner_com.views import SearchView
+from mattbierner_com.views import IndexView
 from mattbierner_com.pages.models import Page
 
 
@@ -25,8 +25,8 @@ class PageDataView(View):
             return Http404
 
 
-class PageView(SearchView, TemplateResponseMixin):
-    template_name = 'page.html'
+class PageView(IndexView, TemplateResponseMixin):
+    template_name = 'page_view.html'
     
     def get(self, request, *args, **kwargs):
         return self.render_to_response(self.get_context_data(**kwargs))

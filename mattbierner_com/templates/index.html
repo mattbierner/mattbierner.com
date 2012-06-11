@@ -30,7 +30,9 @@
             <div id="tags">
                 <ul>
                     {% for tag in tags %}
-                        <li class="Tag SideTag">{{ tag.name }}</li>
+                        <li>
+                            <a class="Tag SideTag">{{ tag.name }}</a>
+                        </li>
                     {% endfor %}
                 </ul>
             </div>
@@ -69,10 +71,12 @@
 {% block scripts %}
 
 <script>
-{% autoescape off %}
     // serve root page json
-    var root_page = {% if page %} {{ page.as_view_json }} {% else %} undefined {% endif %};
-    
+    var root_page = {% if page %}
+        {% with self=page %}{% include "page.json" %}{% endwith %}
+   {% else %} undefined {% endif %};
+
+{% autoescape off %}    
     // serve search result json
     var search_results = [
         {% for result in pages %}

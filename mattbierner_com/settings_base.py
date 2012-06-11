@@ -125,6 +125,7 @@ INSTALLED_APPS = (
     'taggit_autocomplete_modified',
     'south',
     
+    'mattbierner_com.json_filter',
     'mattbierner_com.pages',
 )
 

@@ -200,7 +200,7 @@ article, #page_header {
 
 .SideTag {
   color: $mid;
-  -webkit-transition: color 0.4s;
+  @include transition(color 0.2s);
 }
 
 .ActiveTag {
@@ -264,6 +264,14 @@ article, #page_header {
 
 .SearchResult:hover {
 }
+
+.NonActiveSearchResult,
+.NonActiveSearchResult * {
+  @include transition(color 0.2s);
+  color: $mid !important;
+
+}
+
 
 .ResultBrief {
   width: col_width(4);

@@ -4,6 +4,14 @@
   licensed under CC0  <http://creativecommons.org/publicdomain/zero/1.0/>
 */
 
+//
+// Mixins
+//
+@mixin transition($val) {
+  transition: $val;
+  -webkit-transition: $val;
+  -moz-transition: $val;
+}
 
 //
 // Configuration

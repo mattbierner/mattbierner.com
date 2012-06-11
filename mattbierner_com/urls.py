@@ -3,7 +3,7 @@ from django.conf import settings
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from mattbierner_com.views import IndexView
+from mattbierner_com.views import IndexView, SearchDataView
 from mattbierner_com.pages import urls as PageUrls  
 
 admin.autodiscover()
@@ -22,7 +22,7 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
     
     # Search
-    url(r'^search$', IndexView.as_view(), name='search'),
+    url(r'^search$', SearchDataView.as_view(), name='search'),
     
     # Index
     url(r'^$', IndexView.as_view(), name='index'),
