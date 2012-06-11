@@ -8,6 +8,7 @@
         <header class="SectionHeader" id="root_header">
             <h1>Matt Bierner</h1>
         </header>
+        
         <header class="SectionHeader" id="page_header">
             <h1>{{ page.title }}</h1>
         </header>
@@ -79,8 +80,8 @@
 {% autoescape off %}    
     // serve search result json
     var search_results = [
-        {% for result in pages %}
-            {{ result.as_view_json }},
+        {% for self in pages %}
+            {% include "page.json" %},
         {% endfor %}
     ];
 {% endautoescape %}

@@ -13,14 +13,17 @@ from mattbierner_com.views import IndexView
 from mattbierner_com.pages.models import Page
 
 
-class PageDataView(View):
+class PageDataView(View, TemplateResponseMixin):
+    template_name = 'page.json'
+        
     def get(self, request, *args, **kwargs):
-        url = request.GET['url']
-        response = HttpResponse(content_type='application/json')
+        return self.render_to_response(self.get_context_data(
+            url=request.GET['url'], **kwargs))
+    
+    def get_context_data(self, url=None, *args, **kwargs):
         try:
             page = Page.objects.get(url=url)
-            response.write(page.as_view_json())
-            return response
+            return {'self': page}
         except Page.DoesNotExist:
             return Http404
 

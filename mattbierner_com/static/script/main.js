@@ -97,7 +97,7 @@ $(function()
         // set new page title.
         var title = $(this).text();
         $('#page_header h1').text(title);
-        
+
         // Request new page content
         $.getJSON('/page?url=' + encodeURI(dest), function(p)
         {

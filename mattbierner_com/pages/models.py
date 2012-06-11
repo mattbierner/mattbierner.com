@@ -33,12 +33,3 @@ class Page(models.Model):
     def get_absolute_url(self):
         return u'%s' % urlquote(self.url)
     
-    def as_view_json(self):
-        return json.dumps({
-            'title': self.title,
-            'tags': [tag.name for tag in self.tags.all()] ,
-            'brief': self.brief,
-            'header': self.header.rendered,
-            'body': self.body.rendered,
-        })
-    
