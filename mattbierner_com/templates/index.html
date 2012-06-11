@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load staticfiles %}
+
 {% block content %}
 <div id="page" >
     <div class='clearfix'>
@@ -63,3 +65,18 @@
     </footer>
 </div>
 {% endblock %} 
+
+
+
+{% block scripts %}
+{% if page %}
+    <script>
+    {% autoescape off %}
+        var root_page = {{ page.as_view_json }};
+    {% endautoescape %}
+    </script>
+{% endif %}
+
+<script src="{% static "script/jquery-1.7.2.min.js" %}"></script>
+<script src="{% static "script/main.js" %}"></script>
+{% endblock %}

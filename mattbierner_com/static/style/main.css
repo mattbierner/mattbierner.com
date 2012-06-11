@@ -234,13 +234,6 @@ footer {
   footer > * {
     display: inline; }
 
-/*
-	An easy way to zoom your entire layout in or out (as long as it's set in ems).
-	Just change the media queries to activate them.
-	Assuming your base font-size is 16:
-	- the first one zooms out by a factor of (16-2)/16 = 0.875
-	- the second one zooms in by a factor of (16+2)/16 = 1.125  
-*/
 @media screen and (max-width: 62.857em) {
   #page {
     width: 55.429em; }

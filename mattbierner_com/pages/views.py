@@ -19,13 +19,7 @@ class PageDataView(View):
         response = HttpResponse(content_type='application/json')
         try:
             page = Page.objects.get(url=url)
-            json.dump({
-                'title': page.title,
-                'tags': [tag.name for tag in page.tags.all()] ,
-                'brief': page.brief,
-                'header': page.header.rendered,
-                'body': page.body.rendered,
-            }, response)
+            response.write(page.as_view_json)
             return response
         except Page.DoesNotExist:
             return Http404

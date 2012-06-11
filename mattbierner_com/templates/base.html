@@ -29,8 +29,7 @@
 <body lang="en">
     {% block content %}{% endblock %}
     
-    <script src="{% static "script/jquery-1.7.2.min.js" %}"></script>
-    <script src="{% static "script/main.js" %}"></script>
+    {% block scripts %}{% endblock %}
 </body>
     
 </html>

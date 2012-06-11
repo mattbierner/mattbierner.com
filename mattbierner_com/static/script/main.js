@@ -1,11 +1,5 @@
 $(function()
-{
-    var root_page = {
-        title: $('#page_header h1').text(),
-        body: $('article').html(),
-    };
-    
-    
+{    
     var setupPage = function(p)
     {
         $('article').html(p['body']);
