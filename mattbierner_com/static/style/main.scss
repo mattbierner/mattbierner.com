@@ -167,10 +167,23 @@ article ul li {
   overflow: hidden;
 }
 
+#container {
+  width: 100%;
+  height: 100%;
+  
+  margin-left: 0;
+  color: $fg;
+  border-color: $fg;
+  @include browser_prefix(transition, margin 0.2s ease-out);
+} 
+
+
+
 #root_header, #root_search, #search_list {
   width: col_width(5);
   float: left;
   clear: left;
+  @include browser_prefix(transition, color 0.8s ease-out);
 }
 
 article, #page_header {
@@ -195,6 +208,7 @@ article, #page_header {
     -moz-appearance:none;
     -webkit-appearance:none;
     outline: none;
+    @include browser_prefix(transition, border-color 0.8s ease-out);
   }
 }
 
@@ -235,7 +249,7 @@ article, #page_header {
 }
 
 #search_results .SearchResult {
-  margin-bottom: 1em;
+  padding-bottom: 1em;
 }
 
 .SearchResult {
@@ -262,14 +276,18 @@ article, #page_header {
   }
 }
 
-.SearchResult:hover {
+.SearchResult:hover a {
+  color: $bg; 
+}
+
+.SearchResult:hover h2 {
+  background: $fg;
 }
 
 .NonActiveSearchResult,
 .NonActiveSearchResult * {
   @include transition(color 0.2s);
   color: $mid !important;
-
 }
 
 
@@ -301,6 +319,10 @@ footer {
   #root_header, #root_search, #search_list {
     width: col_width(4);
   }
+  
+  .ResultBrief {
+    width: col_width(3);
+  }
  
   #page_header, article {
     width: col_width(6);
@@ -329,69 +351,31 @@ footer {
 
 @media screen and (max-width: page_width(8)) { /* first single pane design */
   #page {
-    width: col_width(7);
-  }
-  
-  #root_header, #root_search, #search_list, 
-  #page_header, article {
-    width: 100%;
-  }
-}
-
-@media screen and (max-width: page_width(7)) { 
-  #page {
     width: col_width(6);
+    overflow: visible;
   }
   
-}
-
-@media screen and (max-width: page_width(6)) { 
-  #page {
-    width: col_width(5);
+  #container {
+    width: col_width(10);
+    margin-left: -(col_width(4) + $gutter / $em);
   }
-}
-
-
-
-/*
-@media screen and (max-width: page_width(8)) { 
-  #page {
-    width: col_width(7);
-  }
-
+  
   #root_header, #root_search, #search_list {
     width: col_width(4);
+    color: $mid;
   }
   
   .ResultBrief {
     width: col_width(3);
   }
-}
-
-
-@media screen and (max-width: page_width(5)) { 
-  #page {
-    width: col_width(5);
-  }
-
-  #root_header, #root_search, #search_list {
-    width: col_width(5);
-  }
   
-  .ResultBrief {
-    width: col_width(4);
+  #root_search input {
+   border-color: $mid;
+  } 
+  
+  
+  #page_header, article {
+    width: col_width(6);
   }
 }
-
-*/
-
-
-/*
-@media screen and (max-width: 1px) {
-	body {
-		font-size: ($font-size + 2) / $em;
-	}
-}
-*/
-
 

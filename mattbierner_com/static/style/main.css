@@ -157,10 +157,23 @@ article ul li {
   width: 61.143em;
   overflow: hidden; }
 
+#container {
+  width: 100%;
+  height: 100%;
+  margin-left: 0;
+  color: #222222;
+  border-color: #222222;
+  transition: margin 0.2s ease-out;
+  -webkit-transition: margin 0.2s ease-out;
+  -moz-transition: margin 0.2s ease-out; }
+
 #root_header, #root_search, #search_list {
   width: 26.857em;
   float: left;
-  clear: left; }
+  clear: left;
+  transition: color 0.8s ease-out;
+  -webkit-transition: color 0.8s ease-out;
+  -moz-transition: color 0.8s ease-out; }
 
 article, #page_header {
   width: 32.571em;
@@ -179,7 +192,10 @@ article, #page_header {
     text-align: left;
     -moz-appearance: none;
     -webkit-appearance: none;
-    outline: none; }
+    outline: none;
+    transition: border-color 0.8s ease-out;
+    -webkit-transition: border-color 0.8s ease-out;
+    -moz-transition: border-color 0.8s ease-out; }
 
 .SideTag {
   color: #cacaca;
@@ -211,7 +227,7 @@ article, #page_header {
   margin: 0; }
 
 #search_results .SearchResult {
-  margin-bottom: 1em; }
+  padding-bottom: 1em; }
 
 .SearchResult .SearchResultHeader {
   width: 100%; }
@@ -227,6 +243,12 @@ article, #page_header {
     height: 100%;
     position: absolute;
     text-overflow: ellipsis; }
+
+.SearchResult:hover a {
+  color: white; }
+
+.SearchResult:hover h2 {
+  background: #222222; }
 
 .NonActiveSearchResult,
 .NonActiveSearchResult * {
@@ -254,6 +276,9 @@ footer {
   #root_header, #root_search, #search_list {
     width: 21.143em; }
 
+  .ResultBrief {
+    width: 15.429em; }
+
   #page_header, article {
     width: 32.571em; } }
 @media screen and (max-width: 57.143em) {
@@ -272,52 +297,22 @@ footer {
 @media screen and (max-width: 45.714em) {
   /* first single pane design */
   #page {
-    width: 38.286em; }
+    width: 32.571em;
+    overflow: visible; }
 
-  #root_header, #root_search, #search_list,
+  #container {
+    width: 55.429em;
+    margin-left: -22.857em; }
+
+  #root_header, #root_search, #search_list {
+    width: 21.143em;
+    color: #cacaca; }
+
+  .ResultBrief {
+    width: 15.429em; }
+
+  #root_search input {
+    border-color: #cacaca; }
+
   #page_header, article {
-    width: 100%; } }
-@media screen and (max-width: 40em) {
-  #page {
     width: 32.571em; } }
-@media screen and (max-width: 34.286em) {
-  #page {
-    width: 26.857em; } }
-/*
-@media screen and (max-width: page_width(8)) { 
-  #page {
-    width: col_width(7);
-  }
-
-  #root_header, #root_search, #search_list {
-    width: col_width(4);
-  }
-  
-  .ResultBrief {
-    width: col_width(3);
-  }
-}
-
-
-@media screen and (max-width: page_width(5)) { 
-  #page {
-    width: col_width(5);
-  }
-
-  #root_header, #root_search, #search_list {
-    width: col_width(5);
-  }
-  
-  .ResultBrief {
-    width: col_width(4);
-  }
-}
-
-*/
-/*
-@media screen and (max-width: 1px) {
-	body {
-		font-size: ($font-size + 2) / $em;
-	}
-}
-*/

@@ -21,11 +21,9 @@ class PageDataView(View, TemplateResponseMixin):
             url=request.GET['url'], **kwargs))
     
     def get_context_data(self, url=None, *args, **kwargs):
-        try:
-            page = Page.objects.get(url=url)
-            return {'self': page}
-        except Page.DoesNotExist:
-            return Http404
+        return {
+            'self': get_object_or_404(Page, url=url)
+        }
 
 
 class PageView(IndexView, TemplateResponseMixin):

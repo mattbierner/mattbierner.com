@@ -5,13 +5,18 @@
 */
 
 //
-// Mixins
+// Browser specific
 //
-@mixin transition($val) {
-  transition: $val;
-  -webkit-transition: $val;
-  -moz-transition: $val;
+@mixin browser_prefix($prop, $val) {
+  #{$prop}: $val;
+  -webkit-#{$prop}: $val;
+  -moz-#{$prop}: $val;
 }
+
+@mixin transition($val) {
+  @include browser_prefix(transition, $val);
+}
+
 
 //
 // Configuration
@@ -25,6 +30,7 @@ $column: 56px;  // The column-width of your grid in pixels
 $gutter: 24px;  // The gutter-width of your grid in pixels
 $margin: 12px;
 
+$bg: rgb(255, 255, 255);
 $fg: rgb(34, 34, 34);
 $mid: rgb(202, 202, 202);
 $selection: rgb(0, 174, 239);

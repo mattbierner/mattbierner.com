@@ -5,57 +5,59 @@
 {% block content %}
 <div id="page" >
     <div class='clearfix'>
-        <header class="SectionHeader" id="root_header">
-            <h1>Matt Bierner</h1>
-        </header>
+        <div id="container" class="clearfix">
+    
+            <header class="SectionHeader" id="root_header">
+                <h1>Matt Bierner</h1>
+            </header>
+            
+            <header class="SectionHeader" id="page_header">
+                <h1>{{ page.title }}</h1>
+            </header>
+            <div id="root_search">
+                <form action="/" method="get">
+                    <input name="query" type="search" placeholder="Search" autofocus="autofocus" results="5" />
+                </form>
+            </div>
         
-        <header class="SectionHeader" id="page_header">
-            <h1>{{ page.title }}</h1>
-        </header>
-        <div id="root_search">
-            <form action="/" method="get">
-                <input name="query" type="search" placeholder="Search" autofocus="autofocus" results="5" />
-            </form>
-        </div>
-        
-        <article>
-            <section class="PageHeaderSection">
-                {% autoescape off %}{{ page.header.rendered }}{% endautoescape %}
-            </section>
-            <section class="PageBodySection">
-                {% autoescape off %}{{ page.body.rendered }}{% endautoescape %}
-            </section>
-        </article>
-        
-        <nav id="search_list">
-            <div id="tags">
-                <ul>
-                    {% for tag in tags %}
-                        <li>
-                            <a class="Tag SideTag">{{ tag.name }}</a>
-                        </li>
+            <article>
+                <section class="PageHeaderSection">
+                    {% autoescape off %}{{ page.header.rendered }}{% endautoescape %}
+                </section>
+                <section class="PageBodySection">
+                    {% autoescape off %}{{ page.body.rendered }}{% endautoescape %}
+                </section>
+            </article>
+            
+            <nav id="search_list">
+                <div id="tags">
+                    <ul>
+                        {% for tag in tags %}
+                            <li>
+                                <a class="Tag SideTag">{{ tag.name }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <ul id="search_results">
+                    {% for page in pages %}
+                    <li class="SearchResult">
+                        <h2 class="SearchResultHeader"><a href="{{ page.get_absolute_url }}">{{ page.title }}</a></h2>
+                        <div>
+                            <ul class="TagList">
+                                {% for tag in page.tags.all %}
+                                    <li class="Tag">{{ tag.name }}</li>
+                                {% endfor %}
+                            </ul>
+                            <p class="ResultBrief">
+                                {{ page.brief }}
+                            </p>
+                        </div>
+                    </li>
                     {% endfor %}
                 </ul>
-            </div>
-            <ul id="search_results">
-                {% for page in pages %}
-                <li class="SearchResult">
-                    <h2 class="SearchResultHeader"><a href="{{ page.get_absolute_url }}">{{ page.title }}</a></h2>
-                    <div>
-                        <ul class="TagList">
-                            {% for tag in page.tags.all %}
-                                <li class="Tag">{{ tag.name }}</li>
-                            {% endfor %}
-                        </ul>
-                        <p class="ResultBrief">
-                            {{ page.brief }}
-                        </p>
-                    </div>
-                </li>
-                {% endfor %}
-            </ul>
-        </nav>
-        
+            </nav>
+        </div>
     </div>
     
     <footer>

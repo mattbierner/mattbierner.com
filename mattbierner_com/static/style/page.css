@@ -17,15 +17,22 @@
 * html .clearfix {
   height: 1%; }
 
-@media screen and (max-width: 45.714em) {
+/*
+@media screen and (max-width: page_width(8)) {
   #page_header {
-    margin-top: 0; }
-
+    margin-top: 0;
+  }
+  
   #page_header, article {
-    float: left; }
-
+    float: left;
+  }
+  
   #page_header, #root_search, article {
-    clear: left; }
-
+    clear: left;
+  }
+ 
   #search_list {
-    display: none; } }
+    display: none;
+  }
+}
+*/

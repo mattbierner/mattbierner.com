@@ -1,5 +1,6 @@
 $(function()
 {
+    
     $(".SideTag").each(function(i)
     {
         $(this).data('value', $.trim($(this).text()));
@@ -20,16 +21,8 @@ $(function()
     
     var setupPage = function(p)
     {
-        if (p)
-        {
-            $('article').html(p['body']);
-            $('#page_header h1').text(p['title']);
-        }
-        else
-        {
-            $('article').html("");
-            $('#page_header h1').text("");
-        }
+        $('article').html(p ? p['body'] : "");
+        $('#page_header h1').text(p ? p['title'] : "");
     };
     
     // Handle search
