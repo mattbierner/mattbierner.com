@@ -22,6 +22,9 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
     
     # Search
+    url(r'^search$', IndexView.as_view(), name='search'),
+    
+    # Index
     url(r'^$', IndexView.as_view(), name='index'),
 )
 

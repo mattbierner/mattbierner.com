@@ -1,15 +1,63 @@
 $(function()
-{    
+{
+    $(".SideTag").each(function(i)
+    {
+        $(this).data('value', $.trim($(this).text()));
+    });
+    
+    $(".SearchResult").each(function(i)
+    {
+        var tags = [];
+        $(this).find('.Tag').each(function(i)
+        {
+            tags.push($.trim($(this).text()));
+        });
+        $(this).data({
+            tags: tags
+        });
+    });
+
+    
     var setupPage = function(p)
     {
-        $('article').html(p['body']);
-        $('#page_header h1').text(p['title']);
+        if (p)
+        {
+            $('article').html(p['body']);
+            $('#page_header h1').text(p['title']);
+        }
+        else
+        {
+            $('article').html("");
+            $('#page_header h1').text("");
+        }
     };
     
     // Handle search
-    $("#root_search from").bind("onsubmit", function(e)
+    $("#root_search form").submit(function(e)
     {
+        e.preventDefault(); // cancel default submit action
         
+        $.getJSON('/page?url=' + encodeURI(dest), function(p)
+        {
+                
+        });
+    });
+    
+    // Handle mouseenter and mouse leave on SearchResult
+    $(".SearchResult").mouseenter(function(e)
+    {
+        var tags = $(this).data()['tags'] || [];
+        $(".SideTag").each(function(i)
+        {
+            if (tags.indexOf($(this).data('value')) >= 0)
+                $(this).addClass("ActiveTag");   
+        });
+    }).mouseleave(function(e)
+    {
+        $(".SideTag").each(function(i)
+        {
+            $(this).removeClass("ActiveTag");   
+        });
     });
     
     // Handle clicks on SearchResult

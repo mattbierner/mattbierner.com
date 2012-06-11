@@ -198,11 +198,16 @@ article, #page_header {
   }
 }
 
-.Tag {
+.SideTag {
   color: $mid;
+  -webkit-transition: color 0.4s;
 }
 
-#tags .Tag:before {
+.ActiveTag {
+  color: $fg;
+}
+
+.SideTag:before {
   content: "#"
 }
 
@@ -255,6 +260,9 @@ article, #page_header {
       text-overflow: ellipsis;
     }
   }
+}
+
+.SearchResult:hover {
 }
 
 .ResultBrief {
@@ -377,3 +385,5 @@ footer {
 	}
 }
 */
+
+

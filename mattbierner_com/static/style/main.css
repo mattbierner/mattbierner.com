@@ -181,10 +181,14 @@ article, #page_header {
     -webkit-appearance: none;
     outline: none; }
 
-.Tag {
-  color: #666666; }
+.SideTag {
+  color: #cacaca;
+  -webkit-transition: color 0.4s; }
 
-#tags .Tag:before {
+.ActiveTag {
+  color: #222222; }
+
+.SideTag:before {
   content: "#"; }
 
 #tags {

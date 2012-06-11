@@ -19,7 +19,7 @@ class PageDataView(View):
         response = HttpResponse(content_type='application/json')
         try:
             page = Page.objects.get(url=url)
-            response.write(page.as_view_json)
+            response.write(page.as_view_json())
             return response
         except Page.DoesNotExist:
             return Http404

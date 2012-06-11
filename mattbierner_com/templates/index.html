@@ -27,13 +27,13 @@
         </article>
         
         <nav id="search_list">
-            <ul id="tags">
-                {% for tag in tags %}
-                <li class="Tag">
-                    {{ tag.name }}
-                </li>
-                {% endfor %}
-            </ul>
+            <div id="tags">
+                <ul>
+                    {% for tag in tags %}
+                        <li class="Tag SideTag">{{ tag.name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
             <ul id="search_results">
                 {% for page in pages %}
                 <li class="SearchResult">
@@ -41,9 +41,7 @@
                     <div>
                         <ul class="TagList">
                             {% for tag in page.tags.all %}
-                            <li class="Tag">
-                                {{ tag.name }}
-                            </li>
+                                <li class="Tag">{{ tag.name }}</li>
                             {% endfor %}
                         </ul>
                         <p class="ResultBrief">
@@ -69,13 +67,21 @@
 
 
 {% block scripts %}
-{% if page %}
-    <script>
-    {% autoescape off %}
-        var root_page = {{ page.as_view_json }};
-    {% endautoescape %}
-    </script>
-{% endif %}
+
+<script>
+{% autoescape off %}
+    // serve root page json
+    var root_page = {% if page %} {{ page.as_view_json }} {% else %} undefined {% endif %};
+    
+    // serve search result json
+    var search_results = [
+        {% for result in pages %}
+            {{ result.as_view_json }},
+        {% endfor %}
+    ];
+{% endautoescape %}
+</script>
+
 
 <script src="{% static "script/jquery-1.7.2.min.js" %}"></script>
 <script src="{% static "script/main.js" %}"></script>

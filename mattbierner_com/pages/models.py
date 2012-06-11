@@ -41,4 +41,6 @@ class Page(models.Model):
             'header': self.header.rendered,
             'body': self.body.rendered,
         })
+        
+
     
