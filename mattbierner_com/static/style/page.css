@@ -17,27 +17,10 @@
 * html .clearfix {
   height: 1%; }
 
-@media screen and (max-width: 45.714em) {
-  /* first single pane design */
-  #page {
-    width: 32.571em;
-    overflow: visible; }
+#secondary_header {
+  position: absolute;
+  top: 1em;
+  font-size: 1em; }
 
-  #container {
-    width: 55.429em; }
-
-  #container, #tag_container {
-    margin-left: -22.857em; }
-
-  #root_header, #root_search, #search_list {
-    width: 21.143em;
-    color: #cacaca; }
-
-  .ResultBrief {
-    width: 15.429em; }
-
-  #root_search input {
-    border-color: #cacaca; }
-
-  #page_header, article {
-    width: 32.571em; } }
+.PageHeader {
+  margin-bottom: 0.6em; }

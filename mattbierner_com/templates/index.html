@@ -1,108 +1,73 @@
-{% extends "base.html" %}
+{% extends "root.html" %}
 
 {% load staticfiles %}
 
+{% block pre-content %}
+<nav id="tag_container">
+    <ul id="tags">
+        {% for tag in tags %}
+            <li class="SideTag"
+              data-tag-id="{{ tag.id }}"
+              data-tag-name="{{ tag.name }}">
+                <a href="?query={{ tag.name }}" class="Tag">{{ tag.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</nav>
+{% endblock %}
+
+
+{% block header %}
+    <h1 id="main_header">Matt Bierner</h1>
+{% endblock %}
+
+
 {% block content %}
-<div id="page" >
-    <nav id="tag_container">
-        <ul id="tags">
-            {% for tag in tags %}
-                <li class="SideTag" data-tag-id="{{ tag.id }}">
-                    <a href="/?query={{ tag.name }}" class="Tag">{{ tag.name }}</a>
+    <nav id="search_list">
+        <ul id="search_results">
+            {% for page in pages %}
+                <li class="SearchResult"
+                  data-page-id="{{ page.id }}"
+                  data-tags="[
+                    {% for tag in page.tags.all %}
+                        {{ tag.id }}
+                        {% if not forloop.last %},{% endif %}
+                    {% endfor %}
+                  ]">
+                    <h2 class="SearchResultHeader">
+                        <a href="{{ page.get_absolute_url }}">{{ page.title }}</a>
+                    </h2>
+                    <div>
+                        <ul class="TagList">
+                            {% for tag in page.tags.all %}
+                                <li class="Tag">{{ tag.name }}</li>
+                            {% endfor %}
+                        </ul>
+                        <p class="ResultBrief">
+                            {{ page.brief }}
+                        </p>
+                    </div>
+                </li>
+            {% empty %}
+                <li class="SearchResult EmptyResult">
+                    No results found
                 </li>
             {% endfor %}
         </ul>
-    </nav>
-    
-    <div class="clearfix">
-        <div id="container" class="clearfix">
-            <header class="SectionHeader" id="root_header">
-                <h1>Matt Bierner</h1>
-            </header>
-            
-            <header class="SectionHeader" id="page_header">
-                <h1>{{ page.title }}</h1>
-            </header>
-            <div id="root_search">
-                <form action="/" method="get">
-                    <input name="query" type="search" placeholder="Search" autofocus="autofocus" results="5" />
-                </form>
-            </div>
-        
-            <article>
-                <section class="PageHeader">
-                    {% autoescape off %}{{ page.header.rendered }}{% endautoescape %}
-                </section>
-                <section class="PageBody">
-                    {% autoescape off %}{{ page.body.rendered }}{% endautoescape %}
-                </section>
-            </article>
-            
-            <nav id="search_list">
-                <ul id="search_results">
-                    {% for page in pages %}
-                        <li class="SearchResult"
-                          data-page-id="{{ page.id }}"
-                          data-tags="[
-                            {% for tag in page.tags.all %}
-                                {{ tag.id }}
-                                {% if not forloop.last %},{% endif %}
-                            {% endfor %}
-                          ]">
-                            <h2 class="SearchResultHeader">
-                                <a href="{{ page.get_absolute_url }}">{{ page.title }}</a>
-                            </h2>
-                            <div>
-                                <ul class="TagList">
-                                    {% for tag in page.tags.all %}
-                                        <li class="Tag">{{ tag.name }}</li>
-                                    {% endfor %}
-                                </ul>
-                                <p class="ResultBrief">
-                                    {{ page.brief }}
-                                </p>
-                            </div>
-                        </li>
-                    {% empty %}
-                        <li class="SearchResult EmptyResult">
-                            No results found
-                        </li>
-                    {% endfor %}
-                </ul>
-            </nav>
-        </div>
-    </div>
-    
-    <footer>
-        &#169; 2012
-        <address>
-            <a href="mailto:_@mattbierner.com">Matt Bierner</a>
-        </address>
-    </footer>
-</div>
-{% endblock %} 
-
-
-
+    </nav>  
+{% endblock %}
+ 
+ 
 {% block scripts %}
 
 <script>
     // serve root page json
-    var state = {
-        'page':
-            {% if page %}
-                {% with self=page %}{% include "page.json" %}{% endwith %}
-            {% else %}
-                undefined
-            {% endif %},
-        'results': [
-            {% if pages %}
-                {% with results=pages %}{% include "search_results.json" %}{% endwith %}
-            {% endif %},
-        ]
-    };
-    
-    var page_style_sheet = '{% static "style/page.css" %}';
+    var results = 
+        {% if pages %}
+            {% with results=pages %}{% include "search_results.json" %}{% endwith %}
+        {% else %}
+            undefined
+        {% endif %};
 </script>
 
 

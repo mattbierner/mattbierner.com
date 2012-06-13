@@ -63,15 +63,11 @@ $(function()
    
    
 // page specific
-    var page_css_link = $('<link id="page_style_sheet" rel="stylesheet" href="${link}" />'.mapFormat({
-        'link': page_style_sheet
-    }));
-    
     var createSideTag = function(obj)
     {
         return $('<li class="SideTag">\
-            <a class="Tag" href="/?query=${name}">${name}</a>\
-        </li>'.mapFormat(obj)).data('tagId', obj.id);
+            <a class="Tag" href="?query=${name}">${name}</a>\
+        </li>'.mapFormat(obj)).data('tagId', obj.id).data('tagName', obj.name);
     }
     
     var createSearchResult = function(obj)
@@ -110,9 +106,24 @@ $(function()
         });
     }
     
+    var search = function(query)
+    {
+        var uri = encodeURIComponent(query);
+        $.getJSON('/search?query=' + uri, function(p)
+        {
+            if (!p)
+                return;
+            history.pushState(p, "Search: " + query, '?query=' + uri);
+            onSearchResultChange(p['results'], p['tags'])       
+        });
+    }
+    
+// init
     $(".SearchResult").each(function(i)
     {        
-        $(this).data('tags', JSON.parse($(this).data('tags')));
+        var tags = $(this).data('tags');
+        if (tags)
+            $(this).data('tags', JSON.parse(tags));
     });
 
     var onSearchResultChange = function(results, tags)
@@ -170,26 +181,21 @@ $(function()
             addSearchResult($('<li class="SearchResult EmptyResult">No results found</li>'));
         }
     };
-    
-    var setupPage = function(p)
-    {
-        $('#page_header h1').text(p ? p['title'] : "");
-        $('article .PageHeader').html(p ? p['header'] : "");
-        $('article .PageBody').html(p ? p['body'] : "");
-    };
+   
     
     // Handle search
     $("#root_search form").submit(function(e)
     {
-        e.preventDefault(); // cancel default submit action
-        
+        e.preventDefault(); // cancel default submit action        
         var query = $(this).find('input').val();
-        $.getJSON('/search?query=' + encodeURIComponent(query), function(p)
-        {
-            if (!p)
-                return;
-            onSearchResultChange(p['results'], p['tags'])       
-        });
+        search(query);
+    });
+    
+    $(".SideTag > .Tag").live('click', function(e)
+    {
+        var tag = $(this).parent('.SideTag');
+        tag.addClass("ActiveTag");   
+        search(tag.data('tagName'));
     });
     
     // Handle mouseenter and mouseleave on SearchResult
@@ -235,51 +241,11 @@ $(function()
         });
     });
     
-    // Handle clicks on SearchResult
-    $("#search_results .SearchResultHeader a").live("click", function(e)
-    {
-        e.preventDefault(); // cancel default link action
-        
-        // if already at url, noop 
-        var dest = $(this).attr('href');
-        if (window.location.pathname == dest)
-            return;
-            
-        // set new page title.
-        var title = $(this).text();
-        $('#page_header h1').text(title);
-
-        // Request new page content
-        $.getJSON('/page?url=' + encodeURI(dest), function(p)
-        {
-            if (!p)
-                return;
-                
-            // push the state.
-            history.pushState({
-                page: p,
-                results: $.extend(true, [], state['results'])
-            }, p['title'],  dest);
-            
-            if ($('head #page_style_sheet').length == 0)
-                $('head').append(page_css_link);
-            
-            // setup new page
-            setupPage(p);    
-        });
-    });
-    
     
     // Handle back navigation
     window.onpopstate = function(e)
     {
-        if (e.state)
-            setupPage(e.state['page']);
-        else
-        {
-            setupPage(state['page']);
-            $('head #page_style_sheet').remove();
-        }
-        
+        var state = e.state || results;
+        onSearchResultChange(state['results'], state['tags']);     
     };
 });

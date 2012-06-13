@@ -1,34 +1,12 @@
 @import "common";
 
-@media screen and (max-width: page_width(8)) { /* first single pane design */
-  #page {
-    width: col_width(6);
-    overflow: visible;
-  }
-  
-  #container {
-    width: col_width(10);
-  }
-  
-  #container, #tag_container {
-    margin-left: -(col_width(4) + $gutter / $em);
-  }
-  
-  #root_header, #root_search, #search_list {
-    width: col_width(4);
-    color: $mid;
-  }
-  
-  .ResultBrief {
-    width: col_width(3);
-  }
-  
-  #root_search input {
-   border-color: $mid;
-  } 
-  
-  
-  #page_header, article {
-    width: col_width(6);
-  }
+#secondary_header {
+  position: absolute;
+  top: 1em;
+  font-size: 1em;
+}
+
+
+.PageHeader {
+  margin-bottom: 0.6em;
 }

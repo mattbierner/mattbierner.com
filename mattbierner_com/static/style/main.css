@@ -185,12 +185,10 @@ img::-moz-selection {
   background: transparent; }
 
 body {
-  -webkit-tap-highlight-color: #00aeef; }
+  tap-highlight-color: #00aeef;
+  -webkit-tap-highlight-color: #00aeef;
+  -moz-tap-highlight-color: #00aeef; }
 
-/*
-	Style overrides for IE6-8
-	http://jonikorpi.com/leaving-old-IE-behind/
-*/
 /*
   Common styles
 */
@@ -205,21 +203,39 @@ body {
   font-size: 14px;
   color: #222222; }
 
+body, input {
+  background: #fafafa; }
+
 h1, h2, h3, h4, h5, h6 {
   font-weight: normal; }
 
 h1 {
   font-size: 2em; }
 
+a {
+  color: #00aeef; }
+
 article ol li,
 article ul li {
   margin-left: 1.6em; }
 
+#bounds {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  text-align: center; }
+
 #page {
-  margin: 0 auto;
+  width: 26.857em;
   padding: 0 12px;
-  width: 61.143em;
-  overflow: hidden; }
+  display: inline-block;
+  text-align: left; }
+
+#page_link, #result_link {
+  height: 100%;
+  position: absolute;
+  display: none; }
 
 #container {
   width: 100%;
@@ -231,24 +247,12 @@ article ul li {
   min-height: 100%; }
 
 #container, #tag_container {
-  margin-left: 0;
-  transition: margin 0.2s ease-out;
-  -webkit-transition: margin 0.2s ease-out;
-  -moz-transition: margin 0.2s ease-out; }
+  margin-left: 0; }
 
-#root_header, #root_search, #search_list {
-  width: 26.857em;
-  float: left;
-  clear: left;
-  transition: color 0.8s ease-out;
-  -webkit-transition: color 0.8s ease-out;
-  -moz-transition: color 0.8s ease-out; }
+header, #root_search, #search_list {
+  width: 100%; }
 
-article, #page_header {
-  width: 32.571em;
-  float: right; }
-
-.SectionHeader {
+header {
   margin-top: 2.2em; }
 
 #root_search {
@@ -330,7 +334,7 @@ article, #page_header {
     text-overflow: ellipsis; }
 
 .SearchResult:hover a {
-  color: white; }
+  color: #fafafa; }
 
 .SearchResult:hover h2 {
   background: #222222; }
@@ -350,46 +354,25 @@ article, #page_header {
 footer {
   font-size: 0.8em;
   margin-top: 4em;
-  margin-bottom: 1em; }
+  margin-bottom: 1em;
+  font-style: italic; }
   footer > * {
     display: inline; }
+  footer a {
+    color: #222222; }
 
-@media screen and (max-width: 62.857em) {
+@media screen and (max-width: 34.286em) {
   #page {
-    width: 55.429em; }
-
-  #root_header, #root_search, #search_list {
+    width: 26.857em; } }
+@media screen and (max-width: 28.571em) {
+  #page {
     width: 21.143em; }
 
   .ResultBrief {
+    width: 15.429em; } }
+@media screen and (max-width: 22.857em) {
+  #page {
     width: 15.429em; }
-
-  #page_header, article {
-    width: 32.571em; } }
-@media screen and (max-width: 57.143em) {
-  #page {
-    width: 49.714em; }
-
-  #page_header, article {
-    width: 26.857em; } }
-@media screen and (max-width: 51.429em) {
-  /* last two pane design */
-  #page {
-    width: 44em; }
-
-  #page_header, article {
-    width: 21.143em; } }
-@media screen and (max-width: 45.714em) {
-  /* first single pane design */
-  #page {
-    width: 32.571em;
-    overflow: visible; }
-
-  #container, #root_header, #root_search, #search_list {
-    width: 32.571em; }
 
   .ResultBrief {
-    width: 15.429em; }
-
-  #page_header, article {
-    width: 32.571em; } }
+    width: 100%; } }

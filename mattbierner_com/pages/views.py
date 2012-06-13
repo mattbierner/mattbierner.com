@@ -18,7 +18,7 @@ class PageDataView(View, TemplateResponseMixin):
         
     def get(self, request, *args, **kwargs):
         return self.render_to_response(self.get_context_data(
-            url=request.GET['url'], **kwargs))
+            url=request.GET.get('url', None), **kwargs))
     
     def get_context_data(self, url=None, *args, **kwargs):
         return {
