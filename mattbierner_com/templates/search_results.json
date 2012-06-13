@@ -1,0 +1,17 @@
+{
+    {% load json_filter %}
+
+    "tags":  [
+        {% for tag in tags %}
+            {% with self=tag %}{% include "tag.json" %}{% endwith %}
+            {% if not forloop.last %},{% endif %}
+        {% endfor %}
+    ],
+    "results": [
+        {% load json_filter %}
+        {% for result in results %}
+            {% with self=result %}{% include "page.json" %}{% endwith %}
+            {% if not forloop.last %},{% endif %}
+        {% endfor %}
+    ]
+}

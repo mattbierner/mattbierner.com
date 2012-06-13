@@ -122,7 +122,6 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'haystack',
     'taggit',
-    'taggit_autocomplete_modified',
     'south',
     
     'mattbierner_com.json_filter',

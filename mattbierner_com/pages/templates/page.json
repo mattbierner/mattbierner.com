@@ -1,13 +1,16 @@
 {
     {% load json_filter %}
     
+    "id": {{ self.id|as_json }},
     "title": {{ self.title|as_json }},
     "tags": [
         {% for tag in self.tags.all %}
-            {{ tag.name|as_json}}{% if not forloop.last %},{% endif %}
+            {% with self=tag %}{% include "tag.json" %}{% endwith %}
+            {% if not forloop.last %},{% endif %}
         {% endfor %}
     ],
     "brief": {{ self.brief|as_json }},
     "header": {{ self.header.rendered|as_json }},
-    "body": {{ self.body.rendered|as_json }}
+    "body": {{ self.body.rendered|as_json }},
+    "absolute_url": {{ self.get_absolute_url|as_json }}
 }

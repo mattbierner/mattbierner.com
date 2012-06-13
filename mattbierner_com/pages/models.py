@@ -6,7 +6,7 @@ from django.utils.http import urlquote
 
 from markupfield.fields import MarkupField
 
-from taggit_autocomplete_modified.managers import TaggableManager
+from taggit.managers import TaggableManager
 
 
 class Page(models.Model):

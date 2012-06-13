@@ -4,9 +4,18 @@
 
 {% block content %}
 <div id="page" >
-    <div class='clearfix'>
-        <div id="container" class="clearfix">
+    <nav id="tag_container">
+        <ul id="tags">
+            {% for tag in tags %}
+                <li class="SideTag" data-tag-id="{{ tag.id }}">
+                    <a href="/?query={{ tag.name }}" class="Tag">{{ tag.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </nav>
     
+    <div class="clearfix">
+        <div id="container" class="clearfix">
             <header class="SectionHeader" id="root_header">
                 <h1>Matt Bierner</h1>
             </header>
@@ -21,39 +30,43 @@
             </div>
         
             <article>
-                <section class="PageHeaderSection">
+                <section class="PageHeader">
                     {% autoescape off %}{{ page.header.rendered }}{% endautoescape %}
                 </section>
-                <section class="PageBodySection">
+                <section class="PageBody">
                     {% autoescape off %}{{ page.body.rendered }}{% endautoescape %}
                 </section>
             </article>
             
             <nav id="search_list">
-                <div id="tags">
-                    <ul>
-                        {% for tag in tags %}
-                            <li>
-                                <a class="Tag SideTag">{{ tag.name }}</a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
                 <ul id="search_results">
                     {% for page in pages %}
-                    <li class="SearchResult">
-                        <h2 class="SearchResultHeader"><a href="{{ page.get_absolute_url }}">{{ page.title }}</a></h2>
-                        <div>
-                            <ul class="TagList">
-                                {% for tag in page.tags.all %}
-                                    <li class="Tag">{{ tag.name }}</li>
-                                {% endfor %}
-                            </ul>
-                            <p class="ResultBrief">
-                                {{ page.brief }}
-                            </p>
-                        </div>
-                    </li>
+                        <li class="SearchResult"
+                          data-page-id="{{ page.id }}"
+                          data-tags="[
+                            {% for tag in page.tags.all %}
+                                {{ tag.id }}
+                                {% if not forloop.last %},{% endif %}
+                            {% endfor %}
+                          ]">
+                            <h2 class="SearchResultHeader">
+                                <a href="{{ page.get_absolute_url }}">{{ page.title }}</a>
+                            </h2>
+                            <div>
+                                <ul class="TagList">
+                                    {% for tag in page.tags.all %}
+                                        <li class="Tag">{{ tag.name }}</li>
+                                    {% endfor %}
+                                </ul>
+                                <p class="ResultBrief">
+                                    {{ page.brief }}
+                                </p>
+                            </div>
+                        </li>
+                    {% empty %}
+                        <li class="SearchResult EmptyResult">
+                            No results found
+                        </li>
                     {% endfor %}
                 </ul>
             </nav>
@@ -75,18 +88,21 @@
 
 <script>
     // serve root page json
-    var root_page = {% if page %}
-        {% with self=page %}{% include "page.json" %}{% endwith %}
-   {% else %} undefined {% endif %};
-
-{% autoescape off %}    
-    // serve search result json
-    var search_results = [
-        {% for self in pages %}
-            {% include "page.json" %},
-        {% endfor %}
-    ];
-{% endautoescape %}
+    var state = {
+        'page':
+            {% if page %}
+                {% with self=page %}{% include "page.json" %}{% endwith %}
+            {% else %}
+                undefined
+            {% endif %},
+        'results': [
+            {% if pages %}
+                {% with results=pages %}{% include "search_results.json" %}{% endwith %}
+            {% endif %},
+        ]
+    };
+    
+    var page_style_sheet = '{% static "style/page.css" %}';
 </script>
 
 

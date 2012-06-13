@@ -31,7 +31,7 @@ class SearchView(View):
 
 
 class SearchDataView(SearchView, TemplateResponseMixin):
-    template_name = 'search_result.json'
+    template_name = 'search_results.json'
 
     def get(self, request, *args, **kwargs):
         return self.render_to_response(self.get_context_data(

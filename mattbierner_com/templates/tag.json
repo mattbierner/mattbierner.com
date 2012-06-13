@@ -1,0 +1,6 @@
+{
+    {% load json_filter %}
+    
+    "name": {{ self.name|as_json}},
+    "id": {{ self.id|as_json }}
+}

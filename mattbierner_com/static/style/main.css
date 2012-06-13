@@ -23,6 +23,66 @@
   height: 1%; }
 
 /*
+  Animations 
+*/
+@keyframes fadeIn {
+  from {
+    opacity: 0; }
+
+  to {
+    opacity: 1; } }
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0; }
+
+  to {
+    opacity: 1; } }
+
+@-moz-keyframes fadeIn {
+  from {
+    opacity: 0; }
+
+  to {
+    opacity: 1; } }
+
+@keyframes fadeOutCollapse {
+  0% {
+    opacity: 1; }
+
+  25% {
+    opacity: 0;
+    max-height: 3em; }
+
+  100% {
+    opacity: 0;
+    max-height: 0; } }
+
+@-webkit-keyframes fadeOutCollapse {
+  0% {
+    opacity: 1; }
+
+  25% {
+    opacity: 0;
+    max-height: 3em; }
+
+  100% {
+    opacity: 0;
+    max-height: 0; } }
+
+@-moz-keyframes fadeOutCollapse {
+  0% {
+    opacity: 1; }
+
+  25% {
+    opacity: 0;
+    max-height: 3em; }
+
+  100% {
+    opacity: 0;
+    max-height: 0; } }
+
+/*
 	Margin, padding, and border resets
 	except for form elements
 */
@@ -134,6 +194,10 @@ body {
 /*
   Common styles
 */
+body, html {
+  height: 100%;
+  min-height: 100%; }
+
 body, input {
   font-family: Century Gothic, 'century gothic', sans-serif; }
 
@@ -160,9 +224,14 @@ article ul li {
 #container {
   width: 100%;
   height: 100%;
-  margin-left: 0;
   color: #222222;
-  border-color: #222222;
+  border-color: #222222; }
+
+#tag_container {
+  min-height: 100%; }
+
+#container, #tag_container {
+  margin-left: 0;
   transition: margin 0.2s ease-out;
   -webkit-transition: margin 0.2s ease-out;
   -moz-transition: margin 0.2s ease-out; }
@@ -197,19 +266,27 @@ article, #page_header {
     -webkit-transition: border-color 0.8s ease-out;
     -moz-transition: border-color 0.8s ease-out; }
 
-.SideTag {
+.Tag, .Tag:hover {
+  color: #222222;
+  text-decoration: none; }
+
+.SideTag > .Tag {
   color: #cacaca;
   transition: color 0.2s;
   -webkit-transition: color 0.2s;
   -moz-transition: color 0.2s; }
 
-.ActiveTag {
+.ActiveTag > .Tag {
   color: #222222; }
 
-.SideTag:before {
+.SideTag > .Tag:before {
   content: "#"; }
 
 #tags {
+  max-height: 100%; }
+
+#tags {
+  overflow-y: hidden;
   display: block;
   position: absolute;
   top: 6em;
@@ -232,6 +309,8 @@ article, #page_header {
 .SearchResult .SearchResultHeader {
   width: 100%; }
   .SearchResult .SearchResultHeader a {
+    display: block;
+    width: 100%;
     color: #222222;
     text-decoration: none; }
 .SearchResult div {
@@ -239,9 +318,15 @@ article, #page_header {
   overflow: hidden;
   position: relative; }
   .SearchResult div .TagList {
+    position: relative;
     width: 4em;
     height: 100%;
     position: absolute;
+    text-overflow: ellipsis; }
+  .SearchResult div .TagList li {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis; }
 
 .SearchResult:hover a {
@@ -300,19 +385,11 @@ footer {
     width: 32.571em;
     overflow: visible; }
 
-  #container {
-    width: 55.429em;
-    margin-left: -22.857em; }
-
-  #root_header, #root_search, #search_list {
-    width: 21.143em;
-    color: #cacaca; }
+  #container, #root_header, #root_search, #search_list {
+    width: 32.571em; }
 
   .ResultBrief {
     width: 15.429em; }
-
-  #root_search input {
-    border-color: #cacaca; }
 
   #page_header, article {
     width: 32.571em; } }

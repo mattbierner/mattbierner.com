@@ -17,22 +17,27 @@
 * html .clearfix {
   height: 1%; }
 
-/*
-@media screen and (max-width: page_width(8)) {
-  #page_header {
-    margin-top: 0;
-  }
-  
+@media screen and (max-width: 45.714em) {
+  /* first single pane design */
+  #page {
+    width: 32.571em;
+    overflow: visible; }
+
+  #container {
+    width: 55.429em; }
+
+  #container, #tag_container {
+    margin-left: -22.857em; }
+
+  #root_header, #root_search, #search_list {
+    width: 21.143em;
+    color: #cacaca; }
+
+  .ResultBrief {
+    width: 15.429em; }
+
+  #root_search input {
+    border-color: #cacaca; }
+
   #page_header, article {
-    float: left;
-  }
-  
-  #page_header, #root_search, article {
-    clear: left;
-  }
- 
-  #search_list {
-    display: none;
-  }
-}
-*/
+    width: 32.571em; } }

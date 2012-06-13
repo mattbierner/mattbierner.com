@@ -1,3 +1,5 @@
+
+// Based on Frameless
 /*
 	Frameless			<http://framelessgrid.com/>
 	by Joni Korpi 		<http://jonikorpi.com/>
@@ -8,9 +10,44 @@
 
 
 /*
+  Animations 
+*/
+
+
+@mixin fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes fadeIn { @include fadeIn };
+@-webkit-keyframes fadeIn { @include fadeIn };
+@-moz-keyframes fadeIn { @include fadeIn };
+
+
+@mixin fadeOutCollapse {
+  0% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0;
+    max-height: 3em;
+  }
+  100% {
+    opacity: 0;
+    max-height: 0;
+  }
+}
+
+@keyframes fadeOutCollapse { @include fadeOutCollapse };
+@-webkit-keyframes fadeOutCollapse { @include fadeOutCollapse };
+@-moz-keyframes fadeOutCollapse { @include fadeOutCollapse };
+
+
+/*
 	Margin, padding, and border resets
 	except for form elements
 */
+
+
 
 body, div,
 h1, h2, h3, h4, h5, h6,
@@ -138,6 +175,11 @@ body {
   Common styles
 */
 
+body, html {
+  height: 100%;
+  min-height: 100%;
+}
+
 body, input {
     font-family: Century Gothic, 'century gothic', sans-serif;
 }
@@ -170,14 +212,18 @@ article ul li {
 #container {
   width: 100%;
   height: 100%;
-  
-  margin-left: 0;
   color: $fg;
   border-color: $fg;
+}
+
+#tag_container {
+  min-height: 100%;
+}
+
+#container, #tag_container {
+  margin-left: 0;
   @include browser_prefix(transition, margin 0.2s ease-out);
-} 
-
-
+}
 
 #root_header, #root_search, #search_list {
   width: col_width(5);
@@ -212,20 +258,30 @@ article, #page_header {
   }
 }
 
-.SideTag {
+.Tag, .Tag:hover {
+  color: $fg;
+  text-decoration: none;
+}
+
+.SideTag > .Tag {
   color: $mid;
   @include transition(color 0.2s);
 }
 
-.ActiveTag {
+.ActiveTag > .Tag {
   color: $fg;
 }
 
-.SideTag:before {
-  content: "#"
+.SideTag > .Tag:before {
+  content: "#";
 }
 
 #tags {
+  max-height: 100%;
+}
+
+#tags {
+  overflow-y:hidden;
   display: block;
   position: absolute;
   top: 6em;
@@ -257,6 +313,8 @@ article, #page_header {
     width: 100%;
     
     a {
+      display: block;
+      width: 100%;
       color: $fg;
       text-decoration: none;
     }
@@ -268,9 +326,17 @@ article, #page_header {
     position: relative;
     
     .TagList {
+      position: relative;
       width: col_width(1);
       height: 100%;
       position: absolute;
+      text-overflow: ellipsis;
+    }
+    
+    .TagList li {
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
       text-overflow: ellipsis;
     }
   }
@@ -355,24 +421,14 @@ footer {
     overflow: visible;
   }
   
-  #container {
-    width: col_width(10);
-    margin-left: -(col_width(4) + $gutter / $em);
+  #container, #root_header, #root_search, #search_list {
+    width: col_width(6);
   }
   
-  #root_header, #root_search, #search_list {
-    width: col_width(4);
-    color: $mid;
-  }
   
   .ResultBrief {
     width: col_width(3);
   }
-  
-  #root_search input {
-   border-color: $mid;
-  } 
-  
   
   #page_header, article {
     width: col_width(6);
