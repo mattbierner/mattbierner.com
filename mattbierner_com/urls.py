@@ -9,12 +9,6 @@ from mattbierner_com.pages import urls as PageUrls
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Example:
-    # (r'^{{ project_name }}/', include('{{ project_name }}.foo.urls')),
-
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
     #
     url(r'^taggit_autocomplete_modified/', include('taggit_autocomplete_modified.urls')),
 
