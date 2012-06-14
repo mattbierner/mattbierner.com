@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block page %}
+
+<div id="bounds">
+    <div id="page">
+        {% block pre-content %}{% endblock %}
+    
+        <header>
+            {% block header %}{% endblock %}
+        </header>
+        
+        <div id="root_search">
+            <form action="/" method="get">
+                <input name="query" type="search" placeholder="Search" autofocus="autofocus" results="5" />
+            </form>
+        </div>
+        
+        {% block content %}{% endblock %}
+        
+        <footer>
+            &#169; 2012
+            <address>
+                <a href="mailto:_@mattbierner.com">Matt Bierner</a>
+            </address>
+        </footer>
+    </div>
+</div>
+{% endblock %} 
