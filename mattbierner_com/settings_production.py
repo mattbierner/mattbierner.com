@@ -30,4 +30,4 @@ CACHES = {
 
 
 
-STATIC_ROOT = '/www/mattbierner_com/static'
+STATIC_ROOT = '/www/mattbierner.com/static'
