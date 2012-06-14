@@ -1,7 +1,7 @@
-from settings_base import *
-
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+
+from settings_base import *
 
 
 DATABASES = {
@@ -26,3 +26,5 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
     }
 }
+
+SECRET_KEY = 't7-a5^olkfh=aunlcz3p3nwphn$#rnr&u())9y)))zsvm6r+p2'

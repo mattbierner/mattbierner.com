@@ -29,5 +29,7 @@ CACHES = {
 }
 
 
-
 STATIC_ROOT = '/www/mattbierner.com/static'
+
+from mattbierner_com.private_settings import SECRET_KEY
+ 

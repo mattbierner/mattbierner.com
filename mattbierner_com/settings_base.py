@@ -2,20 +2,11 @@ import os
 
 ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
 
-DEBUG = False
-
-ADMINS = ()
+ADMINS = ('Matt Bierner' ,'_@mattbierner.com',)
 
 MANAGERS = ADMINS
 
 
-HAYSTACK_CONNECTIONS = {
-    'default': {
-        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-        'URL': 'http://127.0.0.1:9200/',
-        'INDEX_NAME': 'haystack',
-    },
-}
 
 
 # Local time zone for this installation. Choices can be found here:
@@ -81,14 +72,11 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = 't7-a5^olkfh=aunlcz3p3nwphn$#rnr&u())9y)))zsvm6r+p2'
-
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
