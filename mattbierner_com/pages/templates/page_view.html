@@ -2,6 +2,8 @@
 
 {% load staticfiles %}
 
+{% block page-title %} | {{ page.title }}{% endblock %}
+
 {% block extra-css %}
    <link rel="stylesheet" href="{% static "style/page.css" %}" />
 {% endblock %}
