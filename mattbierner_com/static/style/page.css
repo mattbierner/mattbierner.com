@@ -54,7 +54,7 @@ article figure figcaption {
 article section > figure {
   width: auto; }
 
-article section > .gist {
+article section .gist {
   width: 44em; }
 
 article section figure figcaption {
