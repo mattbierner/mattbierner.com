@@ -50,7 +50,7 @@ $(function()
                 '-webkit-transition': "max-height 0.2s",
                 'max-height': 0
             });
-            // why you no fire the transitionend for transitions nested webkit?
+            // why you no fire the transitionend for nested transitions webkit?
             setTimeout(function(){ elem.remove(); }, 200); 
         }).css({
             'max-height': elem.height(),
@@ -82,10 +82,7 @@ $(function()
             <h2 class="SearchResultHeader">\
                 <a href="${absolute_url}">${title}</a>\
             </h2>\
-            <div>\
-                <ul class="TagList"></ul>\
-                <p class="ResultBrief">${brief}</p>\
-            </div>\
+            <p class="ResultBrief">${brief}</p>\
         </li>'.mapFormat(obj));
         var tagList = result.find('.TagList');
         tagList.append.apply(tagList, tags);
@@ -207,11 +204,22 @@ $(function()
         var tags = $(this).data('tags');
         if (!tags)
             return;
-
+            
+        var toRemove = {};
         $(".SideTag").each(function(i)
         {
-            if (tags.indexOf($(this).data('tagId')) >= 0)
-                $(this).addClass("ActiveTag");   
+            var id = $(this).data('tagId');
+            if (tags.indexOf(id) >= 0)
+                $(this).addClass("ActiveTag");
+            else
+                toRemove[id] = $(this);
+        });
+        
+        $.each(toRemove, function(i)
+        {
+            var c = this.clone().css('opacity', '0.0').appendTo('#tags');
+            fadeCollapseRemoveAnimate(this);
+            c.css('opacity', '1.0')
         });
     }).live('mouseleave', function(e)
     {

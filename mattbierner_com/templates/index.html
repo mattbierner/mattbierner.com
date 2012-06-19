@@ -20,7 +20,7 @@
 
 
 {% block header %}
-    <h1 id="main_header">Matt Bierner</h1>
+    <h1 id="main_header"><a href="/">Matt Bierner</a></h1>
 {% endblock %}
 
 {% block search_value%}
@@ -43,16 +43,7 @@
                     <h2 class="SearchResultHeader">
                         <a href="{{ page.get_absolute_url }}">{{ page.title }}</a>
                     </h2>
-                    <div>
-                        <ul class="TagList">
-                            {% for tag in page.tags.all %}
-                                <li class="Tag">{{ tag.name }}</li>
-                            {% endfor %}
-                        </ul>
-                        <p class="ResultBrief">
-                            {{ page.brief }}
-                        </p>
-                    </div>
+                    <p class="ResultBrief">{{ page.brief }}</p>
                 </li>
             {% empty %}
                 <li class="SearchResult EmptyResult">
