@@ -3,15 +3,27 @@
 
     "tags":  [
         {% for tag in tags %}
+        
             {% with self=tag %}{% include "tag.json" %}{% endwith %}
             {% if not forloop.last %},{% endif %}
         {% endfor %}
     ],
     "results": [
-        {% load json_filter %}
         {% for result in results %}
-            {% with self=result %}{% include "page.json" %}{% endwith %}
+            {
+                "id": {{ result.id|as_json }},
+                "title": {{ result.title|as_json }},
+                "tags": [
+                    {% for tag in result.tags.all %}
+                        {% with self=tag %}{% include "tag.json" %}{% endwith %}
+                        {% if not forloop.last %},{% endif %}
+                    {% endfor %}
+                ],
+                "brief": {{ result.brief|as_json }},
+                "absolute_url": {{ result.get_absolute_url|as_json }}
+            }
             {% if not forloop.last %},{% endif %}
         {% endfor %}
     ]
 }
+

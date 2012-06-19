@@ -202,18 +202,11 @@ article ul li {
   margin-left: 1.6em;
 }
 
-#bounds {
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
+body > * {
+  margin: 0 auto;
   position: relative;
-  text-align: center;
-}
-
-#page {
-  width: col_width(5);
+  width: col_width_em(5);
   padding: 0 $margin;
-  display:inline-block;
   text-align: left;
 }
 
@@ -230,20 +223,13 @@ article ul li {
   border-color: $fg;
 }
 
-#tag_container {
-  min-height: 100%;
-}
-
-#container, #tag_container {
+#container {
   margin-left: 0;
 }
 
-header, #root_search, #search_list {
-  width: 100%;
-}
-
 header {
-  margin-top: 2.2em;
+  padding-top: 2.2em;
+  margin-bottom: 0.2em;
 }
 
 
@@ -256,10 +242,17 @@ header {
     border-bottom: 1px solid $fg;
     color: $fg; 
     text-align: left;
-    -moz-appearance:none;
-    -webkit-appearance:none;
+    @include browser_prefix(appearance, none);
+    @include browser_prefix(border-radius, 0);
     outline: none;
-    @include browser_prefix(transition, border-color 0.8s ease-out);
+  }
+  
+  input::-webkit-input-placeholder {
+    color: $mid;
+  }
+  
+  :-moz-placeholder {
+    color: $mid;
   }
 }
 
@@ -281,23 +274,43 @@ header {
   content: "#";
 }
 
-#tags {
-  max-height: 100%;
+#tag_container {
+  position: relative;
+  padding: 0 $margin;
+  margin: 0 auto;
+  width: col_width_em(5);
+  height: 100%;
 }
+  
 
-#tags {
-  overflow-y:hidden;
-  display: block;
+#tag_wrapper {
   position: absolute;
-  top: 6em;
+  padding: 0;
+  top: 0;
+  height: 100%;
   width: 100%;
-  margin-left: -100%;
+  overflow-y: hidden;
+  
+  #tags {
+    position: absolute;
+    display: block;
+    left: -100%;
+    width: 100%;
+  }
+  
+  li:first-child {
+    padding-top: 2.4em;
+  }
   
   li {
+    width: 5000px;
+    display: block;
+    float: right;
+    clear: both;
     list-style: none;
     text-align: right;
-    padding-right: $gutter;
-    font-size: 3em;
+    padding-right: $gutter - $margin;
+    font-size: 2.4em;
   }
 }
 
@@ -332,7 +345,7 @@ header {
     
     .TagList {
       position: relative;
-      width: col_width(1);
+      width: col_width_em(1);
       height: 100%;
       position: absolute;
       text-overflow: ellipsis;
@@ -363,21 +376,25 @@ header {
 
 
 .ResultBrief {
-  width: col_width(4);
+  width: col_width_em(4);
   font-style: italic;
   padding-left: $gutter + $column;
 }
 
 
 footer {
-  font-size: 0.8em;
   margin-top: 4em;
-  margin-bottom: 1em;
+  padding-bottom: 1em;
   font-style: italic;
 
   > * {
-    display: inline;
+    font-size: 0.8em;
+    width: 100%;
   } 
+  
+  address {
+    display: inline;
+  }
   
   a {
     color: $fg;
@@ -389,24 +406,24 @@ footer {
 //
 
 @media screen and (max-width: page_width(6)) { 
-  #page {
-    width: col_width(5);
+  body > *, #tag_container {
+    width: col_width_em(5);
   }
 }
 
 @media screen and (max-width: page_width(5)) { 
-  #page {
-    width: col_width(4);
+  body > *, #tag_container {
+    width: col_width_em(4);
   }
   
   .ResultBrief {
-    width: col_width(3);
+    width: col_width_em(3);
   }
 }
 
 @media screen and (max-width: page_width(4)) { 
-  #page {
-    width: col_width(3);
+  body > *, #tag_container {
+    width: col_width_em(3);
   }
   
   .ResultBrief {

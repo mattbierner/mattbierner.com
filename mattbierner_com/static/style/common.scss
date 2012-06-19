@@ -63,11 +63,16 @@ $cols16: (16 * ($column + $gutter) - $gutter) / $em;
 //
 
 @function col_width ($cols:1) {
-  @return ($cols * ($column + $gutter) - $gutter) / $em;
+  @return ($cols * ($column + $gutter) - $gutter);
 }
 
+@function col_width_em ($cols:1) {
+  @return col_width($cols) / $em;
+}
+
+
 @function page_width ($cols:1) {
-  @return col_width($cols) + ((2 * $margin) / $em);
+  @return col_width_em($cols) + ((2 * $margin) / $em);
 }
 
 

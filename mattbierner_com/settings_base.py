@@ -2,7 +2,7 @@ import os
 
 ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
 
-ADMINS = ('Matt Bierner' ,'_@mattbierner.com',)
+ADMINS = ('error' ,'error@mattbierner.com',)
 
 MANAGERS = ADMINS
 
@@ -107,12 +107,12 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.markup',
     
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+    # 3rd Party
     'haystack',
     'taggit',
     'south',
     
+    # Site specfic 
     'mattbierner_com.json_filter',
     'mattbierner_com.pages',
 )

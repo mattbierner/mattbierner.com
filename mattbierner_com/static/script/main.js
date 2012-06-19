@@ -109,13 +109,15 @@ $(function()
     var search = function(query)
     {
         var uri = encodeURIComponent(query);
+        $("#root_search form input").val(query);
         $.getJSON('/search?query=' + uri, function(p)
         {
             if (!p)
                 return;
             history.pushState(p, "Search: " + query, '?query=' + uri);
-            onSearchResultChange(p['results'], p['tags'])       
+            onSearchResultChange(p['results'], p['tags']);
         });
+        
     }
     
 // init
@@ -193,8 +195,9 @@ $(function()
     
     $(".SideTag > .Tag").live('click', function(e)
     {
+        e.preventDefault(); // cancel default link action
         var tag = $(this).parent('.SideTag');
-        tag.addClass("ActiveTag");   
+        tag.addClass("ActiveTag"); 
         search(tag.data('tagName'));
     });
     
@@ -246,6 +249,7 @@ $(function()
     window.onpopstate = function(e)
     {
         var state = e.state || results;
-        onSearchResultChange(state['results'], state['tags']);     
+        if (state)
+            onSearchResultChange(state['results'], state['tags']);     
     };
 });

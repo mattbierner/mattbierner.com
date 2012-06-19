@@ -4,9 +4,92 @@
   position: absolute;
   top: 1em;
   font-size: 1em;
+
+}
+
+#secondary_header a {
+  color: $fg;
+  text-decoration: none;
+  margin-bottom: 0em;
 }
 
 
 .PageHeader {
   margin-bottom: 0.6em;
+}
+
+
+article {
+  width: auto;
+  max-width: 100%;
+}
+
+article > section {
+  width: 100%;
+  max-width: 100%;
+}  
+
+article section > * {
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+article section > * {
+  display: block;
+  width: col_width(5);
+}
+
+article figure > * {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+
+article figure figcaption {
+  display: block;
+  text-align: center;
+  font-style: italic;
+}
+
+
+//
+// Special sizing for some items.
+// 
+article section > figure {
+  width: auto;
+}
+
+article section > .gist {
+  width: col_width_em(8);
+}
+
+article section figure figcaption {
+  display: block;
+  width: col_width(5);
+}
+
+
+
+
+//
+// Media specific settings
+//
+
+@media screen and (max-width: page_width(6)) { 
+  article section > *, article section figure figcaption {
+    width: col_width(5);
+  }
+}
+
+@media screen and (max-width: page_width(5)) { 
+   article section > *, article section figure figcaption {
+    width: col_width(4);
+  }
+}
+
+@media screen and (max-width: page_width(4)) { 
+   article section > *, article section figure figcaption {
+    width: col_width(3);
+  }
 }

@@ -57,5 +57,6 @@ class IndexView(SearchView, TemplateResponseMixin):
         return {
             'tags': self.get_result_set(pages),
             'pages': pages,
+            'query': query
         }
     

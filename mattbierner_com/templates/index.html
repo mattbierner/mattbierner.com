@@ -3,22 +3,28 @@
 {% load staticfiles %}
 
 {% block pre-content %}
-<nav id="tag_container">
-    <ul id="tags">
-        {% for tag in tags %}
-            <li class="SideTag"
-              data-tag-id="{{ tag.id }}"
-              data-tag-name="{{ tag.name }}">
-                <a href="?query={{ tag.name }}" class="Tag">{{ tag.name }}</a>
-            </li>
-        {% endfor %}
-    </ul>
-</nav>
+    <div id="tag_wrapper">
+        <nav id="tag_container">
+            <ul id="tags">
+                {% for tag in tags %}
+                    <li class="SideTag"
+                      data-tag-id="{{ tag.id }}"
+                      data-tag-name="{{ tag.name }}">
+                        <a href="?query={{ tag.name }}" class="Tag">{{ tag.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </div>
 {% endblock %}
 
 
 {% block header %}
     <h1 id="main_header">Matt Bierner</h1>
+{% endblock %}
+
+{% block search_value%}
+{% if query %}{{ query }}{% endif %}
 {% endblock %}
 
 
@@ -61,6 +67,7 @@
 {% block scripts %}
 
 <script>
+//<![CDATA[
     // serve root page json
     var results = 
         {% if pages %}
@@ -68,6 +75,7 @@
         {% else %}
             undefined
         {% endif %};
+//]]>
 </script>
 
 

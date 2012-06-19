@@ -219,17 +219,11 @@ article ol li,
 article ul li {
   margin-left: 1.6em; }
 
-#bounds {
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
+body > * {
+  margin: 0 auto;
   position: relative;
-  text-align: center; }
-
-#page {
   width: 26.857em;
   padding: 0 12px;
-  display: inline-block;
   text-align: left; }
 
 #page_link, #result_link {
@@ -243,17 +237,12 @@ article ul li {
   color: #222222;
   border-color: #222222; }
 
-#tag_container {
-  min-height: 100%; }
-
-#container, #tag_container {
+#container {
   margin-left: 0; }
 
-header, #root_search, #search_list {
-  width: 100%; }
-
 header {
-  margin-top: 2.2em; }
+  padding-top: 2.2em;
+  margin-bottom: 0.2em; }
 
 #root_search {
   margin-bottom: 0.6em; }
@@ -263,12 +252,17 @@ header {
     border-bottom: 1px solid #222222;
     color: #222222;
     text-align: left;
-    -moz-appearance: none;
+    appearance: none;
     -webkit-appearance: none;
-    outline: none;
-    transition: border-color 0.8s ease-out;
-    -webkit-transition: border-color 0.8s ease-out;
-    -moz-transition: border-color 0.8s ease-out; }
+    -moz-appearance: none;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    outline: none; }
+  #root_search input::-webkit-input-placeholder {
+    color: #cacaca; }
+  #root_search :-moz-placeholder {
+    color: #cacaca; }
 
 .Tag, .Tag:hover {
   color: #222222;
@@ -286,21 +280,36 @@ header {
 .SideTag > .Tag:before {
   content: "#"; }
 
-#tags {
-  max-height: 100%; }
+#tag_container {
+  position: relative;
+  padding: 0 12px;
+  margin: 0 auto;
+  width: 26.857em;
+  height: 100%; }
 
-#tags {
-  overflow-y: hidden;
-  display: block;
+#tag_wrapper {
   position: absolute;
-  top: 6em;
+  padding: 0;
+  top: 0;
+  height: 100%;
   width: 100%;
-  margin-left: -100%; }
-  #tags li {
+  overflow-y: hidden; }
+  #tag_wrapper #tags {
+    position: absolute;
+    display: block;
+    left: -100%;
+    width: 100%; }
+  #tag_wrapper li:first-child {
+    padding-top: 2.4em; }
+  #tag_wrapper li {
+    width: 5000px;
+    display: block;
+    float: right;
+    clear: both;
     list-style: none;
     text-align: right;
-    padding-right: 24px;
-    font-size: 3em; }
+    padding-right: 12px;
+    font-size: 2.4em; }
 
 #search_list li {
   list-style: none;
@@ -352,26 +361,28 @@ header {
   padding-left: 80px; }
 
 footer {
-  font-size: 0.8em;
   margin-top: 4em;
-  margin-bottom: 1em;
+  padding-bottom: 1em;
   font-style: italic; }
   footer > * {
+    font-size: 0.8em;
+    width: 100%; }
+  footer address {
     display: inline; }
   footer a {
     color: #222222; }
 
 @media screen and (max-width: 34.286em) {
-  #page {
+  body > *, #tag_container {
     width: 26.857em; } }
 @media screen and (max-width: 28.571em) {
-  #page {
+  body > *, #tag_container {
     width: 21.143em; }
 
   .ResultBrief {
     width: 15.429em; } }
 @media screen and (max-width: 22.857em) {
-  #page {
+  body > *, #tag_container {
     width: 15.429em; }
 
   .ResultBrief {

@@ -22,5 +22,56 @@
   top: 1em;
   font-size: 1em; }
 
+#secondary_header a {
+  color: #222222;
+  text-decoration: none;
+  margin-bottom: 0em; }
+
 .PageHeader {
   margin-bottom: 0.6em; }
+
+article {
+  width: auto;
+  max-width: 100%; }
+
+article > section {
+  width: 100%;
+  max-width: 100%; }
+
+article section > * {
+  margin: 0 auto;
+  max-width: 100%; }
+
+article section > * {
+  display: block;
+  width: 376px; }
+
+article figure > * {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%; }
+
+article figure figcaption {
+  display: block;
+  text-align: center;
+  font-style: italic; }
+
+article section > figure {
+  width: auto; }
+
+article section > .gist {
+  width: 44em; }
+
+article section figure figcaption {
+  display: block;
+  width: 376px; }
+
+@media screen and (max-width: 34.286em) {
+  article section > *, article section figure figcaption {
+    width: 376px; } }
+@media screen and (max-width: 28.571em) {
+  article section > *, article section figure figcaption {
+    width: 296px; } }
+@media screen and (max-width: 22.857em) {
+  article section > *, article section figure figcaption {
+    width: 216px; } }
