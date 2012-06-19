@@ -17,6 +17,12 @@
 * html .clearfix {
   height: 1%; }
 
+article figure {
+  padding-bottom: 1em; }
+
+article ul, article ol {
+  padding-bottom: 0.8em; }
+
 #secondary_header {
   position: absolute;
   top: 1em;

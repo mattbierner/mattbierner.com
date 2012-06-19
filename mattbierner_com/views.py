@@ -15,6 +15,7 @@ from mattbierner_com.pages.models import Page
 
 class SearchView(View):
     def get_search_results(self, query=None, *args, **kwargs):
+        print query
         if query is None:
             return Page.objects.all()
         else:
