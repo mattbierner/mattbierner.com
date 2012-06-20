@@ -25,7 +25,7 @@ class Page(models.Model):
         verbose_name_plural = "Pages"
         verbose_name = "Page"
         ordering = ['-created']
-        get_latest_by = 'created'
+        get_latest_by = '-created'
 
     def __unicode__(self):
         return u'%s' % (self.title)

@@ -10,7 +10,7 @@
                     <li class="SideTag"
                       data-tag-id="{{ tag.id }}"
                       data-tag-name="{{ tag.name }}">
-                        <a href="?query={{ tag.name }}" class="Tag">{{ tag.name }}</a>
+                        <a href="?query={{ tag.name|urlencode }}" class="Tag">{{ tag.name }}</a>
                     </li>
                 {% endfor %}
             </ul>
@@ -41,7 +41,7 @@
                     {% endfor %}
                   ]">
                     <h2 class="SearchResultHeader">
-                        <a href="{{ page.get_absolute_url }}">{{ page.title }}</a>
+                        <a href="{{ page.get_absolute_url|urlencode }}">{{ page.title }}</a>
                     </h2>
                     <p class="ResultBrief">{{ page.brief }}</p>
                 </li>

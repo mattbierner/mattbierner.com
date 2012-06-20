@@ -63,33 +63,46 @@ $(function()
    
    
 // page specific
-    var createSideTag = function(obj)
-    {
-        return $('<li class="SideTag">\
-            <a class="Tag" href="?query=${name}">${name}</a>\
-        </li>'.mapFormat(obj)).data('tagId', obj.id).data('tagName', obj.name);
-    }
-    
-    var createSearchResult = function(obj)
-    {
-        var tags = obj.tags.map(function(e)
-        {
-            return $('<li class="Tag">${name}</li>'.mapFormat(e));
-        });
+    var createSideTag = (function(){
+        var tag_template = 
+            '<li class="SideTag">\
+                <a class="Tag" href="?query=${name}">${name}</a>\
+            </li>';
         
-        var result = $('<li class="SearchResult" \
-            data-page-id="${id}"> \
-            <h2 class="SearchResultHeader">\
-                <a href="${absolute_url}">${title}</a>\
-            </h2>\
-            <p class="ResultBrief">${brief}</p>\
-        </li>'.mapFormat(obj));
-        var tagList = result.find('.TagList');
-        tagList.append.apply(tagList, tags);
-
-        var tagIds = obj.tags.map(function(e){ return e.id; });
-        return result.data('tags', tagIds);
-    }
+        return function(obj)
+        {
+            obj['absolute_url'] = encodeURIComponent(obj['absolute_url']);
+            return $(tag_template.mapFormat(obj)).data('tagId', obj.id).data('tagName', obj.name);
+        }
+    }());
+    
+    var createSearchResult = (function(){
+        var result_template =
+            '<li class="SearchResult" \
+                data-page-id="${id}"> \
+                <h2 class="SearchResultHeader">\
+                    <a href="${absolute_url}">${title}</a>\
+                </h2>\
+                <p class="ResultBrief">${brief}</p>\
+            </li>';
+        
+        return function(obj)
+        {
+            obj['absolute_url'] = encodeURIComponent(obj['absolute_url']);
+    
+            var tags = obj.tags.map(function(e)
+            {
+                return $('<li class="Tag">${name}</li>'.mapFormat(e));
+            });
+            
+            var result = $(result_template.mapFormat(obj));
+            var tagList = result.find('.TagList');
+            tagList.append.apply(tagList, tags);
+    
+            var tagIds = obj.tags.map(function(e){ return e.id; });
+            return result.data('tags', tagIds);
+        }
+    }());
     
     var addSearchResult = function(obj)
     {
