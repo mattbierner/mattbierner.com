@@ -11,7 +11,9 @@
 
 {% block meta-description %}{{ page.brief }}{% endblock %}
 
-{% block meta-keywords %}{% for tag in page.tags }tag {% endfor %}{% endblock %}
+{% block meta-keywords %}
+    {% for tag in page.tags.all %}{{ tag }}{% if not forloop.last %},{% endif %} {% endfor %}
+{% endblock %}
 
 {% block header %}
     <h1 id="secondary_header"><a href="/">Matt Bierner</a></h1>
