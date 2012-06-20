@@ -1,18 +1,19 @@
 @import "common";
 
+article figure {
+  padding-bottom: 1em;
+}
+
+article ul, article ol {
+  padding-bottom: 0.8em;
+}
+
 #secondary_header {
   position: absolute;
   top: 1em;
   font-size: 1em;
 
 }
-
-#secondary_header a {
-  color: $fg;
-  text-decoration: none;
-  margin-bottom: 0em;
-}
-
 
 .PageHeader {
   margin-bottom: 0.6em;
@@ -60,7 +61,7 @@ article section > figure {
   width: auto;
 }
 
-article section > .gist {
+article section .gist {
   width: col_width_em(8);
 }
 
@@ -68,6 +69,7 @@ article section figure figcaption {
   display: block;
   width: col_width(5);
 }
+
 
 
 

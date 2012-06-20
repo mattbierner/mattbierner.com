@@ -50,7 +50,7 @@ $(function()
                 '-webkit-transition': "max-height 0.2s",
                 'max-height': 0
             });
-            // why you no fire the transitionend for transitions nested webkit?
+            // why you no fire the transitionend for nested transitions webkit?
             setTimeout(function(){ elem.remove(); }, 200); 
         }).css({
             'max-height': elem.height(),
@@ -63,36 +63,46 @@ $(function()
    
    
 // page specific
-    var createSideTag = function(obj)
-    {
-        return $('<li class="SideTag">\
-            <a class="Tag" href="?query=${name}">${name}</a>\
-        </li>'.mapFormat(obj)).data('tagId', obj.id).data('tagName', obj.name);
-    }
-    
-    var createSearchResult = function(obj)
-    {
-        var tags = obj.tags.map(function(e)
-        {
-            return $('<li class="Tag">${name}</li>'.mapFormat(e));
-        });
+    var createSideTag = (function(){
+        var tag_template = 
+            '<li class="SideTag">\
+                <a class="Tag" href="?query=${name}">${name}</a>\
+            </li>';
         
-        var result = $('<li class="SearchResult" \
-            data-page-id="${id}"> \
-            <h2 class="SearchResultHeader">\
-                <a href="${absolute_url}">${title}</a>\
-            </h2>\
-            <div>\
-                <ul class="TagList"></ul>\
+        return function(obj)
+        {
+            obj['absolute_url'] = encodeURIComponent(obj['absolute_url']);
+            return $(tag_template.mapFormat(obj)).data('tagId', obj.id).data('tagName', obj.name);
+        }
+    }());
+    
+    var createSearchResult = (function(){
+        var result_template =
+            '<li class="SearchResult" \
+                data-page-id="${id}"> \
+                <h2 class="SearchResultHeader">\
+                    <a href="${absolute_url}">${title}</a>\
+                </h2>\
                 <p class="ResultBrief">${brief}</p>\
-            </div>\
-        </li>'.mapFormat(obj));
-        var tagList = result.find('.TagList');
-        tagList.append.apply(tagList, tags);
-
-        var tagIds = obj.tags.map(function(e){ return e.id; });
-        return result.data('tags', tagIds);
-    }
+            </li>';
+        
+        return function(obj)
+        {
+            obj['absolute_url'] = encodeURIComponent(obj['absolute_url']);
+    
+            var tags = obj.tags.map(function(e)
+            {
+                return $('<li class="Tag">${name}</li>'.mapFormat(e));
+            });
+            
+            var result = $(result_template.mapFormat(obj));
+            var tagList = result.find('.TagList');
+            tagList.append.apply(tagList, tags);
+    
+            var tagIds = obj.tags.map(function(e){ return e.id; });
+            return result.data('tags', tagIds);
+        }
+    }());
     
     var addSearchResult = function(obj)
     {
@@ -207,11 +217,22 @@ $(function()
         var tags = $(this).data('tags');
         if (!tags)
             return;
-
+            
+        var toRemove = {};
         $(".SideTag").each(function(i)
         {
-            if (tags.indexOf($(this).data('tagId')) >= 0)
-                $(this).addClass("ActiveTag");   
+            var id = $(this).data('tagId');
+            if (tags.indexOf(id) >= 0)
+                $(this).addClass("ActiveTag");
+            else
+                toRemove[id] = $(this);
+        });
+        
+        $.each(toRemove, function(i)
+        {
+            var c = this.clone().css('opacity', '0.0').appendTo('#tags');
+            fadeCollapseRemoveAnimate(this);
+            c.css('opacity', '1.0')
         });
     }).live('mouseleave', function(e)
     {
