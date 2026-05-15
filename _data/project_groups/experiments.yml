@@ -1,0 +1,194 @@
+# Web Experiments projects.
+# Add, remove, or reorder entries here. Use ISO dates; set sort_date only when sorting differs from the displayed dates.
+- title: Page Stack
+  description: Compose pages from fragments of classic books.
+  date: 2026-04-13
+  media:
+    type: video
+    url: https://blog.mattbierner.com/content/2026-04-13-page-stack/spin.mp4
+    alt: Page Stack 3D text assemblage
+  links:
+  - label: Open app
+    url: https://page-stack.mattbierner.com
+  - label: How to use it
+    url: https://page-stack.mattbierner.com/about
+- title: Gif Shift
+  description: Shift gif pixels through time.
+  date: 2020-06-12
+  media:
+    type: image
+    url: https://blog.mattbierner.com/content/2020-06-12-gif-shift/example.gif
+    alt: Gif Shift demo
+  links:
+  - label: Open app
+    url: https://mattbierner.github.io/gif-shift/
+  - label: Source
+    url: https://github.com/mattbierner/gif-shift
+- title: Gif Mask
+  description: Remix gifs with image masks.
+  date: 2020-05-30
+  media:
+    type: image
+    url: https://blog.mattbierner.com/content/2020-05-30-gif-mask/example.gif
+    alt: Gif Mask demo
+  links:
+  - label: Open app
+    url: https://mattbierner.github.io/gif-mask/
+  - label: Source
+    url: https://github.com/mattbierner/gif-mask
+- title: Gif Cube
+  description: Turn animated gifs into physical 3D cubes.
+  date: 2018-04-28
+  media:
+    type: image
+    url: https://blog.mattbierner.com/content/2018-04-28-gif-cube/cube.gif
+    alt: Gif Cube example
+  links:
+  - label: Website
+    url: https://gif-cube.com
+  - label: Source
+    url: https://github.com/mattbierner/gif-cube
+- title: Recurss
+  description: Build recursive CSS specimens from nested divs.
+  date: 2018-04-23
+  media:
+    type: image
+    url: https://blog.mattbierner.com/content/2018-04-23-recurss/title.png
+    alt: Recurss specimen
+  links:
+  - label: Website
+    url: https://recurss.github.io
+  - label: Submit specimen
+    url: https://github.com/recurss/recurss.github.io#submitting
+- title: Gif Slice
+  description: Turn animated gifs into sliced 2D prints.
+  date: 2018-04-02
+  media:
+    type: image
+    url: https://blog.mattbierner.com/content/2018-04-02-gif-slice/title.png
+    alt: Gif Slice image
+  links:
+  - label: Website
+    url: https://gif-slice.com
+  - label: Source
+    url: https://github.com/mattbierner/gif-slice
+- title: char flip
+  description: Flip a single character in a tweet.
+  date: 2018-01-08
+  media:
+    type: image
+    url: https://blog.mattbierner.com/content/2018-01-08-char-flip/title.png
+    alt: char flip screenshot
+  links:
+  - label: Open app
+    url: https://mattbierner.github.io/char-flip
+  - label: Source
+    url: https://github.com/mattbierner/char-flip
+
+- title: reflow
+  description: Resize images by reflowing pixels.
+  date: 2017-06-19
+  media:
+    type: image
+    url: https://blog.mattbierner.com/content/2017-06-19-reflow/top.png
+    alt: reflow image
+  links:
+  - label: Open app
+    url: https://mattbierner.github.io/reflow/
+  
+- title: interleave.gif
+  description: Interleave two gifs frame by frame.
+  date: 2017-06-10
+  media:
+    type: image
+    url: https://blog.mattbierner.com/content/2017-06-10-interleave-gif/shark.gif
+    alt: interleave.gif demo
+  links:
+  - label: Open app
+    url: https://mattbierner.github.io/interleave-gif/
+
+- title: Post Mortem
+  description: Visualize Wikipedia edits after someone dies.
+  date: 2017-05-29
+  media:
+    type: image
+    url: https://blog.mattbierner.com/content/2017-05-29-post-mortem/lead.png
+    alt: Post Mortem visualization
+  links:
+  - label: Website
+    url: https://mattbierner.github.io/post-mortem/
+
+- title: cube.gif
+  description: View gifs as 3D volumes.
+  date: 2016-07-18
+  media:
+    type: image
+    url: https://blog.mattbierner.com/content/2016-07-18-cube-gif/cube.gif
+    alt: cube.gif demo
+  links:
+  - label: Open app
+    url: https://mattbierner.github.io/cube-gif/
+  - label: Source
+    url: https://github.com/mattbierner/cube-gif
+- title: median.gif
+  description: Median-blend animated gifs.
+  date: 2016-07-13
+  media:
+    type: image
+    url: https://blog.mattbierner.com/content/2016-07-13-median-gif/main.gif
+    alt: median.gif demo
+  links:
+  - label: Open app
+    url: https://mattbierner.github.io/median-gif/
+  - label: Source
+    url: https://github.com/mattbierner/median-gif
+- title: scanline.gif
+  description: Flatten animated gifs into slit-scan images.
+  date: 2016-07-06
+  media:
+    type: image
+    url: https://blog.mattbierner.com/content/2016-07-06-scanline-gif/cat.gif
+    alt: scanline.gif demo
+  links:
+  - label: Open app
+    url: https://mattbierner.github.io/scanline-gif/
+  - label: Source
+    url: https://github.com/mattbierner/scanline-gif
+- title: Forward Propagation
+  description: Explore history through human generations.
+  date: 2016-05-16
+  media:
+    type: image
+    url: https://blog.mattbierner.com/content/2016-05-16-forward-propagation/logo.svg
+    alt: Forward Propagation logo
+  links:
+  - label: Website
+    url: http://mattbierner.github.io/forward-propagation/
+  - label: Source
+    url: https://github.com/mattbierner/forward-propagation
+  
+- title: Vernacular
+  description: Find Urban Dictionary entries inside longer works.
+  date: 2016-05-09
+  media:
+    type: image
+    url: https://blog.mattbierner.com/content/2016-05-09-vernacular/graph.png
+    alt: Vernacular graph
+  links:
+  - label: Website
+    url: http://mattbierner.github.io/vernacular/
+  - label: Source
+    url: https://github.com/mattbierner/vernacular
+
+- title: Symphony of Death
+  description: Generate musical instruments from Halo 5 match data.
+  date: 2016-04-24
+  media:
+    type: image
+    url: https://blog.mattbierner.com/content/2016-04-24-symphony-of-death-chordophone/logo.png
+    alt: Symphony of Death logo
+  links:
+  - label: Website
+    url: http://mattbierner.github.io/Symphony-of-Death
+  - label: Source
+    url: https://github.com/mattbierner/Symphony-of-Death

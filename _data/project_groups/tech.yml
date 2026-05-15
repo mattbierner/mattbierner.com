@@ -1,0 +1,76 @@
+# Developer Tools projects.
+# Add, remove, or reorder entries here. Use ISO dates; set sort_date only when sorting differs from the displayed dates.
+- title: Akh
+  description: Compose JavaScript monads and monad transformers.
+  date: 2016-09-03
+  media:
+    type: image
+    url: https://blog.mattbierner.com/content/2016-09-03-akh3/akh.svg
+    alt: Akh logo
+  links:
+  - label: Source
+    url: https://github.com/mattbierner/akh
+  - label: Documentation
+    url: https://github.com/mattbierner/akh#overview
+
+- title: Hamt+
+  description: Add transient mutation to hash array mapped tries.
+  date: 2016-01-29
+  media:
+    type: image
+    url: https://blog.mattbierner.com/content/2016-01-29-hamt-plus-one/hamt-logo.png
+    alt: Hamt+ logo
+  links:
+  - label: Source
+    url: https://github.com/mattbierner/hamt_plus
+  - label: Documentation
+    url: https://github.com/mattbierner/hamt_plus#api
+- title: Hamt
+  description: Implement immutable hash array mapped tries in JavaScript.
+  date: 2016-01-05
+  media:
+    type: image
+    url: https://blog.mattbierner.com/content/2016-01-05-hamt-3-the-final-iteration/hamt-logo.png
+    alt: Hamt logo
+  links:
+  - label: npm
+    url: https://www.npmjs.com/package/hamt
+  - label: Source
+    url: https://github.com/mattbierner/hamt
+- title: Apep
+  description: Generate text with Dada Engine-style grammars.
+  date: 2015-11-09
+  media:
+    type: image
+    url: https://blog.mattbierner.com/content/2015-11-09-apep/apep.png
+    alt: Apep logo
+  links:
+  - label: Source
+    url: https://github.com/mattbierner/apep
+  - label: Documentation
+    url: https://github.com/mattbierner/apep/wiki
+- title: Khepri
+  description: Explore expression-oriented ECMAScript syntax.
+  date: 2014-03-03
+  links:
+  - label: Source
+    url: https://github.com/mattbierner/khepri
+- title: Atum
+  description: Interpret ECMAScript semantics in JavaScript.
+  date: 2014-02-01
+  links:
+  - label: Source
+    url: https://github.com/mattbierner/atum
+
+- title: Neith
+  description: Navigate lazy JavaScript structures with zippers.
+  date: 2014-01-16
+  links:
+  - label: Source
+    url: https://github.com/mattbierner/neith
+- title: Parse.js
+  description: Build incremental monadic parser combinators in JavaScript.
+  date: 2013-12-08
+  links:
+  - label: Source
+    url: https://github.com/mattbierner/parse.js

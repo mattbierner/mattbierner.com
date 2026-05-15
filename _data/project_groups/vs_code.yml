@@ -1,0 +1,118 @@
+
+- title: Copilot Codebase Knowledge
+  description: Ground Copilot answers in workspace context.
+  date: 2026-02-05
+  end_date: Present
+  links:
+  - label: Tracking Issue
+    url: https://github.com/microsoft/vscode/issues/292972
+  
+- title: Markdown Language Service
+  description: Power rich Markdown editing across tools.
+  date: 2022-07-12
+  end_date: Present
+  links:
+  - label: Source
+    url: https://github.com/microsoft/vscode-markdown-languageservice
+
+- title: Code 20/20
+  description: Share short VS Code video tips.
+  date: 2021-04-22
+  media:
+    type: image
+    url: https://blog.mattbierner.com/content/2021-04-22-code-2020-logo/logo.png
+    alt: Code 20/20 logo
+  links:
+  - label: YouTube
+    url: https://youtube.com/c/code2020
+
+- title: VS Code Docs View
+  description: Show documentation in the VS Code sidebar.
+  date: 2020-10-21
+  media:
+    type: image
+    url: https://blog.mattbierner.com/content/2020-10-21-vscode-docs-view/title.png
+    alt: VS Code Docs View screenshot
+  links:
+  - label: Extension
+    url: https://marketplace.visualstudio.com/items?itemName=bierner.docs-view
+  - label: Source
+    url: https://github.com/mattbierner/vscode-docs-view
+  
+- title: Gif Player
+  description: Play, pause, and scrub gifs in VS Code.
+  date: 2020-07-11
+  media:
+    type: image
+    url: https://blog.mattbierner.com/content/2020-07-11-vscode-gif-player/example.gif
+    alt: Gif Player screenshot
+  links:
+  - label: Extension
+    url: https://marketplace.visualstudio.com/items?itemName=bierner.gif-player
+  - label: Source
+    url: https://github.com/mattbierner/vscode-gif-player
+
+- title: GitHub Markdown Preview
+  description: Bring GitHub-style Markdown rendering to VS Code.
+  date: 2018-11-02
+  links:
+  - label: Extension
+    url: https://marketplace.visualstudio.com/items?itemName=bierner.github-markdown-preview
+  - label: Source
+    url: https://github.com/mjbvz/vscode-github-markdown-preview
+  - label: Styling
+    url: https://github.com/mjbvz/vscode-github-markdown-preview-style
+
+- title: Strict Null Checked the VS Code Codebase
+  description: Incrementally enable strict null checks across VS Code.
+  date: 2019-05-23
+  links:
+  - label: Post
+    url: https://code.visualstudio.com/blogs/2019/05/23/strict-null
+
+- title: VS Code Webview APIs
+  description: Design and build VS Code's webview APIs.
+  date: 2018-05-01
+  end_date: Present
+  links:
+  - label: Webview API
+    url: https://code.visualstudio.com/api/extension-guides/webview
+  - label: Webview Views
+    url: https://code.visualstudio.com/updates/v1_50#_webview-views
+  - label: Custom Editors
+    url: https://code.visualstudio.com/api/extension-guides/custom-editors
+
+- title: API Design
+  description: Design VS Code extension APIs.
+  date: 2018-01-01
+  end_date: Present
+  links:
+  - label: API Reference
+    url: https://code.visualstudio.com/api/references/vscode-api
+  - label: Proposed APIs
+    url: https://code.visualstudio.com/api/advanced-topics/using-proposed-api
+
+- title: Markdown Preview Mermaid Support
+  description: Render Mermaid diagrams in VS Code Markdown previews.
+  date: 2017-03-24
+  links:
+  - label: Extension
+    url: https://marketplace.visualstudio.com/items?itemName=bierner.markdown-mermaid
+
+- title: VS Code TypeScript Language Features
+  description: Develop VS Code's JavaScript and TypeScript language features.
+  date: 2016-01-01
+  end_date: Present
+  links:
+  - label: Docs
+    url: https://code.visualstudio.com/docs/languages/typescript
+
+- title: VS Code Markdown Extension
+  description: Build VS Code's Markdown previews, language features, and notebook support.
+  date: 2016-01-01
+  end_date: Present
+  links:
+  - label: Source
+    url: https://github.com/microsoft/vscode/tree/main/extensions/markdown-language-features
+  - label: Docs
+    url: https://code.visualstudio.com/docs/languages/markdown

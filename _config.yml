@@ -1,0 +1,15 @@
+title: Matt Bierner
+description: Projects by Matt Bierner
+url: https://mattbierner.com
+baseurl: ""
+
+markdown: kramdown
+permalink: pretty
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor
+  - .bundle
+  - .jekyll-cache

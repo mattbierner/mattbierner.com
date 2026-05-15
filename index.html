@@ -1,0 +1,77 @@
+---
+layout: default
+description: Selected projects by Matt Bierner.
+hide_site_header: true
+---
+<section class="hero" aria-labelledby="intro-title">
+    <canvas class="hero-field" data-hero-field aria-hidden="true"></canvas>
+    <header class="hero-content">
+        <h1 id="intro-title">
+            <span class="hero-title-line">Matt</span>
+            <span class="hero-title-line">Bierner</span>
+        </h1>
+        <p class="hero-summary">Hi, I'm Matt Bierner. I make tools for developers, software for creating, and art for fun.</p>
+        {% include primary-nav.html class="site-nav hero-nav" %}
+    </header>
+</section>
+
+<section class="project-browser" aria-labelledby="projects-title">
+    <header class="section-header">
+        <h2 id="projects-title">Projects</h2>
+        <form class="project-controls" aria-label="Project controls">
+            <label class="filter-field" data-project-filter-controls hidden>
+                <span>Category</span>
+                <select data-project-filter-select aria-label="Filter projects by category"
+                    aria-controls="projects-chronological">
+                    <option value="all">All</option>
+                    {% for category in site.data.projects.categories %}
+                        <option value="{{ category.name | slugify }}">{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+            <div class="layout-control" data-project-view-controls hidden aria-label="Project organization">
+                <button class="layout-toggle" type="button" data-project-view-toggle
+                    aria-controls="projects-grouped projects-chronological"
+                    aria-label="Switch to chronological grid view">
+                    <span class="layout-icon layout-icon-grid" aria-hidden="true">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                    <span class="layout-icon layout-icon-list" aria-hidden="true">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                    <span class="layout-toggle-label" data-project-view-toggle-label>Grouped</span>
+                </button>
+            </div>
+        </form>
+    </header>
+
+    <section class="project-view project-view-grouped" id="projects-grouped" data-project-view="grouped"
+        aria-label="Grouped projects">
+        {% for category in site.data.projects.categories %}
+            {% assign category_slug = category.name | slugify %}
+            {% assign category_projects = site.data.project_groups[category.file] %}
+            {% if category_projects.size > 0 %}
+                <section class="category-section" id="{{ category_slug }}"
+                    aria-labelledby="{{ category_slug }}-title">
+                    <header class="category-heading">
+                        <h3 id="{{ category_slug }}-title">
+                            <a href="#{{ category_slug }}">{{ category.name }}</a>
+                        </h3>
+                        <p>{{ category.description }}</p>
+                    </header>
+                    {% include project-list-compact.html projects=category_projects category=category %}
+                </section>
+            {% endif %}
+        {% endfor %}
+    </section>
+
+    <section class="project-view project-view-chronological" id="projects-chronological"
+        data-project-view="chronological" aria-label="Chronological projects" hidden>
+        {% include project-list-grid.html categories=site.data.projects.categories %}
+    </section>
+</section>

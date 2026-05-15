@@ -1,0 +1,13 @@
+<nav class="{{ include.class | default: 'site-nav' }}" aria-label="{{ include.label | default: 'Primary navigation' }}">
+    {% for item in site.data.site.nav %}
+        {% assign protocol = item.url | slice: 0, 4 %}
+        {% assign is_current = false %}
+        {% assign nav_url = item.url | relative_url %}
+        {% if protocol == 'http' %}
+            {% assign nav_url = item.url %}
+        {% elsif page.url == item.url %}
+            {% assign is_current = true %}
+        {% endif %}
+        <a href="{{ nav_url }}"{% if is_current %} aria-current="page"{% endif %}>{{ item.label }}</a>
+    {% endfor %}
+</nav>

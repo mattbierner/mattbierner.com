@@ -1,0 +1,112 @@
+# Fun projects.
+# Add, remove, or reorder entries here. Use ISO dates; set sort_date only when sorting differs from the displayed dates.
+- title: mandō
+  description: Recast the top 100 Unix commands as vibe-coded SaaS companies.
+  date: 2026-05-01
+  media:
+    type: image
+    url: https://blog.mattbierner.com/content/2026-05-01-mando/title.png
+    alt: mandō project image
+  links:
+  - label: mandō
+    url: https://mando.mattbierner.com/
+- title: "FU: Future You"
+  description: Generate posts that sabotage your future self.
+  date: 2019-09-22
+  media:
+    type: image
+    url: https://blog.mattbierner.com/content/2019-09-22-fu-fu/logo.svg
+    alt: FU logo
+  links:
+  - label: Open app
+    url: https://mattbierner.github.io/fu-fu
+  - label: Source
+    url: https://github.com/mattbierner/fu-fu
+- title: GIFAKIRA
+  description: Browse every Akira shot as gifs.
+  date: 2018-02-01
+  media:
+    type: image
+    url: https://blog.mattbierner.com/content/2018-02-01-gifakira/title.png
+    alt: GIFAKIRA title image
+  links:
+  - label: Website
+    url: https://gifakira.com
+  - label: Stream
+    url: https://gifakira.com/stream.html
+- title: The John Barleycorn Challenge
+  description: Turn Jack London's John Barleycorn into a drinking game.
+  date: 2017-07-04
+  media:
+    type: image
+    url: https://blog.mattbierner.com/content/2017-07-04-john-barleycorn/top.png
+    alt: John Barleycorn Challenge screenshot
+  links:
+  - label: Open app
+    url: https://mattbierner.github.io/john-barleycorn-challenge/
+  - label: Source
+    url: https://github.com/mattbierner/john-barleycorn-challenge
+- title: Zork.git
+  description: Play Zork through GitHub pull requests and commits.
+  date: 2016-11-13
+  media:
+    type: image
+    url: https://blog.mattbierner.com/content/2016-11-13-zork-dot-git/blame.png
+    alt: Zork.git screenshot
+  links:
+  - label: Game repo
+    url: https://github.com/art-dot-git/zork-dot-git
+  - label: Code
+    url: https://github.com/art-dot-git/zork-client/
+- title: allthecolors.gif
+  description: Pack every 24-bit RGB color into gifs.
+  date: 2016-07-24
+  media:
+    type: image
+    url: https://blog.mattbierner.com/content/2016-07-24-allthecolors-gif/main.png
+    alt: allthecolors.gif image
+  links:
+  - label: Rainbow Array
+    url: https://mattbierner.github.io/allthecolors.gif/rainbow-array
+  - label: Rainbow Stack
+    url: https://mattbierner.github.io/allthecolors.gif/rainbow-stack
+  - label: Rainbow Walk
+    url: https://mattbierner.github.io/allthecolors.gif/rainbow-stack-walk
+- title: Na Naa, Na Na Na Na Naa Naa Naa Na
+  description: Visualize Katamari controller inputs on expanding spheres.
+  date: 2016-06-13
+  media:
+    type: image
+    url: https://blog.mattbierner.com/content/2016-06-13-na-naa-na-na-na-na-naa-naa-naa-na/main.png
+    alt: Katamari input visualization
+  links:
+  - label: Website
+    url: https://mattbierner.github.io/na-naa-na-na-na-na-naa-naa-naa-na/
+  - label: Documentation
+    url: https://github.com/mattbierner/na-naa-na-na-na-na-naa-naa-naa-na/blob/gh-pages/documentation/about.md
+  - label: Source
+    url: https://github.com/mattbierner/na-naa-na-na-na-na-naa-naa-naa-na
+- title: "{{dubious}}"
+  description: Surface questionable Wikipedia cleanup-tag sentences.
+  date: 2016-03-07
+  media:
+    type: image
+    url: https://blog.mattbierner.com/content/2016-03-07-dubious-wikipedia/eating.png
+    alt: Wikipedia dubious extraction example
+  links:
+  - label: Source
+    url: https://github.com/mattbierner/dubious
+  - label: Dubious Results
+    url: https://github.com/mattbierner/dubious/blob/master/out/dubious/dubious.md
+- title: 80x40
+  description: Play a collaborative ASCII canvas through GitHub pull requests.
+  date: 2015-11-02
+  media:
+    type: image
+    url: https://blog.mattbierner.com/content/2015-11-02-80x40/Screen-Shot-2015-11-01-at-10-31-09-PM.png
+    alt: 80x40 text canvas
+  links:
+  - label: Canvas Repo
+    url: https://github.com/art-dot-git/80x40
+  - label: Client Code
+    url: https://github.com/art-dot-git/80x40-client

@@ -1,0 +1,68 @@
+<div class="project-list">
+    {% for category in include.categories %}
+        {% assign category_projects = site.data.project_groups[category.file] %}
+        {% assign project_category_slug = category.name | slugify %}
+        {% for project in category_projects %}
+            {% assign project_date = project.date | append: "" %}
+            {% assign project_date_year = project_date | slice: 0, 4 %}
+            {% assign project_end_date = project.end_date | default: "" | append: "" %}
+            {% assign project_end_date_year = project_end_date | slice: 0, 4 %}
+            {% assign project_sort_date = project.sort_date | default: project_date | append: "" %}
+            {% assign primary_link = project.links.first %}
+            {% assign link_count = project.links | size %}
+            {% assign has_multiple_links = false %}
+            {% if link_count > 1 %}
+                {% assign has_multiple_links = true %}
+            {% endif %}
+            <article class="project-card{% unless project.media %} project-card-no-media{% endunless %}{% if primary_link %} project-card-linked{% endif %}"
+                data-project-category="{{ project_category_slug }}"
+                data-project-sort-date="{{ project_sort_date }}">
+                {% if project.media %}
+                    <div class="project-media">
+                        {% if project.media.type == 'video' %}
+                            <video src="{{ project.media.url }}" aria-label="{{ project.media.alt }}" autoplay muted loop
+                                playsinline></video>
+                        {% else %}
+                            <img src="{{ project.media.url }}" alt="{{ project.media.alt }}">
+                        {% endif %}
+                    </div>
+                {% endif %}
+                <h3>
+                    {% if primary_link %}
+                        <a href="{{ primary_link.url }}">{{ project.title }}</a>
+                    {% else %}
+                        {{ project.title }}
+                    {% endif %}
+                </h3>
+                <p class="project-kicker">
+                    <span class="project-date">
+                        <time datetime="{{ project_date }}">{{ project_date_year }}</time>
+                        {% if project_end_date != "" %}
+                            <span> - </span>
+                            {% if project_end_date == "Present" %}
+                                <span>Present</span>
+                            {% else %}
+                                <time datetime="{{ project_end_date }}">{{ project_end_date_year }}</time>
+                            {% endif %}
+                        {% endif %}
+                    </span>
+                    <button class="project-category" type="button"
+                        data-project-category-button="{{ project_category_slug }}">#{{ category.name }}</button>
+                </p>
+                <p>{{ project.description }}</p>
+                {% if has_multiple_links %}
+                    <footer class="project-links" aria-label="{{ project.title }} links">
+                        <details class="project-links-more">
+                            <summary aria-label="Show additional {{ project.title }} links">links</summary>
+                            <span class="project-links-menu">
+                                {% for link in project.links %}
+                                    <a href="{{ link.url }}">{{ link.label }}</a>
+                                {% endfor %}
+                            </span>
+                        </details>
+                    </footer>
+                {% endif %}
+            </article>
+        {% endfor %}
+    {% endfor %}
+</div>

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ page.description | default: site.description }}">
+    <title>{% if page.title %}{{ page.title }} / {% endif %}{{ site.title }}</title>
+    <link rel="canonical" href="{{ page.url | absolute_url }}">
+    <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
+    <script type="module" src="{{ '/scripts/header-animation.js' | relative_url }}"></script>
+    <script type="module" src="{{ '/scripts/site.js' | relative_url }}"></script>
+</head>
+
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    {% unless page.hide_site_header %}
+        {% include site-nav.html %}
+    {% endunless %}
+    <main id="main" class="site-main">
+        {{ content }}
+    </main>
+    <footer class="site-footer">
+        <p>&copy; {{ 'now' | date: '%Y' }} Matt Bierner</p>
+    </footer>
+</body>
+
+</html>

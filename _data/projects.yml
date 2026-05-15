@@ -1,0 +1,29 @@
+# Project category metadata. Project entries live in `_data/project_groups/*.yml`
+# so each category can be edited without working in one large file.
+categories:
+
+- name: iOS
+  description: iOS apps and Augmented Reality projects
+  file: ios
+
+- name: VS Code
+  description: Projects from nearly a decade on the VS Code team.
+  file: vs_code
+
+- name: Experiments
+  description: Small tools, toys, and experiments
+  file: experiments
+
+- name: Art
+  file: art
+
+- name: Tech
+  description: Libraries and utilities and other technical projects.
+  file: tech
+
+- name: Letterpress
+  file: letterpress
+
+- name: Fun
+  file: fun
+

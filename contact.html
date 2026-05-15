@@ -1,0 +1,27 @@
+---
+layout: page
+title: Contact
+description: Ways to get in touch and find other work.
+permalink: /contact/
+page_class: contact-page
+---
+
+<section class="contact-grid" aria-label="Contact options">
+    <section class="contact-block" aria-labelledby="business-contact-title">
+        <h2 id="business-contact-title">Business</h2>
+        <p>{{ site.data.site.contact.business.text }}</p>
+        <address class="text-links" aria-label="Business contact links">
+            {% for link in site.data.site.contact.business.links %}
+                <a href="{{ link.url }}">{{ link.label }}</a>
+            {% endfor %}
+        </address>
+    </section>
+    <section class="contact-block" aria-labelledby="elsewhere-contact-title">
+        <h2 id="elsewhere-contact-title">Elsewhere</h2>
+        <ul class="link-list">
+            {% for link in site.data.site.contact.elsewhere %}
+                <li><a href="{{ link.url }}">{{ link.label }}</a></li>
+            {% endfor %}
+        </ul>
+    </section>
+</section>

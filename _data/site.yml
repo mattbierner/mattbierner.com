@@ -1,0 +1,23 @@
+nav:
+  - label: Blog
+    url: https://blog.mattbierner.com
+  - label: Contact
+    url: /contact/
+
+contact:
+  business:
+    text: Interested in AR or mixed reality work? Reach out through Rare Realities.
+    links:
+      - label: Rare Realities
+        url: https://rarerealities.com
+      - label: Email
+        url: mailto:matt@rarerealities.com
+  elsewhere:
+    - label: GitHub
+      url: https://github.com/mattbierner
+    - label: Photography
+      url: https://photography.mattbierner.com
+    - label: YouTube
+      url: https://www.youtube.com/channel/UC89vHLITb7DWKe07_hSWYBw
+    - label: Blog feedback
+      url: https://github.com/mattbierner/blog.mattbierner.com/issues/new

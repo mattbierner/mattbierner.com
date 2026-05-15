@@ -1,0 +1,70 @@
+# Art projects.
+# Add, remove, or reorder entries here. Use ISO dates; set sort_date only when sorting differs from the displayed dates.
+- title: Non-Flesh Tokens
+  description: Assemble image NFTs from portrait blocks.
+  date: 2022-01-20
+  media:
+    type: image
+    url: https://blog.mattbierner.com/content/2022-01-20-non-flesh-tokens/title.png
+    alt: Non-Flesh Tokens image
+  links:
+  - label: OpenSea
+    url: https://opensea.io/collection/non-flesh-tokens
+  - label: Visual browser
+    url: https://nonfleshtokens.com
+
+- title: Lekker
+  description: Control a vibrator using face tracking.
+  date: 2018-09-22
+  media:
+    type: video
+    url: https://blog.mattbierner.com/content/2018-09-22-lekker/title.mp4
+    alt: Lekker demo
+  links:
+  - label: Post
+    url: https://blog.mattbierner.com/lekker/
+
+- title: The Theremin-X Project
+  description: Translate theremin input into wearable haptic feedback.
+  date: 2018-07-14
+  media:
+    type: image
+    url: https://blog.mattbierner.com/content/2018-07-14-theremin-x/title.png
+    alt: Theremin-X still
+  links:
+  - label: Video
+    url: https://www.youtube.com/embed/JiWuBYVaWI0
+  - label: Source
+    url: https://github.com/mattbierner/theremin-x
+- title: Nuke Scan
+  description: Strip-scan nuclear test films.
+  date: 2018-04-20
+  media:
+    type: image
+    url: https://blog.mattbierner.com/content/2018-04-20-nuke-scan/teapot-turk28141-1.png
+    alt: Nuke Scan image
+  links:
+  - label: Source
+    url: https://github.com/mattbierner/nuke-scan
+- title: Hue Theremin
+  description: Control Hue lights with theremin MIDI input.
+  date: 2018-01-29
+  media:
+    type: image
+    url: https://blog.mattbierner.com/content/2018-01-29-hue-theremin/title.gif
+    alt: Hue Theremin demo
+  links:
+  - label: Source
+    url: https://github.com/mattbierner/hue-theremin
+- title: blueframe
+  description: Interrupt gifs with a single blue frame.
+  date: 2017-06-18
+  media:
+    type: image
+    url: https://blog.mattbierner.com/content/2017-06-18-blueframe/logo.svg
+    alt: blueframe logo
+  links:
+  - label: Open app
+    url: https://mattbierner.github.io/blueframe/
+  - label: Source
+    url: https://github.com/mattbierner/blueframe
