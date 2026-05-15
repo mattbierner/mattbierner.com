@@ -31,14 +31,18 @@ headerAnimation: {
     const startupForceDuration = 1600;
     const sceneScaleReferenceWidth = 780;
     const minSceneScale = 0.62;
+    const maxPixelRatio = 3;
 
-    const gl = canvas.getContext("webgl", {
+    const contextAttributes = {
         alpha: false,
         antialias: false,
         depth: false,
         premultipliedAlpha: false,
         stencil: false,
-    });
+    };
+
+    const gl = canvas.getContext("webgl", contextAttributes)
+        || canvas.getContext("experimental-webgl", contextAttributes);
 
     if (!gl) {
         canvas.hidden = true;
@@ -69,7 +73,7 @@ precision mediump float;
 
 const int BLOB_COUNT = ${blobCount};
 const int COLOR_COUNT = ${palette.length};
-const float FAR_DISTANCE = 100000.0;
+const float FAR_DISTANCE = 8192.0;
 
 uniform vec4 u_blobs[BLOB_COUNT];
 uniform vec4 u_meta[BLOB_COUNT];
@@ -294,9 +298,9 @@ void main() {
 
     const refreshMetrics = () => {
         const canvasRect = canvas.getBoundingClientRect();
-        const nextPixelRatio = Math.min(window.devicePixelRatio || 1, 2);
-        const width = Math.max(1, Math.floor(canvasRect.width));
-        const height = Math.max(1, Math.floor(canvasRect.height));
+        const nextPixelRatio = clamp(window.devicePixelRatio || 1, 1, maxPixelRatio);
+        const width = Math.max(1, canvasRect.width);
+        const height = Math.max(1, canvasRect.height);
         const nextSceneScale = clamp(width / sceneScaleReferenceWidth, minSceneScale, 1);
 
         viewportWidth = width;
@@ -306,7 +310,7 @@ void main() {
         pixelRatio = nextPixelRatio;
         sceneScale = nextSceneScale;
 
-        resizeCanvas(Math.max(1, Math.floor(width * pixelRatio)), Math.max(1, Math.floor(height * pixelRatio)));
+        resizeCanvas(Math.max(1, Math.ceil(width * pixelRatio)), Math.max(1, Math.ceil(height * pixelRatio)));
 
         const titleRect = title.getBoundingClientRect();
         titleBox = {
@@ -704,6 +708,7 @@ void main() {
 
     const start = () => {
         if (!animationFrame) {
+            previousFrameTime = null;
             animationFrame = window.requestAnimationFrame(animate);
         }
     };
@@ -716,6 +721,12 @@ void main() {
     };
 
     window.addEventListener("resize", markMetricsDirty);
+    window.addEventListener("orientationchange", markMetricsDirty);
+
+    if (window.visualViewport) {
+        window.visualViewport.addEventListener("resize", markMetricsDirty);
+    }
+
     hero.addEventListener("pointerdown", startPointerAttraction);
     hero.addEventListener("pointermove", updatePointerInteraction);
     hero.addEventListener("pointerup", stopPointerAttraction);
@@ -740,5 +751,13 @@ void main() {
         }
     });
 
+    window.addEventListener("pagehide", stop);
+    window.addEventListener("pageshow", () => {
+        markMetricsDirty();
+        start();
+    });
+
+    refreshMetrics();
+    drawFrame(0);
     start();
 }

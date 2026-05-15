@@ -9,6 +9,7 @@
 	--space-3: 1.5rem;
 	--space-4: 2rem;
 	--measure: 50rem;
+	--safe-area-top: env(safe-area-inset-top, 0px);
 	font-family: var(--font-sans);
 }
 
@@ -75,7 +76,7 @@ button {
 	grid-template-columns: minmax(12rem, 1fr) auto;
 	gap: var(--space-2);
 	align-items: start;
-	padding: var(--space-3) 0 var(--space-4);
+	padding: calc(var(--space-3) + var(--safe-area-top)) 0 var(--space-4);
 }
 
 .site-mark {
@@ -230,7 +231,7 @@ button {
 		border-radius: 999px;
 		background: rgb(255 255 255 / 70%);
 		box-shadow: 0 0.35rem 1.2rem rgb(255 255 255 / 55%);
-		text-decoration: none;
+		text-decoration-color: transparent;
 	}
 
 	& a:hover,
@@ -238,6 +239,7 @@ button {
 	& a[aria-current="page"] {
 		background: var(--color-paper);
 		box-shadow: 0 0.4rem 1.35rem rgb(255 255 255 / 75%);
+		text-decoration-color: currentColor;
 	}
 }
 
@@ -256,7 +258,7 @@ button {
 	text-align: left;
 	isolation: isolate;
 	overflow: hidden;
-	padding: calc(3rem + var(--space-4)) 0 5rem;
+	padding: calc(3rem + var(--space-4) + var(--safe-area-top)) 0 5rem;
 	background: var(--color-paper);
 	margin-top: calc(var(--space-4) * -1);
 	margin-right: calc(50% - 50vw);
@@ -317,6 +319,11 @@ button {
 .hero .hero-summary {
 	max-width: 25rem;
 	margin: var(--space-2) 0 0;
+	padding: 0.35rem 0.6rem;
+	border: 1px solid rgb(255 255 255 / 72%);
+	border-radius: 0.65rem;
+	background: rgb(255 255 255 / 70%);
+	box-shadow: 0 0.35rem 1.2rem rgb(255 255 255 / 55%);
 }
 
 .hero-summary,
@@ -737,6 +744,7 @@ body[data-project-view="chronological"] .layout-icon-grid {
 
 		& a {
 			color: var(--color-ink);
+			pointer-events: auto;
 			text-decoration-color: transparent;
 
 			&::after {
@@ -744,6 +752,7 @@ body[data-project-view="chronological"] .layout-icon-grid {
 				inset: 0;
 				z-index: 1;
 				content: "";
+				pointer-events: auto;
 			}
 
 			&:hover {
