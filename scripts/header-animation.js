@@ -1,10 +1,10 @@
-headerAnimation: {
+const initializeHeaderAnimation = () => {
     const canvas = document.querySelector("[data-hero-field]");
     const title = document.getElementById("intro-title");
     const hero = canvas && canvas.closest(".hero");
 
     if (!canvas || !title || !hero) {
-        break headerAnimation;
+        return;
     }
 
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -46,7 +46,7 @@ headerAnimation: {
 
     if (!gl) {
         canvas.hidden = true;
-        break headerAnimation;
+        return;
     }
 
     const vertexShaderSource = `
@@ -224,7 +224,7 @@ void main() {
 
     if (!program || !positionBuffer) {
         canvas.hidden = true;
-        break headerAnimation;
+        return;
     }
 
     const positionLocation = gl.getAttribLocation(program, "a_position");
@@ -240,7 +240,7 @@ void main() {
 
     if (positionLocation < 0 || Object.values(uniforms).some((location) => !location)) {
         canvas.hidden = true;
-        break headerAnimation;
+        return;
     }
 
     const blobUniforms = new Float32Array(blobCount * 4);
@@ -707,6 +707,7 @@ void main() {
     };
 
     const start = () => {
+        console.log("Starting header animation");
         if (!animationFrame) {
             previousFrameTime = null;
             animationFrame = window.requestAnimationFrame(animate);
@@ -714,6 +715,7 @@ void main() {
     };
 
     const stop = () => {
+        console.Consolelog("Stopping header animation");
         if (animationFrame) {
             window.cancelAnimationFrame(animationFrame);
             animationFrame = null;
@@ -740,7 +742,7 @@ void main() {
     if (prefersReducedMotion.matches) {
         refreshMetrics();
         drawFrame(0);
-        break headerAnimation;
+        return;
     }
 
     document.addEventListener("visibilitychange", () => {
@@ -756,8 +758,11 @@ void main() {
         markMetricsDirty();
         start();
     });
+    console.log("Initializing header animation");
 
     refreshMetrics();
     drawFrame(0);
     start();
-}
+};
+
+initializeHeaderAnimation();
