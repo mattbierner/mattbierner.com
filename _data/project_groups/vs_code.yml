@@ -1,6 +1,6 @@
 
 - title: Copilot Codebase Knowledge
-  description: Ground Copilot answers in workspace context.
+  description: Grounds Copilot answers in workspace context.
   date: 2026-02-05
   end_date: Present
   links:
@@ -8,7 +8,7 @@
     url: https://github.com/microsoft/vscode/issues/292972
   
 - title: Markdown Language Service
-  description: Power rich Markdown editing across tools.
+  description: Library which powers rich Markdown IntelliSense and editing across tools.
   date: 2022-07-12
   end_date: Present
   links:
@@ -16,7 +16,7 @@
     url: https://github.com/microsoft/vscode-markdown-languageservice
 
 - title: Code 20/20
-  description: Share short VS Code video tips.
+  description: A collection of hundreds of short VS Code video tips.
   date: 2021-04-22
   media:
     type: image
@@ -27,7 +27,7 @@
     url: https://youtube.com/c/code2020
 
 - title: VS Code Docs View
-  description: Show documentation in the VS Code sidebar.
+  description: Extension that shows documentation in the VS Code sidebar.
   date: 2020-10-21
   media:
     type: image
@@ -71,7 +71,7 @@
     url: https://code.visualstudio.com/blogs/2019/05/23/strict-null
 
 - title: VS Code Webview APIs
-  description: Design and build VS Code's webview APIs.
+  description: I designed and built VS Code's webview APIs.
   date: 2018-05-01
   end_date: Present
   links:
@@ -83,7 +83,7 @@
     url: https://code.visualstudio.com/api/extension-guides/custom-editors
 
 - title: API Design
-  description: Design VS Code extension APIs.
+  description: I designed many of VS Code extension APIs and ran the API design process.
   date: 2018-01-01
   end_date: Present
   links:
@@ -93,14 +93,14 @@
     url: https://code.visualstudio.com/api/advanced-topics/using-proposed-api
 
 - title: Markdown Preview Mermaid Support
-  description: Render Mermaid diagrams in VS Code Markdown previews.
+  description: Extension enabling Mermaid diagrams in VS Code Markdown previews.
   date: 2017-03-24
   links:
   - label: Extension
     url: https://marketplace.visualstudio.com/items?itemName=bierner.markdown-mermaid
 
 - title: VS Code TypeScript Language Features
-  description: Develop VS Code's JavaScript and TypeScript language features.
+  description: I built VS Code's JavaScript and TypeScript language features.
   date: 2016-01-01
   end_date: Present
   links:
@@ -108,7 +108,7 @@
     url: https://code.visualstudio.com/docs/languages/typescript
 
 - title: VS Code Markdown Extension
-  description: Build VS Code's Markdown previews, language features, and notebook support.
+  description: I built VS Code's Markdown previews, language features, and notebook support.
   date: 2016-01-01
   end_date: Present
   links:

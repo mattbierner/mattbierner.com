@@ -84,10 +84,6 @@ uniform float u_edgeWidth;
 
 varying vec2 v_position;
 
-float blobSdf(vec2 point, vec4 blob) {
-    return length(point - blob.xy) - blob.z;
-}
-
 float smoothUnion(float distanceA, float distanceB, float radius) {
     if (distanceA > FAR_DISTANCE * 0.5) {
         return distanceB;
@@ -121,13 +117,20 @@ void main() {
 
     for (int index = 0; index < BLOB_COUNT; index++) {
         vec4 blob = u_blobs[index];
-        float blobDistance = blobSdf(v_position, blob);
+        vec2 delta = v_position - blob.xy;
+        float reach = blob.z + u_colorBlendRadius;
 
-        if (blobDistance > u_colorBlendRadius
-            && (sceneDistance > FAR_DISTANCE * 0.5 || blobDistance > sceneDistance + u_mergeRadius)) {
+        if (abs(delta.x) > reach || abs(delta.y) > reach) {
             continue;
         }
 
+        float sqDistance = dot(delta, delta);
+
+        if (sqDistance > reach * reach) {
+            continue;
+        }
+
+        float blobDistance = sqrt(sqDistance) - blob.z;
         vec4 meta = u_meta[index];
         float colorWeight = 1.0 - smoothstep(-u_colorBlendRadius, u_colorBlendRadius, blobDistance);
 
@@ -136,7 +139,12 @@ void main() {
         blendedWeight += colorWeight;
     }
 
-    vec3 shapeColor = blendedWeight > 0.001 ? blendedColor / blendedWeight : vec3(1.0);
+    if (blendedWeight < 0.001) {
+        gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
+        return;
+    }
+
+    vec3 shapeColor = blendedColor / blendedWeight;
     float fillAlpha = 1.0 - smoothstep(-u_edgeWidth, u_edgeWidth, sceneDistance);
     vec3 color = mix(vec3(1.0), shapeColor, fillAlpha);
 
@@ -474,7 +482,7 @@ void main() {
         const outsideX = Math.max(localX, 0);
         const outsideY = Math.max(localY, 0);
 
-        return Math.hypot(outsideX, outsideY) + Math.min(Math.max(localX, localY), 0) - radius;
+        return Math.sqrt(outsideX * outsideX + outsideY * outsideY) + Math.min(Math.max(localX, localY), 0) - radius;
     };
 
     const getDistanceNormal = (distanceAt, left, top, fallbackAngle = 0) => {
@@ -497,7 +505,17 @@ void main() {
     };
 
     const applyTitleSdfForce = (blob, frameScale) => {
-        const distanceAt = (left, top) => roundedRectDistance(left, top, titleBox, 18) - getBlobRadius(blob);
+        const radius = blob.radius;
+        const reach = titleInfluence + radius + titlePadding;
+
+        if (blob.left < titleBox.left - reach
+            || blob.left > titleBox.left + titleBox.width + reach
+            || blob.top < titleBox.top - reach
+            || blob.top > titleBox.top + titleBox.height + reach) {
+            return;
+        }
+
+        const distanceAt = (left, top) => roundedRectDistance(left, top, titleBox, 18) - radius;
         const distance = distanceAt(blob.left, blob.top);
 
         if (distance >= titleInfluence) {
@@ -543,18 +561,20 @@ void main() {
             return;
         }
 
+        const influence = pointerState.attracting ? pointerAttractInfluence : pointerRepelInfluence;
         const deltaX = blob.left - pointerState.left;
         const deltaY = blob.top - pointerState.top;
-        const distance = Math.max(0.001, Math.hypot(deltaX, deltaY));
-        const influence = pointerState.attracting ? pointerAttractInfluence : pointerRepelInfluence;
+        const sqDistance = deltaX * deltaX + deltaY * deltaY;
 
-        if (distance > influence) {
+        if (sqDistance > influence * influence) {
             return;
         }
 
+        const distance = Math.max(0.001, Math.sqrt(sqDistance));
         const normalX = deltaX / distance;
         const normalY = deltaY / distance;
-        const falloff = (1 - clamp(distance / influence, 0, 1)) ** 2;
+        const normalizedDistance = clamp(distance / influence, 0, 1);
+        const falloff = pointerState.attracting ? 1 - normalizedDistance : (1 - normalizedDistance) ** 2;
         const direction = pointerState.attracting ? -1 : 1;
         const strength = (pointerState.attracting ? pointerAttractStrength : pointerRepelStrength) * falloff * frameScale;
 
@@ -569,18 +589,27 @@ void main() {
 
     const applyBlobPairForces = (frameScale) => {
         for (let index = 0; index < blobs.length; index++) {
+            const blobA = blobs[index];
+            const radiusA = blobA.radius;
+
             for (let nextIndex = index + 1; nextIndex < blobs.length; nextIndex++) {
-                const blobA = blobs[index];
                 const blobB = blobs[nextIndex];
-                const radiusA = getBlobRadius(blobA);
-                const radiusB = getBlobRadius(blobB);
+                const radiusB = blobB.radius;
+                const sumRadii = radiusA + radiusB;
+                const maxInteraction = sumRadii + blobStickDistance;
                 const deltaX = blobB.left - blobA.left;
                 const deltaY = blobB.top - blobA.top;
-                const distance = Math.max(0.001, Math.hypot(deltaX, deltaY));
+                const sqDistance = deltaX * deltaX + deltaY * deltaY;
+
+                if (sqDistance > maxInteraction * maxInteraction) {
+                    continue;
+                }
+
+                const distance = Math.max(0.001, Math.sqrt(sqDistance));
                 const normalX = deltaX / distance;
                 const normalY = deltaY / distance;
-                const overlap = radiusA + radiusB - distance;
-                const edgeDistance = distance - radiusA - radiusB;
+                const overlap = sumRadii - distance;
+                const edgeDistance = distance - sumRadii;
 
                 if (overlap > blobRepelOverlap) {
                     const repel = ((overlap - blobRepelOverlap) / Math.min(radiusA, radiusB)) ** 2 * blobRepelStrength * frameScale;
@@ -715,12 +744,77 @@ void main() {
     };
 
     const stop = () => {
-        console.Consolelog("Stopping header animation");
+        console.log("Stopping header animation");
         if (animationFrame) {
             window.cancelAnimationFrame(animationFrame);
             animationFrame = null;
         }
     };
+
+    const ANIMATION_PREF_KEY = "header-animation";
+
+    const getStoredAnimationPreference = () => {
+        try {
+            const value = window.localStorage.getItem(ANIMATION_PREF_KEY);
+            if (value === "on" || value === "off") {
+                return value;
+            }
+        } catch (error) {
+            // localStorage may be unavailable (private mode, disabled storage); ignore.
+        }
+        return null;
+    };
+
+    const setStoredAnimationPreference = (value) => {
+        try {
+            if (value === null) {
+                window.localStorage.removeItem(ANIMATION_PREF_KEY);
+            } else {
+                window.localStorage.setItem(ANIMATION_PREF_KEY, value);
+            }
+        } catch (error) {
+            // ignore
+        }
+    };
+
+    const shouldAnimate = () => {
+        const stored = getStoredAnimationPreference();
+        if (stored === "on") {
+            return true;
+        }
+        if (stored === "off") {
+            return false;
+        }
+        return !prefersReducedMotion.matches;
+    };
+
+    const animationToggle = document.querySelector("[data-hero-animation-toggle]");
+
+    const updateAnimationToggle = (animating) => {
+        if (!animationToggle) {
+            return;
+        }
+
+        const label = animating ? "Pause hero animation" : "Play hero animation";
+        animationToggle.setAttribute("aria-pressed", String(animating));
+        animationToggle.setAttribute("aria-label", label);
+        animationToggle.setAttribute("title", label);
+    };
+
+    if (animationToggle) {
+        animationToggle.hidden = false;
+        animationToggle.addEventListener("click", () => {
+            const nextAnimating = !shouldAnimate();
+            setStoredAnimationPreference(nextAnimating ? "on" : "off");
+            updateAnimationToggle(nextAnimating);
+
+            if (nextAnimating) {
+                start();
+            } else {
+                stop();
+            }
+        });
+    }
 
     window.addEventListener("resize", markMetricsDirty);
     window.addEventListener("orientationchange", markMetricsDirty);
@@ -739,16 +833,14 @@ void main() {
         document.fonts.ready.then(markMetricsDirty);
     }
 
-    if (prefersReducedMotion.matches) {
-        refreshMetrics();
-        drawFrame(0);
-        return;
-    }
+    refreshMetrics();
+    drawFrame(0);
+    updateAnimationToggle(shouldAnimate());
 
     document.addEventListener("visibilitychange", () => {
         if (document.hidden) {
             stop();
-        } else {
+        } else if (shouldAnimate()) {
             start();
         }
     });
@@ -756,13 +848,31 @@ void main() {
     window.addEventListener("pagehide", stop);
     window.addEventListener("pageshow", () => {
         markMetricsDirty();
-        start();
+        if (shouldAnimate()) {
+            start();
+        }
     });
+
+    prefersReducedMotion.addEventListener("change", () => {
+        if (getStoredAnimationPreference() !== null) {
+            return;
+        }
+
+        const animating = shouldAnimate();
+        updateAnimationToggle(animating);
+
+        if (animating) {
+            start();
+        } else {
+            stop();
+        }
+    });
+
     console.log("Initializing header animation");
 
-    refreshMetrics();
-    drawFrame(0);
-    start();
+    if (shouldAnimate()) {
+        start();
+    }
 };
 
 initializeHeaderAnimation();

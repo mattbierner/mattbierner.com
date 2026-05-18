@@ -5,12 +5,22 @@ hide_site_header: true
 ---
 <section class="hero" aria-labelledby="intro-title">
     <canvas class="hero-field" data-hero-field aria-hidden="true"></canvas>
+    <button type="button" class="hero-animation-toggle" data-hero-animation-toggle hidden
+        aria-pressed="true" aria-label="Pause hero animation" title="Pause hero animation">
+        <svg class="hero-animation-toggle-icon hero-animation-toggle-icon-pause" viewBox="0 0 12 12" aria-hidden="true">
+            <rect x="3" y="2" width="2" height="8" rx="0.5"></rect>
+            <rect x="7" y="2" width="2" height="8" rx="0.5"></rect>
+        </svg>
+        <svg class="hero-animation-toggle-icon hero-animation-toggle-icon-play" viewBox="0 0 12 12" aria-hidden="true">
+            <path d="M3.5 2 L9.5 6 L3.5 10 Z"></path>
+        </svg>
+    </button>
     <header class="hero-content">
         <h1 id="intro-title">
             <span class="hero-title-line">Matt</span>
             <span class="hero-title-line">Bierner</span>
         </h1>
-        <p class="hero-summary">Hi, I'm Matt Bierner. I make tools for developers, software for creating, and art for fun.</p>
+        <p class="hero-summary"><span>Hi, I'm Matt Bierner.</span> <wbr><span>I make tools for developers,</span> <wbr><span>software for creating,</span> <wbr><span>and art for fun.</span></p>
         {% include primary-nav.html class="site-nav hero-nav" %}
     </header>
 </section>

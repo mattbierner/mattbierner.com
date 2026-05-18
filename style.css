@@ -223,7 +223,8 @@ button {
 
 .hero-nav {
 	gap: 0.35rem;
-	justify-content: center;
+	justify-content: flex-start;
+	margin-left: -0.45rem;
 
 	& a {
 		padding: 0.12rem 0.45rem;
@@ -231,7 +232,7 @@ button {
 		border-radius: 999px;
 		background: rgb(255 255 255 / 70%);
 		box-shadow: 0 0.35rem 1.2rem rgb(255 255 255 / 55%);
-		text-decoration-color: transparent;
+		text-decoration: none;
 	}
 
 	& a:hover,
@@ -239,7 +240,6 @@ button {
 	& a[aria-current="page"] {
 		background: var(--color-paper);
 		box-shadow: 0 0.4rem 1.35rem rgb(255 255 255 / 75%);
-		text-decoration-color: currentColor;
 	}
 }
 
@@ -248,6 +248,7 @@ button {
 }
 
 .hero {
+	--hero-overhang-top: 100px;
 	position: relative;
 	display: grid;
 	grid-template-columns: minmax(0, min(var(--measure), calc(100% - clamp(2rem, 8vw, 6rem))));
@@ -257,7 +258,7 @@ button {
 	align-items: center;
 	text-align: left;
 	isolation: isolate;
-	overflow: hidden;
+	overflow: visible;
 	padding: calc(3rem + var(--space-4) + var(--safe-area-top)) 0 5rem;
 	background: var(--color-paper);
 	margin-top: calc(var(--space-4) * -1);
@@ -268,19 +269,56 @@ button {
 
 .hero-field {
 	position: absolute;
-	inset: 0;
+	top: calc(var(--hero-overhang-top) * -1);
+	right: 0;
+	bottom: 0;
+	left: 0;
 	z-index: 0;
 	display: block;
 	width: 100%;
-	height: 100%;
+	height: calc(100% + var(--hero-overhang-top));
 	-webkit-mask-image: linear-gradient(to bottom, #000 0, #000 76%, transparent 100%);
 	mask-image: linear-gradient(to bottom, #000 0, #000 76%, transparent 100%);
 	pointer-events: none;
 }
 
+.hero-animation-toggle {
+	position: absolute;
+	top: calc(var(--space-2) + var(--safe-area-top));
+	right: var(--space-2);
+	z-index: 4;
+	display: inline-grid;
+	place-items: center;
+	width: 1.85rem;
+	height: 1.85rem;
+	padding: 0;
+	border: 1px solid rgb(255 255 255 / 72%);
+	border-radius: 999px;
+	background: rgb(255 255 255 / 70%);
+	box-shadow: 0 0.35rem 1.2rem rgb(255 255 255 / 55%);
+	color: var(--color-ink);
+	cursor: pointer;
+}
+
+.hero-animation-toggle:hover,
+.hero-animation-toggle:focus-visible {
+	background: var(--color-paper);
+	box-shadow: 0 0.4rem 1.35rem rgb(255 255 255 / 75%);
+}
+
+.hero-animation-toggle-icon {
+	width: 0.75rem;
+	height: 0.75rem;
+	fill: currentColor;
+}
+
+.hero-animation-toggle[aria-pressed="true"] .hero-animation-toggle-icon-play,
+.hero-animation-toggle[aria-pressed="false"] .hero-animation-toggle-icon-pause {
+	display: none;
+}
+
 .hero-content {
 	display: grid;
-	gap: var(--space-2);
 	justify-items: start;
 	position: relative;
 	z-index: 1;
@@ -298,6 +336,7 @@ button {
 
 .hero h1 {
 	max-width: 8ch;
+	margin-bottom: 0.2em;
 	font-size: clamp(4rem, 12vw, 8.25rem);
 	font-weight: 780;
 	line-height: 0.88;
@@ -318,12 +357,17 @@ button {
 
 .hero .hero-summary {
 	max-width: 25rem;
-	margin: var(--space-2) 0 0;
+	margin: 0 0 var(--space-2) -0.6rem;
 	padding: 0.35rem 0.6rem;
 	border: 1px solid rgb(255 255 255 / 72%);
 	border-radius: 0.65rem;
 	background: rgb(255 255 255 / 70%);
 	box-shadow: 0 0.35rem 1.2rem rgb(255 255 255 / 55%);
+}
+
+.hero-summary > span {
+	display: inline-block;
+	max-width: 100%;
 }
 
 .hero-summary,
@@ -925,6 +969,12 @@ body[data-project-view="chronological"] .layout-icon-grid {
 
 	.hero h1 {
 		max-width: 8ch;
+		font-size: clamp(3.5rem, 8.5vw, 5rem);
+	}
+
+	.hero-summary,
+	.page-header > p:last-child {
+		font-size: 1.125rem;
 	}
 
 	#projects-chronological .project-list {
@@ -960,7 +1010,7 @@ body[data-project-view="chronological"] .layout-icon-grid {
 	}
 
 	.hero h1 {
-		font-size: clamp(3.3rem, 16vw, 5rem);
+		font-size: clamp(2.25rem, 11vw, 3rem);
 	}
 
 	.hero-summary,
