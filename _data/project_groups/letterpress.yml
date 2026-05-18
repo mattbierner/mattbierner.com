@@ -1,5 +1,3 @@
-# Letterpress projects.
-# Add, remove, or reorder entries here. Use ISO dates; set sort_date only when sorting differs from the displayed dates.
 - title: Burn For Him
   description: Print full-color Christmas cards by letterpress.
   date: 2020-03-03
@@ -7,6 +5,7 @@
     type: image
     url: https://blog.mattbierner.com/content/2020-03-03-burn-for-him/title.jpg
     alt: Burn For Him card
+
 - title: HE LIVED
   description: Laser-cut acrylic for a letterpress tribute print.
   date: 2019-10-21
@@ -14,6 +13,7 @@
     type: image
     url: https://blog.mattbierner.com/content/2019-10-21-he-lived/title.jpg
     alt: HE LIVED print
+
 - title: You Ain't No Punk You Punk
   description: Tape-letter a black-paper letterpress poster.
   date: 2019-09-28
@@ -21,6 +21,7 @@
     type: image
     url: https://blog.mattbierner.com/content/2019-09-28-you-aint-no-punk-you-punk/title.jpg
     alt: You Ain't No Punk You Punk poster
+
 - title: Bring Out the Gump
   description: Print a forest-themed letterpress exchange card.
   date: 2019-09-15
@@ -28,6 +29,7 @@
     type: image
     url: https://blog.mattbierner.com/content/2019-09-15-bring-out-the-gump/title.jpg
     alt: Bring Out the Gump card
+
 - title: Come play with me inside the fire
   description: Print a six-pass apple with metal type.
   date: 2019-06-21
@@ -35,6 +37,7 @@
     type: image
     url: https://blog.mattbierner.com/content/2019-06-21-come-play-with-me-inside-the-fire/title.jpg
     alt: Come play with me inside the fire print
+
 - title: XFL 2020
   description: Print a future-football poster from linoleum blocks.
   date: 2019-06-14
@@ -42,6 +45,7 @@
     type: image
     url: https://blog.mattbierner.com/content/2019-06-14-xfl-2020/title.jpg
     alt: XFL 2020 poster
+
 - title: Rhonda's Workout
   description: Print an Aerobicide poster on hot pink paper.
   date: 2019-05-04
@@ -49,6 +53,7 @@
     type: image
     url: https://blog.mattbierner.com/content/2019-05-04-rhondas-workout/title.jpg
     alt: Rhonda's Workout poster
+
 - title: Aerobicide Poster
   description: Print a letterpress poster for Aerobicide.
   date: 2019-03-20
@@ -56,6 +61,7 @@
     type: image
     url: https://blog.mattbierner.com/content/2019-03-20-aerobicide-print/title.jpg
     alt: Aerobicide Poster print
+
 - title: DNA Print
   description: Print the human genome onto punched paper tape.
   date: 2019-02-28
@@ -70,6 +76,7 @@
     url: https://blog.mattbierner.com/dna-print-open-house/
   - label: Conclusion
     url: https://blog.mattbierner.com/dna-print-conclusion/
+
 - title: American Heat
   description: Print a four-pass movie-inspired card.
   date: 2019-02-24
@@ -77,6 +84,7 @@
     type: image
     url: https://blog.mattbierner.com/content/2019-02-24-american-heat/title.jpg
     alt: American Heat card
+
 - title: Two Eye Characters
   description: Print letterpress eye-character cards.
   date: 2018-03-02

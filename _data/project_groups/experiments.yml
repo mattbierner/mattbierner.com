@@ -12,6 +12,7 @@
     url: https://page-stack.mattbierner.com
   - label: How to use it
     url: https://page-stack.mattbierner.com/about
+
 - title: Gif Shift
   description: Shift gif pixels through time.
   date: 2020-06-12
@@ -24,6 +25,7 @@
     url: https://mattbierner.github.io/gif-shift/
   - label: Source
     url: https://github.com/mattbierner/gif-shift
+
 - title: Gif Mask
   description: Remix gifs with image masks.
   date: 2020-05-30
@@ -36,6 +38,7 @@
     url: https://mattbierner.github.io/gif-mask/
   - label: Source
     url: https://github.com/mattbierner/gif-mask
+
 - title: Gif Cube
   description: Turn animated gifs into physical 3D cubes.
   date: 2018-04-28
@@ -48,6 +51,7 @@
     url: https://gif-cube.com
   - label: Source
     url: https://github.com/mattbierner/gif-cube
+
 - title: Recurss
   description: Build recursive CSS specimens from nested divs.
   date: 2018-04-23
@@ -60,6 +64,7 @@
     url: https://recurss.github.io
   - label: Submit specimen
     url: https://github.com/recurss/recurss.github.io#submitting
+
 - title: Gif Slice
   description: Turn animated gifs into sliced 2D prints.
   date: 2018-04-02
@@ -72,6 +77,7 @@
     url: https://gif-slice.com
   - label: Source
     url: https://github.com/mattbierner/gif-slice
+
 - title: char flip
   description: Flip a single character in a tweet.
   date: 2018-01-08
@@ -130,6 +136,7 @@
     url: https://mattbierner.github.io/cube-gif/
   - label: Source
     url: https://github.com/mattbierner/cube-gif
+
 - title: median.gif
   description: Median-blend animated gifs.
   date: 2016-07-13
@@ -142,6 +149,7 @@
     url: https://mattbierner.github.io/median-gif/
   - label: Source
     url: https://github.com/mattbierner/median-gif
+
 - title: scanline.gif
   description: Flatten animated gifs into slit-scan images.
   date: 2016-07-06
@@ -154,6 +162,7 @@
     url: https://mattbierner.github.io/scanline-gif/
   - label: Source
     url: https://github.com/mattbierner/scanline-gif
+
 - title: Forward Propagation
   description: Explore history through human generations.
   date: 2016-05-16

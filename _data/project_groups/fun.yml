@@ -10,6 +10,7 @@
   links:
   - label: mandō
     url: https://mando.mattbierner.com/
+
 - title: "FU: Future You"
   description: Generate posts that sabotage your future self.
   date: 2019-09-22
@@ -22,6 +23,7 @@
     url: https://mattbierner.github.io/fu-fu
   - label: Source
     url: https://github.com/mattbierner/fu-fu
+
 - title: GIFAKIRA
   description: Browse every Akira shot as gifs.
   date: 2018-02-01
@@ -34,6 +36,7 @@
     url: https://gifakira.com
   - label: Stream
     url: https://gifakira.com/stream.html
+
 - title: The John Barleycorn Challenge
   description: Turn Jack London's John Barleycorn into a drinking game.
   date: 2017-07-04
@@ -46,6 +49,7 @@
     url: https://mattbierner.github.io/john-barleycorn-challenge/
   - label: Source
     url: https://github.com/mattbierner/john-barleycorn-challenge
+
 - title: Zork.git
   description: Play Zork through GitHub pull requests and commits.
   date: 2016-11-13
@@ -58,6 +62,7 @@
     url: https://github.com/art-dot-git/zork-dot-git
   - label: Code
     url: https://github.com/art-dot-git/zork-client/
+
 - title: allthecolors.gif
   description: Pack every 24-bit RGB color into gifs.
   date: 2016-07-24
@@ -72,6 +77,7 @@
     url: https://mattbierner.github.io/allthecolors.gif/rainbow-stack
   - label: Rainbow Walk
     url: https://mattbierner.github.io/allthecolors.gif/rainbow-stack-walk
+
 - title: Na Naa, Na Na Na Na Naa Naa Naa Na
   description: Visualize Katamari controller inputs on expanding spheres.
   date: 2016-06-13
@@ -86,6 +92,7 @@
     url: https://github.com/mattbierner/na-naa-na-na-na-na-naa-naa-naa-na/blob/gh-pages/documentation/about.md
   - label: Source
     url: https://github.com/mattbierner/na-naa-na-na-na-na-naa-naa-naa-na
+
 - title: "{{dubious}}"
   description: Surface questionable Wikipedia cleanup-tag sentences.
   date: 2016-03-07
@@ -98,6 +105,7 @@
     url: https://github.com/mattbierner/dubious
   - label: Dubious Results
     url: https://github.com/mattbierner/dubious/blob/master/out/dubious/dubious.md
+
 - title: 80x40
   description: Play a collaborative ASCII canvas through GitHub pull requests.
   date: 2015-11-02

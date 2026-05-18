@@ -1,5 +1,3 @@
-# iOS projects.
-# Add, remove, or reorder entries here. Use ISO dates; set sort_date only when sorting differs from the displayed dates.
 - title: Phonogram
   description: Share audio messages with AR effects.
   date: 2023-04-28
@@ -12,6 +10,7 @@
     url: https://apps.apple.com/us/app/phonogramAR/id1612192523
   - label: Documentation
     url: https://github.com/mattbierner/phongram-support
+
 - title: Reality Filters
   description: Paint image filters onto the world in AR.
   date: 2021-08-25
@@ -24,6 +23,7 @@
     url: https://apps.apple.com/us/app/reality-filters/id1582341494
   - label: Support
     url: https://github.com/mattbierner/reality-filters-support
+
 - title: VoxelizeAR
   description: Voxelize the world in AR.
   date: 2021-08-11
@@ -36,6 +36,7 @@
     url: https://apps.apple.com/us/app/voxelizear/id1575681728
   - label: Support
     url: https://github.com/mattbierner/voxelizeAR-support
+
 - title: Face Drop
   description: Make augmented reality selfies.
   date: 2021-05-28
@@ -46,6 +47,7 @@
   links:
   - label: App Store
     url: https://apps.apple.com/us/app/face-drop-ar/id1569124225
+
 - title: Headshot
   description: Capture realtime face textures with ARKit.
   date: 2021-04-13
@@ -58,6 +60,7 @@
     url: https://github.com/mattbierner/headshot
   - label: Notes
     url: https://github.com/mattbierner/headshot#notes
+
 - title: warpAR
   description: Warp the visible world in AR.
   date: 2021-03-10
@@ -70,8 +73,9 @@
     url: https://apps.apple.com/us/app/warpar/id1557413470
   - label: Documentation
     url: https://github.com/mattbierner/warpar-support
+
 - title: Pic Plane
-  description: Create AR photo collages and perspective effects.
+  description: Create photo in AR using a virtual image plane for unique perspective effects.
   date: 2021-01-29
   media:
     type: video
@@ -82,6 +86,7 @@
     url: https://apps.apple.com/us/app/pic-plane/id1550562229
   - label: Documentation
     url: https://github.com/mattbierner/pic-plane-support
+
 - title: watAR
   description: Ripple real-world surfaces like water.
   date: 2021-01-04
@@ -94,6 +99,7 @@
     url: https://apps.apple.com/us/app/watar/id1546980861
   - label: Documentation
     url: https://github.com/mattbierner/watAR-support#watar
+
 - title: Beatsy
   description: Visualize music in AR.
   date: 2020-12-08
@@ -106,8 +112,9 @@
     url: https://apps.apple.com/us/app/beatsy/id1543162330
   - label: Documentation
     url: https://github.com/mattbierner/beatsy-support
+
 - title: In The Walls
-  description: Put your face into walls with AR.
+  description: Make 3D faces pop out of walls Nightmare on Elm Street style with AR.
   date: 2020-08-05
   media:
     type: video
@@ -116,15 +123,14 @@
   links:
   - label: App Store
     url: https://apps.apple.com/us/app/id1522257130
-  - label: Reality shaders example
-    url: https://blog.mattbierner.com/reality-shaders/
+  
 - title: swapiies
-  description: Swap live camera views with a nearby friend.
+  description: Swap live camera views with a nearby friend (deprecated).
   date: 2018-07-31
   media:
     type: image
     url: https://blog.mattbierner.com/content/2018-07-31-swapiies/logo.svg
     alt: swapiies logo
   links:
-  - label: App Store
-    url: https://itunes.apple.com/us/app/swapiies/id1417731732
+  - label: Post
+    url: https://blog.mattbierner.com/swapiies/

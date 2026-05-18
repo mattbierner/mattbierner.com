@@ -36,6 +36,7 @@
     url: https://www.youtube.com/embed/JiWuBYVaWI0
   - label: Source
     url: https://github.com/mattbierner/theremin-x
+
 - title: Nuke Scan
   description: Strip-scan nuclear test films.
   date: 2018-04-20
@@ -46,6 +47,7 @@
   links:
   - label: Source
     url: https://github.com/mattbierner/nuke-scan
+
 - title: Hue Theremin
   description: Control Hue lights with theremin MIDI input.
   date: 2018-01-29
@@ -56,6 +58,7 @@
   links:
   - label: Source
     url: https://github.com/mattbierner/hue-theremin
+
 - title: blueframe
   description: Interrupt gifs with a single blue frame.
   date: 2017-06-18

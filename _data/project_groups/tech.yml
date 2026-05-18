@@ -25,6 +25,7 @@
     url: https://github.com/mattbierner/hamt_plus
   - label: Documentation
     url: https://github.com/mattbierner/hamt_plus#api
+
 - title: Hamt
   description: Implement immutable hash array mapped tries in JavaScript.
   date: 2016-01-05
@@ -37,6 +38,7 @@
     url: https://www.npmjs.com/package/hamt
   - label: Source
     url: https://github.com/mattbierner/hamt
+
 - title: Apep
   description: Generate text with Dada Engine-style grammars.
   date: 2015-11-09
@@ -49,12 +51,14 @@
     url: https://github.com/mattbierner/apep
   - label: Documentation
     url: https://github.com/mattbierner/apep/wiki
+
 - title: Khepri
   description: Explore expression-oriented ECMAScript syntax.
   date: 2014-03-03
   links:
   - label: Source
     url: https://github.com/mattbierner/khepri
+
 - title: Atum
   description: Interpret ECMAScript semantics in JavaScript.
   date: 2014-02-01
@@ -68,6 +72,7 @@
   links:
   - label: Source
     url: https://github.com/mattbierner/neith
+
 - title: Parse.js
   description: Build incremental monadic parser combinators in JavaScript.
   date: 2013-12-08
