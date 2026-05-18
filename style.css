@@ -232,14 +232,25 @@ button {
 		border-radius: 999px;
 		background: rgb(255 255 255 / 70%);
 		box-shadow: 0 0.35rem 1.2rem rgb(255 255 255 / 55%);
+		color: var(--color-ink);
 		text-decoration: none;
+		transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
 	}
 
 	& a:hover,
 	& a:focus-visible,
 	& a[aria-current="page"] {
-		background: var(--color-paper);
+		background: var(--color-ink);
+		border-color: var(--color-ink);
+		color: var(--color-paper);
 		box-shadow: 0 0.4rem 1.35rem rgb(255 255 255 / 75%);
+	}
+
+	& a:active {
+		background: var(--color-muted);
+		border-color: var(--color-muted);
+		color: var(--color-paper);
+		transition-duration: 60ms;
 	}
 }
 
