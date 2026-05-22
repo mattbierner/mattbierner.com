@@ -1,5 +1,18 @@
 # Web Experiments projects.
 # Add, remove, or reorder entries here. Use ISO dates; set sort_date only when sorting differs from the displayed dates.
+- title: Scrubspace
+  description: Exploring audio as a 2D space you move through to play it back
+  date: 2026-05-22
+  media:
+    type: image
+    url: https://blog.mattbierner.com/content/2026-05-22-scrubspace/title.png
+    alt: Scrubspace 3D text assemblage
+  links:
+  - label: Open app
+    url: https://scrubspace.mattbierner.com
+  - label: About
+    url: https://blog.mattbierner.com/scrubspace/
+
 - title: Page Stack
   description: Compose pages from fragments of classic books.
   date: 2026-04-13
