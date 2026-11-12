@@ -1,3 +1,16 @@
+- title: Raree
+  description: Create portals to new worlds in AR. For iOS and Vision.
+  date: 2026-11-09
+  media:
+    type: image
+    url: /content/raree/screenshot.jpg
+    alt: Glowing blue ferns from a Raree world mixed into a real room
+  links:
+  - label: Website
+    url: https://raree.show
+  - label: App Store
+    url: https://apps.apple.com/us/app/raree/id6817887060
+
 - title: Phonogram
   description: Share audio messages with AR effects.
   date: 2023-04-28
