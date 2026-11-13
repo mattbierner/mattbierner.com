@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=../../tools/schemas/project-group.schema.json
 - title: Burn For Him
   description: Print full-color Christmas cards by letterpress.
   date: 2020-03-03

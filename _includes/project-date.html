@@ -1,0 +1,6 @@
+<span class="project-date">
+    <time datetime="{{ include.project.date | date: '%Y-%m-%d' }}">{{ include.project.date | date: '%Y' }}</time>
+    {%- if include.project.end_date == "Present" %} – Present
+    {%- elsif include.project.end_date %} – <time datetime="{{ include.project.end_date | date: '%Y-%m-%d' }}">{{ include.project.end_date | date: '%Y' }}</time>
+    {%- endif %}
+</span>

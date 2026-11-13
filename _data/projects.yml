@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=../tools/schemas/projects.schema.json
 # Project category metadata. Project entries live in `_data/project_groups/*.yml`
 # so each category can be edited without working in one large file.
 categories:

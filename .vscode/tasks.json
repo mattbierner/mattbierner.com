@@ -1,0 +1,24 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Serve site",
+      "detail": "tools/jekyll.sh serve on http://127.0.0.1:4000",
+      "type": "shell",
+      "command": "${workspaceFolder}/tools/jekyll.sh",
+      "args": ["serve"],
+      "isBackground": true,
+      "group": { "kind": "build", "isDefault": true },
+      "presentation": { "reveal": "always", "panel": "dedicated" },
+      "problemMatcher": {
+        "owner": "jekyll",
+        "pattern": { "regexp": "^\\s*(?:Error|Liquid Exception):\\s+(.*)$", "message": 1 },
+        "background": {
+          "activesBegin": true,
+          "beginsPattern": "^\\s*(Generating\\.\\.\\.|Regenerating:)",
+          "endsPattern": "(Server running|\\.\\.\\.done in)"
+        }
+      }
+    }
+  ]
+}

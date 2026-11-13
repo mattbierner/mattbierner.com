@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Site settings",
+  "description": "_data/site.yml: navigation and contact page content.",
+  "type": "object",
+  "required": ["nav", "contact"],
+  "additionalProperties": false,
+  "properties": {
+    "nav": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/link" }
+    },
+    "contact": {
+      "type": "object",
+      "required": ["business", "elsewhere"],
+      "additionalProperties": false,
+      "properties": {
+        "business": {
+          "type": "object",
+          "required": ["text", "links"],
+          "additionalProperties": false,
+          "properties": {
+            "text": { "type": "string", "minLength": 1 },
+            "links": { "type": "array", "items": { "$ref": "#/$defs/link" } }
+          }
+        },
+        "elsewhere": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/link" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "link": {
+      "type": "object",
+      "required": ["label", "url"],
+      "additionalProperties": false,
+      "properties": {
+        "label": { "type": "string", "minLength": 1 },
+        "url": { "type": "string", "pattern": "^(https?://|mailto:|/)" }
+      }
+    }
+  }
+}

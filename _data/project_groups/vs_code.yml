@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=../../tools/schemas/project-group.schema.json
 
 - title: Copilot Codebase Knowledge
   description: Grounds Copilot answers in workspace context.

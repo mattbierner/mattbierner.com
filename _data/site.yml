@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=../tools/schemas/site.schema.json
 nav:
   - label: Blog
     url: https://blog.mattbierner.com

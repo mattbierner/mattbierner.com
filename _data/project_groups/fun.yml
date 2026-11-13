@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=../../tools/schemas/project-group.schema.json
 # Fun projects.
 # Add, remove, or reorder entries here. Use ISO dates; set sort_date only when sorting differs from the displayed dates.
 - title: mandō

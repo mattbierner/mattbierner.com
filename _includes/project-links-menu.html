@@ -1,0 +1,12 @@
+{%- comment -%} include.id must be unique on the page: the same project appears in both views. {%- endcomment -%}
+<span class="project-links-more">
+    <button class="project-links-toggle" type="button" popovertarget="{{ include.id }}"
+        style="anchor-name: --{{ include.id }}"
+        aria-label="Show additional {{ include.project.title }} links">links</button>
+    <span class="project-links-menu" id="{{ include.id }}" popover
+        style="position-anchor: --{{ include.id }}">
+        {%- for link in include.project.links %}
+        <a href="{{ link.url }}">{{ link.label }}</a>
+        {%- endfor %}
+    </span>
+</span>

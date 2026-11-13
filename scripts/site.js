@@ -1,129 +1,65 @@
-const projectLists = Array.from(document.querySelectorAll(".project-list"));
+const projectGrid = document.querySelector("#projects-chronological .project-list");
 
-for (const projectList of projectLists) {
-    const projects = Array.from(projectList.querySelectorAll(".project-card"));
-    projects.sort((left, right) => {
-        const leftSortDate = left.dataset.projectSortDate || "";
-        const rightSortDate = right.dataset.projectSortDate || "";
-        return rightSortDate.localeCompare(leftSortDate);
-    });
-
-    for (const project of projects) {
-        projectList.append(project);
-    }
+if (projectGrid) {
+    const projects = Array.from(projectGrid.children);
+    projects.sort((left, right) => right.dataset.projectSortDate.localeCompare(left.dataset.projectSortDate));
+    projectGrid.append(...projects);
 }
 
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-const projectLinkMenus = Array.from(document.querySelectorAll(".project-links-more"));
-
-if (projectLinkMenus.length) {
-    const closeProjectLinkMenus = (activeMenu = null) => {
-        for (const menu of projectLinkMenus) {
-            if (menu !== activeMenu) {
-                menu.open = false;
+// Link menus are popovers placed with CSS anchor positioning. Where that isn't
+// supported, place them under their toggle when they open.
+if (!CSS.supports("anchor-name: --a")) {
+    for (const menu of document.querySelectorAll(".project-links-menu")) {
+        menu.addEventListener("toggle", (event) => {
+            if (event.newState !== "open") {
+                return;
             }
-        }
-    };
 
-    document.addEventListener("pointerdown", (event) => {
-        const activeMenu = event.target instanceof Element ? event.target.closest(".project-links-more") : null;
-        closeProjectLinkMenus(activeMenu);
-    });
+            const toggle = menu.previousElementSibling.getBoundingClientRect();
+            menu.style.top = `${toggle.bottom}px`;
+            if (menu.closest(".project-list-compact")) {
+                menu.style.left = "auto";
+                menu.style.right = `${document.documentElement.clientWidth - toggle.right}px`;
+            } else {
+                menu.style.left = `${toggle.left}px`;
+            }
+        });
+    }
 
-    document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape") {
-            closeProjectLinkMenus();
-        }
-    });
+    // The fallback position is fixed to the viewport, so close menus on scroll.
+    window.addEventListener("scroll", () => {
+        document.querySelector(".project-links-menu:popover-open")?.hidePopover();
+    }, { passive: true });
 }
 
-const getVisibleProjects = () => Array.from(document.querySelectorAll(".project-card")).filter((project) => {
-    return !project.hidden && !project.closest("[hidden]");
-});
-
+// Grid cards have view-transition-names, so the browser animates them to their
+// new positions, fading in and out cards that appear or disappear.
 const animateProjectChange = (updateProjects) => {
-    if (prefersReducedMotion.matches) {
+    if (!document.startViewTransition || prefersReducedMotion.matches) {
         updateProjects();
         return;
     }
 
-    const previousRects = new Map();
-
-    for (const project of getVisibleProjects()) {
-        previousRects.set(project, project.getBoundingClientRect());
-    }
-
-    for (const project of document.querySelectorAll(".project-card")) {
-        for (const animation of project.getAnimations()) {
-            animation.cancel();
-        }
-    }
-
-    updateProjects();
-
-    for (const project of getVisibleProjects()) {
-        const previousRect = previousRects.get(project);
-        const currentRect = project.getBoundingClientRect();
-        const deltaX = previousRect ? previousRect.left - currentRect.left : 0;
-        const deltaY = previousRect ? previousRect.top - currentRect.top : 8;
-        const moved = Math.abs(deltaX) > 0.5 || Math.abs(deltaY) > 0.5;
-        const isNewlyVisible = !previousRect;
-
-        if (!moved && !isNewlyVisible) {
-            continue;
-        }
-
-        project.classList.add("is-animating");
-
-        const animation = project.animate([
-            {
-                opacity: isNewlyVisible ? 0 : 1,
-                transform: `translate(${deltaX}px, ${deltaY}px)`,
-            },
-            {
-                opacity: 1,
-                transform: "translate(0, 0)",
-            },
-        ], {
-            duration: isNewlyVisible ? 180 : 260,
-            easing: "cubic-bezier(0.2, 0, 0, 1)",
-        });
-
-        animation.addEventListener("finish", () => {
-            project.classList.remove("is-animating");
-        });
-        animation.addEventListener("cancel", () => {
-            project.classList.remove("is-animating");
-        });
-    }
+    document.startViewTransition(updateProjects);
 };
 
-const projectViewControls = document.querySelector("[data-project-view-controls]");
+const viewToggle = document.querySelector("[data-project-view-toggle]");
 
-if (projectViewControls) {
-    const viewToggle = projectViewControls.querySelector("[data-project-view-toggle]");
-    const viewToggleLabel = projectViewControls.querySelector("[data-project-view-toggle-label]");
-    const filterControls = document.querySelector("[data-project-filter-controls]");
-    const filterSelect = filterControls ? filterControls.querySelector("[data-project-filter-select]") : null;
+if (viewToggle) {
+    const viewToggleLabel = viewToggle.querySelector("[data-project-view-toggle-label]");
+    const filterSelect = document.querySelector("[data-project-filter-select]");
     const views = Array.from(document.querySelectorAll("[data-project-view]"));
     const viewNames = new Set(views.map((view) => view.dataset.projectView));
     const categoryButtons = Array.from(document.querySelectorAll("[data-project-category-button]"));
     const chronologicalView = document.querySelector('[data-project-view="chronological"]');
-    const chronologicalProjects = chronologicalView ? Array.from(chronologicalView.querySelectorAll(".project-card")) : [];
-    const filterNames = filterSelect ? new Set(Array.from(filterSelect.options).map((option) => option.value)) : new Set();
+    const chronologicalProjects = Array.from(chronologicalView.querySelectorAll(".project-card"));
+    const filterNames = new Set(Array.from(filterSelect.options, (option) => option.value));
 
-    projectViewControls.hidden = false;
-
-    if (filterControls && filterSelect) {
-        filterControls.hidden = false;
-    }
+    viewToggle.hidden = false;
 
     const showCategory = (categoryName, shouldAnimate = false) => {
-        if (!filterSelect) {
-            return;
-        }
-
         const activeCategory = filterNames.has(categoryName) ? categoryName : "all";
         const updateProjects = () => {
             for (const project of chronologicalProjects) {
@@ -148,8 +84,6 @@ if (projectViewControls) {
     const showProjectView = (viewName, shouldAnimate = false) => {
         const activeViewName = viewNames.has(viewName) ? viewName : "grouped";
         const updateProjects = () => {
-            document.body.dataset.projectView = activeViewName;
-
             for (const view of views) {
                 view.hidden = view.dataset.projectView !== activeViewName;
             }
@@ -161,31 +95,42 @@ if (projectViewControls) {
             updateProjects();
         }
 
-        viewToggle.dataset.projectViewCurrent = activeViewName;
         viewToggle.setAttribute("aria-label", activeViewName === "grouped" ? "Switch to chronological grid view" : "Switch to grouped view");
         viewToggle.setAttribute("title", activeViewName === "grouped" ? "Switch to chronological grid view" : "Switch to grouped view");
 
-        if (viewToggleLabel) {
-            viewToggleLabel.textContent = activeViewName === "grouped" ? "Grouped" : "Chronological";
+        viewToggleLabel.textContent = activeViewName === "grouped" ? "Grouped" : "Chronological";
+
+        // Grid videos don't autoplay so they aren't downloaded while the grid is hidden.
+        if (activeViewName === "chronological") {
+            for (const video of chronologicalView.querySelectorAll("video")) {
+                video.play().catch(() => {});
+            }
         }
     };
 
+    // The view is kept in ?view= (grouped is the default) and the category in the hash.
     const initialCategory = window.location.hash ? window.location.hash.slice(1) : "all";
-    showProjectView("grouped");
+    showProjectView(new URLSearchParams(location.search).get("view"));
     showCategory(initialCategory);
 
-    if (filterSelect) {
-        filterSelect.addEventListener("change", () => {
-            const categoryName = filterSelect.value;
-            showCategory(categoryName, true);
-            history.replaceState(null, "", categoryName === "all" ? `${location.pathname}${location.search}` : `#${categoryName}`);
-        });
-    }
+    filterSelect.addEventListener("change", () => {
+        const categoryName = filterSelect.value;
+        showCategory(categoryName, true);
+        history.replaceState(null, "", categoryName === "all" ? `${location.pathname}${location.search}` : `#${categoryName}`);
+    });
 
     viewToggle.addEventListener("click", () => {
-        const currentViewName = document.body.dataset.projectView === "chronological" ? "chronological" : "grouped";
+        const currentViewName = chronologicalView.hidden ? "grouped" : "chronological";
         const viewName = currentViewName === "grouped" ? "chronological" : "grouped";
         showProjectView(viewName, true);
+
+        const url = new URL(location.href);
+        if (viewName === "grouped") {
+            url.searchParams.delete("view");
+        } else {
+            url.searchParams.set("view", viewName);
+        }
+        history.replaceState(null, "", url);
     });
 
     for (const button of categoryButtons) {

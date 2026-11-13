@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "jekyll",
+      "runtimeExecutable": "tools/jekyll.sh",
+      "runtimeArgs": ["serve"],
+      "port": 4000
+    },
+    {
+      "name": "jekyll-alt",
+      "runtimeExecutable": "tools/jekyll.sh",
+      "runtimeArgs": ["serve", "--port", "4010", "-d", "/private/tmp/claude-501/-Users-mattbierner--claude-spares-spare-rEZyxZ/a07daf60-ae05-4b57-96b1-e52ea304e4c4/scratchpad/site-serve"],
+      "port": 4010
+    }
+  ]
+}

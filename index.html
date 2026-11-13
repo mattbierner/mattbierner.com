@@ -3,6 +3,8 @@ layout: default
 description: Selected projects by Matt Bierner.
 hide_site_header: true
 ---
+<script type="module" src="{{ '/scripts/header-animation.js' | relative_url }}"></script>
+
 <section class="hero" aria-labelledby="intro-title">
     <canvas class="hero-field" data-hero-field aria-hidden="true"></canvas>
     <button type="button" class="hero-animation-toggle" data-hero-animation-toggle hidden
@@ -17,8 +19,8 @@ hide_site_header: true
     </button>
     <header class="hero-content">
         <h1 id="intro-title">
-            <span class="hero-title-line">Matt</span>
-            <span class="hero-title-line">Bierner</span>
+            <span class="visually-hidden">Matt Bierner</span>
+            <span class="hero-title" aria-hidden="true">{% include hero-title.svg %}</span>
         </h1>
         <p class="hero-summary"><span>Hi, I'm Matt Bierner.</span> <wbr><span>I make tools for developers,</span> <wbr><span>software for creating,</span> <wbr><span>and art for fun.</span></p>
         {% include primary-nav.html class="site-nav hero-nav" %}
@@ -28,36 +30,33 @@ hide_site_header: true
 <section class="project-browser" aria-labelledby="projects-title">
     <header class="section-header">
         <h2 id="projects-title">Projects</h2>
-        <form class="project-controls" aria-label="Project controls">
-            <label class="filter-field" data-project-filter-controls hidden>
+        <div class="project-controls">
+            <label class="filter-field">
                 <span>Category</span>
-                <select data-project-filter-select aria-label="Filter projects by category"
-                    aria-controls="projects-chronological">
+                <select data-project-filter-select aria-controls="projects-chronological">
                     <option value="all">All</option>
                     {% for category in site.data.projects.categories %}
                         <option value="{{ category.name | slugify }}">{{ category.name }}</option>
                     {% endfor %}
                 </select>
             </label>
-            <div class="layout-control" data-project-view-controls hidden aria-label="Project organization">
-                <button class="layout-toggle" type="button" data-project-view-toggle
-                    aria-controls="projects-grouped projects-chronological"
-                    aria-label="Switch to chronological grid view">
-                    <span class="layout-icon layout-icon-grid" aria-hidden="true">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </span>
-                    <span class="layout-icon layout-icon-list" aria-hidden="true">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </span>
-                    <span class="layout-toggle-label" data-project-view-toggle-label>Grouped</span>
-                </button>
-            </div>
-        </form>
+            <button class="layout-toggle" type="button" data-project-view-toggle hidden
+                aria-controls="projects-grouped projects-chronological"
+                aria-label="Switch to chronological grid view">
+                <span class="layout-icon layout-icon-grid" aria-hidden="true">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+                <span class="layout-icon layout-icon-list" aria-hidden="true">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+                <span class="layout-toggle-label" data-project-view-toggle-label>Grouped</span>
+            </button>
+        </div>
     </header>
 
     <section class="project-view project-view-grouped" id="projects-grouped" data-project-view="grouped"

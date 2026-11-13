@@ -5,6 +5,7 @@ baseurl: ""
 
 markdown: kramdown
 permalink: pretty
+theme: null # skip the default github-pages theme; all styles are in style.css
 
 exclude:
   - Gemfile
@@ -13,3 +14,7 @@ exclude:
   - vendor
   - .bundle
   - .jekyll-cache
+  - tools
+  - AGENTS.md
+  - .agents # also keeps `serve` from watching the .claude/skills symlink twice
+  - .claude

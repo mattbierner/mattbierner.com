@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Project group",
+  "description": "Projects in one category (_data/project_groups/<file>.yml), listed newest first.",
+  "type": "array",
+  "items": { "$ref": "#/$defs/project" },
+  "$defs": {
+    "project": {
+      "type": "object",
+      "required": ["title", "description", "date"],
+      "additionalProperties": false,
+      "properties": {
+        "title": { "type": "string", "minLength": 1 },
+        "description": {
+          "description": "One short sentence.",
+          "type": "string",
+          "minLength": 1
+        },
+        "date": {
+          "description": "Launch or announcement date. The year is displayed.",
+          "$ref": "#/$defs/date"
+        },
+        "end_date": {
+          "description": "End of an ongoing project, or \"Present\".",
+          "anyOf": [{ "const": "Present" }, { "$ref": "#/$defs/date" }]
+        },
+        "sort_date": {
+          "description": "Overrides date when sorting the chronological view. Not displayed.",
+          "$ref": "#/$defs/date"
+        },
+        "media": { "$ref": "#/$defs/media" },
+        "links": {
+          "description": "The first link is the title link. Two or more show a links menu.",
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/link" }
+        }
+      }
+    },
+    "media": {
+      "description": "Shown only in the chronological grid view.",
+      "type": "object",
+      "required": ["type", "url", "alt"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "description": "Videos autoplay muted and looped.",
+          "enum": ["image", "video"]
+        },
+        "url": {
+          "description": "Absolute URL, or a site path such as /content/<slug>/<file>.",
+          "type": "string",
+          "pattern": "^(https?://|/)"
+        },
+        "alt": { "type": "string", "minLength": 1 }
+      }
+    },
+    "link": {
+      "type": "object",
+      "required": ["label", "url"],
+      "additionalProperties": false,
+      "properties": {
+        "label": { "type": "string", "minLength": 1 },
+        "url": { "type": "string", "pattern": "^(https?://|mailto:|/)" }
+      }
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    }
+  }
+}

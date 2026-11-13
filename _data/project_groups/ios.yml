@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=../../tools/schemas/project-group.schema.json
 - title: Raree
   description: Create portals to new worlds in AR. For iOS and Vision.
   date: 2026-11-09

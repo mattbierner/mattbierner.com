@@ -33,16 +33,16 @@ const initializeHeaderAnimation = () => {
     const minSceneScale = 0.62;
     const maxPixelRatio = 3;
 
+    // Transparent outside the blobs so the page background shows through.
     const contextAttributes = {
-        alpha: false,
+        alpha: true,
         antialias: false,
         depth: false,
         premultipliedAlpha: false,
         stencil: false,
     };
 
-    const gl = canvas.getContext("webgl", contextAttributes)
-        || canvas.getContext("experimental-webgl", contextAttributes);
+    const gl = canvas.getContext("webgl", contextAttributes);
 
     if (!gl) {
         canvas.hidden = true;
@@ -75,8 +75,7 @@ const int BLOB_COUNT = ${blobCount};
 const int COLOR_COUNT = ${palette.length};
 const float FAR_DISTANCE = 8192.0;
 
-uniform vec4 u_blobs[BLOB_COUNT];
-uniform vec4 u_meta[BLOB_COUNT];
+uniform vec4 u_blobs[BLOB_COUNT]; // x, y, radius, color index
 uniform vec3 u_palette[COLOR_COUNT];
 uniform float u_mergeRadius;
 uniform float u_colorBlendRadius;
@@ -131,24 +130,21 @@ void main() {
         }
 
         float blobDistance = sqrt(sqDistance) - blob.z;
-        vec4 meta = u_meta[index];
         float colorWeight = 1.0 - smoothstep(-u_colorBlendRadius, u_colorBlendRadius, blobDistance);
 
         sceneDistance = smoothUnion(sceneDistance, blobDistance, u_mergeRadius);
-        blendedColor += paletteColor(meta.y) * colorWeight;
+        blendedColor += paletteColor(blob.w) * colorWeight;
         blendedWeight += colorWeight;
     }
 
     if (blendedWeight < 0.001) {
-        gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
+        gl_FragColor = vec4(0.0);
         return;
     }
 
     vec3 shapeColor = blendedColor / blendedWeight;
     float fillAlpha = 1.0 - smoothstep(-u_edgeWidth, u_edgeWidth, sceneDistance);
-    vec3 color = mix(vec3(1.0), shapeColor, fillAlpha);
-
-    gl_FragColor = vec4(color, 1.0);
+    gl_FragColor = vec4(shapeColor, fillAlpha);
 }`;
 
     let animationFrame = null;
@@ -239,7 +235,6 @@ void main() {
     const uniforms = {
         resolution: gl.getUniformLocation(program, "u_resolution"),
         blobs: gl.getUniformLocation(program, "u_blobs[0]"),
-        meta: gl.getUniformLocation(program, "u_meta[0]"),
         palette: gl.getUniformLocation(program, "u_palette[0]"),
         mergeRadius: gl.getUniformLocation(program, "u_mergeRadius"),
         colorBlendRadius: gl.getUniformLocation(program, "u_colorBlendRadius"),
@@ -252,7 +247,6 @@ void main() {
     }
 
     const blobUniforms = new Float32Array(blobCount * 4);
-    const metaUniforms = new Float32Array(blobCount * 4);
     const paletteUniforms = new Float32Array(palette.length * 3);
 
     palette.forEach((color, index) => {
@@ -265,9 +259,8 @@ void main() {
     gl.enableVertexAttribArray(positionLocation);
     gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
     gl.uniform3fv(uniforms.palette, paletteUniforms);
-    gl.clearColor(1, 1, 1, 1);
 
-    const renderBlobs = (timeValue) => {
+    const renderBlobs = () => {
         for (let index = 0; index < blobCount; index++) {
             const blob = blobs[index];
             const offset = index * 4;
@@ -275,25 +268,15 @@ void main() {
             blobUniforms[offset] = blob.left * sceneScale;
             blobUniforms[offset + 1] = blob.top * sceneScale;
             blobUniforms[offset + 2] = blob.radius * sceneScale;
-            blobUniforms[offset + 3] = 0;
-            metaUniforms[offset] = 0;
-            metaUniforms[offset + 1] = blob.colorIndex;
-            metaUniforms[offset + 2] = 0;
-            metaUniforms[offset + 3] = 0;
+            blobUniforms[offset + 3] = blob.colorIndex;
         }
 
         gl.viewport(0, 0, canvas.width, canvas.height);
-        gl.clear(gl.COLOR_BUFFER_BIT);
-        gl.useProgram(program);
-        gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-        gl.enableVertexAttribArray(positionLocation);
-        gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
         gl.uniform2f(uniforms.resolution, viewportWidth, viewportHeight);
         gl.uniform1f(uniforms.mergeRadius, blobMergeDistance * sceneScale);
         gl.uniform1f(uniforms.colorBlendRadius, blobMergeDistance * sceneScale * 1.75);
         gl.uniform1f(uniforms.edgeWidth, Math.max(0.8, 1.6 / pixelRatio));
         gl.uniform4fv(uniforms.blobs, blobUniforms);
-        gl.uniform4fv(uniforms.meta, metaUniforms);
         gl.drawArrays(gl.TRIANGLES, 0, 3);
     };
 
@@ -337,6 +320,12 @@ void main() {
 
     const markMetricsDirty = () => {
         metricsDirty = true;
+
+        // While paused, redraw the still frame so it isn't stretched or cleared by a resize.
+        if (!animationFrame) {
+            refreshMetrics();
+            renderBlobs();
+        }
     };
 
     const getPointerPosition = (event) => {
@@ -403,15 +392,6 @@ void main() {
         { minRadius: 32, maxRadius: 58 },
     ];
 
-    const getBlobRadius = (blob) => blob.radius;
-
-    const getBlobProfile = (index) => {
-        const profile = blobProfiles[index % blobProfiles.length];
-
-        return {
-            radius: randomBetween(profile.minRadius, profile.maxRadius),
-        };
-    };
 
     const getSeedYRange = (flowDirection) => flowDirection < 0
         ? { min: canvasHeight * 0.62, max: canvasHeight * 1.16 }
@@ -455,14 +435,15 @@ void main() {
 
         for (let index = 0; index < blobCount; index++) {
             const flowDirection = index % 3 === 0 ? 1 : -1;
-            const profile = getBlobProfile(index);
-            const position = getSeedPosition(flowDirection, profile.radius);
+            const profile = blobProfiles[index % blobProfiles.length];
+            const radius = randomBetween(profile.minRadius, profile.maxRadius);
+            const position = getSeedPosition(flowDirection, radius);
 
             blobs.push({
                 colorIndex: index % palette.length,
                 left: position.left,
                 top: position.top,
-                radius: profile.radius,
+                radius,
                 velocityX: randomBetween(-0.6, 0.6),
                 velocityY: randomBetween(-0.6, 0.6),
                 phase: randomBetween(0, Math.PI * 2),
@@ -531,7 +512,7 @@ void main() {
 
     const applyLavaDriftForce = (blob, timeValue, frameScale) => {
         const time = (timeValue / 1000) * lavaTimeScale;
-        const radius = getBlobRadius(blob);
+        const radius = blob.radius;
         const topTurn = -radius * 0.12;
         const bottomTurn = canvasHeight + radius * 0.2;
 
@@ -631,7 +612,7 @@ void main() {
     };
 
     const applySoftBoundsForce = (blob, frameScale) => {
-        const radius = getBlobRadius(blob);
+        const radius = blob.radius;
         const minLeft = -radius * 0.8;
         const maxLeft = canvasWidth + radius * 0.8;
         const minTop = -radius * 0.55;
@@ -727,7 +708,7 @@ void main() {
         }
 
         updateBlobPhysics(timeValue);
-        renderBlobs(timeValue);
+        renderBlobs();
     };
 
     const animate = (timeValue) => {
@@ -736,7 +717,6 @@ void main() {
     };
 
     const start = () => {
-        console.log("Starting header animation");
         if (!animationFrame) {
             previousFrameTime = null;
             animationFrame = window.requestAnimationFrame(animate);
@@ -744,7 +724,6 @@ void main() {
     };
 
     const stop = () => {
-        console.log("Stopping header animation");
         if (animationFrame) {
             window.cancelAnimationFrame(animationFrame);
             animationFrame = null;
@@ -767,13 +746,9 @@ void main() {
 
     const setStoredAnimationPreference = (value) => {
         try {
-            if (value === null) {
-                window.localStorage.removeItem(ANIMATION_PREF_KEY);
-            } else {
-                window.localStorage.setItem(ANIMATION_PREF_KEY, value);
-            }
+            window.localStorage.setItem(ANIMATION_PREF_KEY, value);
         } catch (error) {
-            // ignore
+            // localStorage may be unavailable; the toggle still works for this page view.
         }
     };
 
@@ -786,6 +761,16 @@ void main() {
             return false;
         }
         return !prefersReducedMotion.matches;
+    };
+
+    let heroVisible = true;
+
+    const updateAnimation = () => {
+        if (shouldAnimate() && heroVisible && !document.hidden) {
+            start();
+        } else {
+            stop();
+        }
     };
 
     const animationToggle = document.querySelector("[data-hero-animation-toggle]");
@@ -807,12 +792,7 @@ void main() {
             const nextAnimating = !shouldAnimate();
             setStoredAnimationPreference(nextAnimating ? "on" : "off");
             updateAnimationToggle(nextAnimating);
-
-            if (nextAnimating) {
-                start();
-            } else {
-                stop();
-            }
+            updateAnimation();
         });
     }
 
@@ -834,23 +814,20 @@ void main() {
     }
 
     refreshMetrics();
-    drawFrame(0);
+    renderBlobs();
     updateAnimationToggle(shouldAnimate());
 
-    document.addEventListener("visibilitychange", () => {
-        if (document.hidden) {
-            stop();
-        } else if (shouldAnimate()) {
-            start();
-        }
-    });
+    // Only animate while the hero is on screen.
+    new IntersectionObserver(([entry]) => {
+        heroVisible = entry.isIntersecting;
+        updateAnimation();
+    }).observe(hero);
 
+    document.addEventListener("visibilitychange", updateAnimation);
     window.addEventListener("pagehide", stop);
     window.addEventListener("pageshow", () => {
         markMetricsDirty();
-        if (shouldAnimate()) {
-            start();
-        }
+        updateAnimation();
     });
 
     prefersReducedMotion.addEventListener("change", () => {
@@ -858,21 +835,11 @@ void main() {
             return;
         }
 
-        const animating = shouldAnimate();
-        updateAnimationToggle(animating);
-
-        if (animating) {
-            start();
-        } else {
-            stop();
-        }
+        updateAnimationToggle(shouldAnimate());
+        updateAnimation();
     });
 
-    console.log("Initializing header animation");
-
-    if (shouldAnimate()) {
-        start();
-    }
+    updateAnimation();
 };
 
 initializeHeaderAnimation();
