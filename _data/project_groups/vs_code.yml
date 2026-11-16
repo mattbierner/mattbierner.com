@@ -3,7 +3,7 @@
 - title: Copilot Codebase Knowledge
   description: Grounds Copilot answers in workspace context.
   date: 2026-02-05
-  end_date: Present
+  end_date: 2026-06-21
   links:
   - label: Tracking Issue
     url: https://github.com/microsoft/vscode/issues/292972
@@ -11,7 +11,7 @@
 - title: Markdown Language Service
   description: Library which powers rich Markdown IntelliSense and editing across tools.
   date: 2022-07-12
-  end_date: Present
+  end_date: 2026-06-21
   links:
   - label: Source
     url: https://github.com/microsoft/vscode-markdown-languageservice
@@ -74,7 +74,7 @@
 - title: VS Code Webview APIs
   description: I designed and built VS Code's webview APIs.
   date: 2018-05-01
-  end_date: Present
+  end_date: 2026-06-21
   links:
   - label: Webview API
     url: https://code.visualstudio.com/api/extension-guides/webview
@@ -86,7 +86,7 @@
 - title: API Design
   description: I designed many of VS Code extension APIs and ran the API design process.
   date: 2018-01-01
-  end_date: Present
+  end_date: 2026-06-21
   links:
   - label: API Reference
     url: https://code.visualstudio.com/api/references/vscode-api
@@ -103,7 +103,7 @@
 - title: VS Code TypeScript Language Features
   description: I built VS Code's JavaScript and TypeScript language features.
   date: 2016-01-01
-  end_date: Present
+  end_date: 2026-06-21
   links:
   - label: Docs
     url: https://code.visualstudio.com/docs/languages/typescript
@@ -111,7 +111,7 @@
 - title: VS Code Markdown Extension
   description: I built VS Code's Markdown previews, language features, and notebook support.
   date: 2016-01-01
-  end_date: Present
+  end_date: 2026-06-21
   links:
   - label: Source
     url: https://github.com/microsoft/vscode/tree/main/extensions/markdown-language-features
