@@ -33,12 +33,13 @@ const initializeHeaderAnimation = () => {
     const minSceneScale = 0.62;
     const maxPixelRatio = 3;
 
-    // Transparent outside the blobs so the page background shows through.
+    // Transparent outside the blobs so the page background shows through. The shader
+    // writes premultiplied color: Safari draws light fringes around soft edges otherwise.
     const contextAttributes = {
         alpha: true,
         antialias: false,
         depth: false,
-        premultipliedAlpha: false,
+        premultipliedAlpha: true,
         stencil: false,
     };
 
@@ -144,7 +145,7 @@ void main() {
 
     vec3 shapeColor = blendedColor / blendedWeight;
     float fillAlpha = 1.0 - smoothstep(-u_edgeWidth, u_edgeWidth, sceneDistance);
-    gl_FragColor = vec4(shapeColor, fillAlpha);
+    gl_FragColor = vec4(shapeColor * fillAlpha, fillAlpha);
 }`;
 
     let animationFrame = null;
